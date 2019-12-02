@@ -64,7 +64,7 @@ public class Register_Activity extends AppCompatActivity {
                             final SyncConfiguration config = new SyncConfiguration.Builder(SyncUser.current(), syncServerURL).build();
                             Realm realm = Realm.getInstance(config  );
                             utente uno = new utente();
-
+//inizio transazione
                             realm.beginTransaction();
 
                             uno.setUsername(etUsername.getText().toString());
