@@ -49,7 +49,7 @@ public class Register_Activity extends AppCompatActivity {
                 else
                 {
                     utente a = new utente();
-                    SyncCredentials credentials = SyncCredentials.usernamePassword("NiCoFrAl","password",false);
+                    SyncCredentials credentials = SyncCredentials.usernamePassword("ScaranoNicola","ciao",false);
                     //Credentials contiene le credenziali dell'unico utente che puo accedere al Realm Object Server per modificarlo(quindi effettuare operazioni di lettura e scrittura)
                     SyncUser.logInAsync(credentials, AUTH_URL, new SyncUser.Callback<SyncUser>() //Metodo che effettua il login dell'admin con le credenziali inserite
                     {
@@ -60,24 +60,31 @@ public class Register_Activity extends AppCompatActivity {
                             Log.i("Login", "Admin identificato");
 
                             //una volta loggati possiamo creare la configurazione che mette in contatto il server con i devices:
-                            String syncServerURL = "realms://swing-app.de1a.cloud.realm.io/swingDB";
+                            String syncServerURL = "https://expanded-granite-ball.us1.cloud.realm.io/ScaranoNicola";
                             final SyncConfiguration config = new SyncConfiguration.Builder(SyncUser.current(), syncServerURL).build();
                             Realm realm = Realm.getInstance(config  );
-                            utente uno = new utente();
+                            final utente uno = new utente();
 
-                            realm.beginTransaction();
-
-                            uno.setUsername(etUsername.getText().toString());
                             uno.setUsername(etUsername.getText().toString());
                             uno.setCognome(etCognome.getText().toString());
                             uno.setNome(etNome.getText().toString());
                             uno.setEmail(etEmail.getText().toString());
                             uno.setPassword(etPassword.getText().toString());
                             SimpleDateFormat x =new SimpleDateFormat("dd-MM-YYYY");
-                            realm.createObject(utente.class,uno.getUsername());
-                            realm.createObject(utente.class,uno.getPassword());
-                            realm.createObject(utente.class,uno.getNome());
-                            realm.commitTransaction();
+                            try {
+                                uno.setDataNascita(x.parse(etDataN.getText().toString()));
+                            } catch (ParseException e) {
+                                e.printStackTrace();
+                            }
+
+                            realm.executeTransaction(new Realm.Transaction() {
+                                @Override
+                                public void execute(Realm realm) {
+
+                                    utente realmUser = realm.copyToRealm(uno);
+
+                                }
+                            });
 
                         }
 
