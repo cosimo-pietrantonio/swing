@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Swing</string>
+    <string name="title_activity_home_">Home_activity_</string>
 </resources>

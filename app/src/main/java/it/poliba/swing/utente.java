@@ -8,7 +8,7 @@ import io.realm.annotations.PrimaryKey;
 public class utente extends RealmObject {
     @PrimaryKey
     @Required
-    private String username;
+    private String email;
     @Required
     private String password;
     @Required
@@ -17,15 +17,11 @@ public class utente extends RealmObject {
     private String cognome;
     @Required
     private Date dataNascita;
-    @Required
-    private String email;
+
 
     public utente() {
     }
 
-    public String getUsername() { return username; }
-
-    public void setUsername(String username) { this.username = username; }
 
     public String getPassword() { return password; }
 

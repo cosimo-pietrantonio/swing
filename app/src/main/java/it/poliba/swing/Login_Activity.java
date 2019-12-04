@@ -20,20 +20,24 @@ public class Login_Activity extends AppCompatActivity {
         EditText etPassword = (EditText) findViewById(R.id.etPass);
 
         final Intent a = new Intent(this,Register_Activity.class);
+        final Intent b = new Intent(this,Home_activity.class);
+
         bRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v)
             {
-                switch (v.getId())
-                {
-
-                    case R.id.buttonReg :
-
                         startActivity(a);
-                        break;
-                }
 
             }
         });
+
+        bLogIn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(b);
+            }
+        });
+
+
     }
 }
