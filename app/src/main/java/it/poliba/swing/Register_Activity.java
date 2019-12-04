@@ -6,11 +6,14 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CalendarView;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import io.realm.ObjectServerError;
 import io.realm.Realm;
@@ -26,13 +29,13 @@ public class Register_Activity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_register_);
+        setContentView(R.layout.activity_reg_);
 
         final EditText etCognome = (EditText) findViewById(R.id.cognome);
         final EditText etNome = (EditText) findViewById(R.id.nome);
         final EditText etEmail = (EditText) findViewById(R.id.email);
         final EditText etPassword = (EditText) findViewById(R.id.password);
-        final EditText etDataN = (EditText) findViewById(R.id.dataN);
+        final CalendarView cWnascita = (CalendarView) findViewById(R.id.calendarView);
         Button bReg = (Button) findViewById(R.id.registrati);
 
 
@@ -42,8 +45,7 @@ public class Register_Activity extends AppCompatActivity {
             public void onClick(View v) {
 
                 if (etNome.getText().toString().equals("") || etCognome.getText().toString().equals("")
-                        || etEmail.getText().toString().equals("") || etPassword.getText().toString().equals("")
-                        || etDataN.getText().toString().equals("")) {
+                        || etEmail.getText().toString().equals("") || etPassword.getText().toString().equals("")) {
                     Toast.makeText(getApplicationContext(), "tutti i campi devono essere compilati", Toast.LENGTH_LONG).show();
                 } else
                     {
@@ -61,12 +63,11 @@ public class Register_Activity extends AppCompatActivity {
                                 uno.setNome(etNome.getText().toString());
                                 uno.setEmail(etEmail.getText().toString());
                                 uno.setPassword(etPassword.getText().toString());
-                                SimpleDateFormat x = new SimpleDateFormat("dd-MM-YYYY");
-                                try {
-                                    uno.setDataNascita(x.parse(etDataN.getText().toString()));
-                                } catch (ParseException e) {
-                                    e.printStackTrace();
-                                }
+
+
+                                String full = new SimpleDateFormat("yyyy-MM-dd").format(cWnascita.getDate());
+                                uno.setDataNascita(full);
+
 
                                 boolean temp = false;
                                 if (temp == false) {

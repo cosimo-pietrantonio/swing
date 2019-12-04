@@ -16,7 +16,7 @@ public class utente extends RealmObject {
     @Required
     private String cognome;
     @Required
-    private Date dataNascita;
+    private String dataNascita;
 
 
     public utente() {
@@ -35,9 +35,9 @@ public class utente extends RealmObject {
 
     public void setCognome(String cognome) { this.cognome = cognome; }
 
-    public Date getDataNascita() { return dataNascita; }
+    public String getDataNascita() { return dataNascita; }
 
-    public void setDataNascita(Date dataNascita) { this.dataNascita = dataNascita; }
+    public void setDataNascita(String dataNascita) { this.dataNascita = dataNascita; }
 
     public String getEmail() { return email; }
 
