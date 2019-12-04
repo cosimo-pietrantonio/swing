@@ -48,19 +48,12 @@ public class Register_Activity extends AppCompatActivity {
                 } else
                     {
                         utente a = new utente();
-                        SyncCredentials credentials = SyncCredentials.usernamePassword("ScaranoNicola", "ciao", false);
-                        //Credentials contiene le credenziali dell'unico utente che puo accedere al Realm Object Server per modificarlo(quindi effettuare operazioni di lettura e scrittura)
-                        SyncUser.logInAsync(credentials, AUTH_URL, new SyncUser.Callback<SyncUser>() //Metodo che effettua il login dell'admin con le credenziali inserite
                         {
 
-                            @Override
-                            public void onSuccess(SyncUser user) {
-                                System.out.println("sono qui");
-                                Log.i("Login", "Admin identificato");
-                                String syncServerURL = "https://expanded-granite-ball.us1.cloud.realm.io/ScaranoNicola";
-                                final SyncConfiguration config = new SyncConfiguration.Builder(SyncUser.current(), syncServerURL).build();
-                                Realm realm = Realm.getInstance(config);
                                 //una volta loggati possiamo creare la configurazione che mette in contatto il server con i devices:
+                            String syncServerURL = "https://swing-app.de1a.cloud.realm.io/swingDB";
+                            final SyncConfiguration config = new SyncConfiguration.Builder(SyncUser.current(), syncServerURL).build();
+                            Realm realm = Realm.getInstance(config);
 
                                 final utente uno = new utente();
 
@@ -94,19 +87,14 @@ public class Register_Activity extends AppCompatActivity {
 
 
 
-                            @Override
-                            public void onError(ObjectServerError error) {
-                                //showProgress(false);
-                                //usernameView.setError("Uh oh something went wrong! (check your logcat please)");
-                                //usernameView.requestFocus();
-                                Log.e("Login error", error.toString());
+
                             }
 
 
-                        });
-                    }
-                }
+                        }
             });
+                }
+            }
 
-    };
-}
+
+
