@@ -10,7 +10,7 @@ import io.realm.annotations.Required;
 public class Richiesta extends RealmObject {
     @PrimaryKey
     private String CodRichiesta;
-    @Required
+
     private int numPosti;
     @Required
     private String LuogoPartenza;
@@ -18,10 +18,56 @@ public class Richiesta extends RealmObject {
     private String LuogoArrivo;
     @Required
     private Date dataPartenza;
-    @Required
-    private Time oraPartenza;
 
 
+    public Richiesta(String codRichiesta, int numPosti, String luogoPartenza, String luogoArrivo, Date dataPartenza) {
+        CodRichiesta = codRichiesta;
+        this.numPosti = numPosti;
+        LuogoPartenza = luogoPartenza;
+        LuogoArrivo = luogoArrivo;
+        this.dataPartenza = dataPartenza;
+    }
 
+    public Richiesta() {
+    }
 
+    public String getCodRichiesta() {
+        return CodRichiesta;
+    }
+
+    public void setCodRichiesta(String codRichiesta) {
+        CodRichiesta = codRichiesta;
+    }
+
+    public int getNumPosti() {
+        return numPosti;
+    }
+
+    public void setNumPosti(int numPosti) {
+        this.numPosti = numPosti;
+    }
+
+    public String getLuogoPartenza() {
+        return LuogoPartenza;
+    }
+
+    public void setLuogoPartenza(String luogoPartenza) {
+        LuogoPartenza = luogoPartenza;
+    }
+
+    public String getLuogoArrivo() {
+        return LuogoArrivo;
+    }
+
+    public void setLuogoArrivo(String luogoArrivo) {
+        LuogoArrivo = luogoArrivo;
+    }
+
+    public Date getDataPartenza() {
+        return dataPartenza;
+    }
+
+    public void setDataPartenza(Date dataPartenza) {
+        this.dataPartenza = dataPartenza;
+    }
 }

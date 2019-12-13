@@ -48,14 +48,12 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="50dp"
         android:layout_marginEnd="256dp"
-        android:layout_marginBottom="104dp"
-        android:text="Cerca"
+        android:layout_marginBottom="84dp"
+        android:text="Pubblica"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.47"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/calendarView"
-        app:layout_constraintVertical_bias="0.258" />
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline"
@@ -129,11 +127,32 @@
         android:id="@+id/spinnerPosti"
         android:layout_width="100dp"
         android:layout_height="wrap_content"
+        android:layout_marginStart="51dp"
         android:layout_marginTop="40dp"
         android:layout_marginEnd="260dp"
+        android:layout_marginBottom="33dp"
         android:spinnerMode="dropdown"
+        app:layout_constraintBottom_toTopOf="@+id/etNumPosti"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/oraPartenza" />
+
+    <EditText
+        android:id="@+id/etNumPosti"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="50dp"
+        android:layout_marginTop="33dp"
+        android:layout_marginEnd="148dp"
+        android:layout_marginBottom="35dp"
+        android:ems="10"
+        android:hint="Quanti posti necessiti?"
+        android:inputType="number"
+        app:layout_constraintBottom_toTopOf="@+id/buttonPubblica"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/spinnerPosti" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

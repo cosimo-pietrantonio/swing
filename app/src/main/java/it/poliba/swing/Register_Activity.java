@@ -29,7 +29,7 @@ public class Register_Activity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_reg_);
+        setContentView(R.layout.content_scrolling);
 
         final EditText etCognome = (EditText) findViewById(R.id.cognome);
         final EditText etNome = (EditText) findViewById(R.id.nome);
@@ -53,7 +53,7 @@ public class Register_Activity extends AppCompatActivity {
                         {
 
                                 //una volta loggati possiamo creare la configurazione che mette in contatto il server con i devices:
-                            String syncServerURL = "https://swing-app.de1a.cloud.realm.io/swingDB";
+                            String syncServerURL = "https://swing-app.de1a.cloud.realm.io/swingdb";
                             final SyncConfiguration config = new SyncConfiguration.Builder(SyncUser.current(), syncServerURL).build();
                             Realm realm = Realm.getInstance(config);
 
