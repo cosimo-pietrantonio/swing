@@ -1,6 +1,5 @@
 package it.poliba.swing;
 
-import java.sql.Time;
 import java.util.Date;
 
 import io.realm.RealmObject;

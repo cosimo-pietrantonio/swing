@@ -46,19 +46,14 @@ public class PeriodicoScrolling_Activity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if (cbLun.isChecked() == true)
-                    giorni[0]=true;
                 else if(cbMar.isChecked()==true)
-                    giorni[1]=true;
                 else if(cbMer.isChecked()==true)
-                    giorni[2]=true;
+
                 else if (cbGio.isChecked()==true)
-                    giorni[3]=true;
+
                 else if (cbVen.isChecked()==true)
-                    giorni[4]=true;
                 else if (cbSab.isChecked()==true)
-                    giorni[5]=true;
                 else if (cbDom.isChecked()==true)
-                    giorni[6]=true;
                 else if ()
 
             }

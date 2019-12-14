@@ -1,7 +1,6 @@
 package it.poliba.swing;
 import android.content.*;
 import android.os.Bundle;
-import android.provider.MediaStore;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -28,9 +27,9 @@ public class OfferActivity extends AppCompatActivity {
         EditText etDataPartenza =findViewById(R.id.etDataPartenzaO);
         EditText etOraPartenza = findViewById(R.id.etOraPartenzaO);
         EditText etPrezzo = findViewById(R.id.etPrezzo);
-        Button bOffri = findViewById(R.id.buttonOffri);
-        RadioButton rbPeriodica = findViewById(R.id.radioPeriodicaO);
-        RadioButton rbSingola = findViewById(R.id.radioSingolaO);
+        Button bOffri = findViewById(R.id.bPubblica);
+        RadioButton rbPeriodica = findViewById(R.id.radioPeriodica);
+        RadioButton rbSingola = findViewById(R.id.radioSingola);
 
 
         final Intent periodica = new Intent(this, OffertaPeriodica_ScrollingActivity); //da creare la scrolling activity, da vedere insieme
