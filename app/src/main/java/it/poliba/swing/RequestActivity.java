@@ -5,13 +5,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.Spinner;
 
-import java.time.Period;
 import java.util.ArrayList;
 
 import io.realm.Realm;
@@ -33,16 +31,16 @@ public class RequestActivity extends AppCompatActivity {
         final EditText etLarrivo = findViewById(R.id.etLuogoArrivo);
         final EditText etPosti  = findViewById(R.id.etNumPosti);
         Button bPub = findViewById(R.id.buttonPubblica);
-        RadioButton rbSingle = findViewById(R.id.radioSingolo);
-        RadioButton rbPeriod = findViewById(R.id.radioPeriodico);
-        Spinner spinner = findViewById(R.id.spinnerPosti);
+        RadioButton rbSingle = findViewById(R.id.radioSingola);
+        RadioButton rbPeriod = findViewById(R.id.radioPeriodica);
 
-        ArrayList<Integer> v = new ArrayList<>();
 
-        v.add(1);
-        v.add(2);
-        v.add(3);
-        v.add(4);
+        //ArrayList<Integer> v = new ArrayList<>();
+
+        //v.add(1);
+        //v.add(2);
+        //v.add(3);
+        //v.add(4);
 
         //spinner  :
         // ArrayAdapter<Integer> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item);

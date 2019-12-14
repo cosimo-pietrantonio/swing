@@ -4,8 +4,15 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".RequestActivity">
+    android:fitsSystemWindows="true"
+    tools:context=".Offerta">
 
+
+    <include
+        android:id="@+id/include"
+        layout="@layout/content_offerta"
+        tools:layout_editor_absoluteX="25dp"
+        tools:layout_editor_absoluteY="173dp" />
 
     <androidx.constraintlayout.widget.Group
         android:id="@+id/group"
@@ -18,9 +25,9 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="50dp"
         android:layout_marginTop="32dp"
-        android:layout_marginEnd="143dp"
+        android:layout_marginEnd="148dp"
         android:ems="10"
-        android:hint="Dove vuoi arrivare?"
+        android:hint="Qual è la tua destinazione?"
         android:inputType="textPersonName"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -33,9 +40,9 @@
         android:layout_height="51dp"
         android:layout_marginStart="50dp"
         android:layout_marginTop="140dp"
-        android:layout_marginEnd="143dp"
+        android:layout_marginEnd="148dp"
         android:ems="10"
-        android:hint="Da dove vuoi partire?"
+        android:hint="Da dove parti?"
         android:inputType="textPersonName"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -48,26 +55,28 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="50dp"
         android:layout_marginEnd="256dp"
-        android:layout_marginBottom="84dp"
-        android:text="Pubblica"
+        android:layout_marginBottom="104dp"
+        android:text="Offri"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintHorizontal_bias="0.47"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/calendarView"
+        app:layout_constraintVertical_bias="0.258" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_begin="20dp" />
+        app:layout_constraintGuide_end="711dp" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_begin="20dp" />
+        app:layout_constraintGuide_end="387dp" />
 
     <EditText
         android:id="@+id/etDataPartenzaO"
@@ -104,7 +113,7 @@
         android:layout_marginStart="50dp"
         android:layout_marginTop="63dp"
         android:layout_marginBottom="57dp"
-        android:text="Singolo"
+        android:text="Singola"
         app:layout_constraintBottom_toTopOf="@+id/etLuogoPartenzaO"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -117,42 +126,25 @@
         android:layout_marginTop="63dp"
         android:layout_marginEnd="148dp"
         android:layout_marginBottom="57dp"
-        android:text="Periodico"
+        android:text="Periodica"
         app:layout_constraintBottom_toTopOf="@+id/etLuogoPartenzaO"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/radioSingolaO"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <Spinner
-        android:id="@+id/spinnerPosti"
-        android:layout_width="100dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="51dp"
-        android:layout_marginTop="40dp"
-        android:layout_marginEnd="260dp"
-        android:layout_marginBottom="33dp"
-        android:spinnerMode="dropdown"
-        app:layout_constraintBottom_toTopOf="@+id/etNumPosti"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/etOraPartenzaO" />
 
-    <EditText
-        android:id="@+id/etNumPosti"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="50dp"
-        android:layout_marginTop="33dp"
-        android:layout_marginEnd="148dp"
-        android:layout_marginBottom="35dp"
-        android:ems="10"
-        android:hint="Quanti posti necessiti?"
+    <com.google.android.material.textfield.TextInputEditText
+        android:id="@+id/etPrezzo"
+        android:layout_width="219dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="52dp"
+        android:layout_marginTop="448dp"
+        android:layout_marginEnd="560dp"
+        android:hint="Inserisci il prezzo"
         android:inputType="number"
-        app:layout_constraintBottom_toTopOf="@+id/buttonOffri"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/spinnerPosti" />
+        app:layout_constraintStart_toEndOf="@+id/include"
+        app:layout_constraintTop_toTopOf="parent" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
