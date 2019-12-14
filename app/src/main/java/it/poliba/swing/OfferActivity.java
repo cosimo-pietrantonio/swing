@@ -1,7 +1,8 @@
 package it.poliba.swing;
-
+import android.content.*;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioButton;
@@ -32,10 +33,20 @@ public class OfferActivity extends AppCompatActivity {
         RadioButton rbSingola = findViewById(R.id.radioSingolaO);
 
 
+        final Intent periodica = new Intent(this, OffertaPeriodica_ScrollingActivity); //da creare la scrolling activity, da vedere insieme
+        rbPeriodica.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(periodica);
+            }
+        } ) ;
 
 
+        bOffri.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
 
-
-
+            }
+        } );
     }
 }
