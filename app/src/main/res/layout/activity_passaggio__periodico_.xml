@@ -14,7 +14,7 @@
         android:layout_height="wrap_content" />
 
     <EditText
-        android:id="@+id/luogoArrivo"
+        android:id="@+id/etLuogoArrivoO"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="50dp"
@@ -26,10 +26,10 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/luogoPartenza" />
+        app:layout_constraintTop_toBottomOf="@+id/etLuogoPartenzaO" />
 
     <EditText
-        android:id="@+id/luogoPartenza"
+        android:id="@+id/etLuogoPartenzaO"
         android:layout_width="213dp"
         android:layout_height="51dp"
         android:layout_marginStart="50dp"
@@ -44,7 +44,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/buttonPubblica"
+        android:id="@+id/buttonOffri"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="50dp"
@@ -73,7 +73,7 @@
         app:layout_constraintGuide_begin="20dp" />
 
     <EditText
-        android:id="@+id/oraPartenza"
+        android:id="@+id/etOraPartenzaO"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="50dp"
@@ -85,7 +85,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/luogoArrivo" />
+        app:layout_constraintTop_toBottomOf="@+id/etLuogoArrivoO" />
 
     <CheckBox
         android:id="@+id/cbLun"
@@ -100,7 +100,7 @@
         app:layout_constraintEnd_toStartOf="@+id/cbMar"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/oraPartenza" />
+        app:layout_constraintTop_toBottomOf="@+id/etOraPartenzaO" />
 
     <CheckBox
         android:id="@+id/cbMar"
@@ -112,7 +112,7 @@
         android:text="Martedì"
         app:layout_constraintBottom_toTopOf="@+id/cbVen"
         app:layout_constraintEnd_toStartOf="@+id/cbMer"
-        app:layout_constraintTop_toBottomOf="@+id/oraPartenza"
+        app:layout_constraintTop_toBottomOf="@+id/etOraPartenzaO"
         app:layout_constraintVertical_bias="0.0" />
 
     <CheckBox
@@ -134,7 +134,7 @@
         android:layout_marginEnd="40dp"
         android:layout_marginBottom="70dp"
         android:text="Giovedì"
-        app:layout_constraintBottom_toTopOf="@+id/buttonPubblica"
+        app:layout_constraintBottom_toTopOf="@+id/buttonOffri"
         app:layout_constraintEnd_toStartOf="@+id/cbVen"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
