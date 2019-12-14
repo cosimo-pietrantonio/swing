@@ -79,7 +79,7 @@ public class Register_Activity extends AppCompatActivity {
                                     realm.executeTransaction(new Realm.Transaction() {
                                     @Override
                                     public void execute(Realm realm) {
-                                        utente realmUser = realm.copyToRealm(uno);
+                                         realm.copyToRealm(uno);
                                     }
 
                                     });

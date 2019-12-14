@@ -23,15 +23,15 @@ public class RequestActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_request);
+        setContentView(R.layout.activity_periodico_scrolling_);
 
         String syncServerURL = "https://swing-app.de1a.cloud.realm.io/swingdb";
         final SyncConfiguration config = new SyncConfiguration.Builder(SyncUser.current(), syncServerURL).build();
         final Realm realm = Realm.getInstance(config);
 
-        EditText etLpartenza = findViewById(R.id.etLuogoPartenza);
-        EditText etLarrivo = findViewById(R.id.etLuogoArrivo);
-        EditText etPosti  = findViewById(R.id.etNumPosti);
+        final EditText etLpartenza = findViewById(R.id.etLuogoPartenza);
+        final EditText etLarrivo = findViewById(R.id.etLuogoArrivo);
+        final EditText etPosti  = findViewById(R.id.etNumPosti);
         Button bPub = findViewById(R.id.buttonPubblica);
         RadioButton rbSingle = findViewById(R.id.radioSingolo);
         RadioButton rbPeriod = findViewById(R.id.radioPeriodico);
@@ -49,6 +49,7 @@ public class RequestActivity extends AppCompatActivity {
         //adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         //spinner.setAdapter(adapter);
 
+
         final Intent periodico = new Intent(this, PeriodicoScrolling_Activity.class);
 
         rbPeriod.setOnClickListener(new View.OnClickListener() {
@@ -63,6 +64,22 @@ public class RequestActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
+                final Richiesta r =new Richiesta();
+
+                String numero= etPosti.getText().toString();
+                int intero = Integer.parseInt(numero);
+
+                r.setCodRichiesta((int) Math.random());
+                r.setLuogoPartenza(etLpartenza.getText().toString());
+                r.setLuogoArrivo(etLarrivo.getText().toString());
+                r.setNumPosti( intero );
+
+                realm.executeTransaction(new Realm.Transaction() {
+                    @Override
+                    public void execute(Realm realm) {
+                        realm.copyToRealm(r);
+                    }
+                });
 
 
             }

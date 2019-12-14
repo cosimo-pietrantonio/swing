@@ -9,19 +9,22 @@ import io.realm.annotations.Required;
 
 public class Richiesta extends RealmObject {
     @PrimaryKey
-    private String CodRichiesta;
+    private int CodRichiesta;
 
+    //@Required
+    private String mailUtente;
+    @Required
     private int numPosti;
     @Required
     private String LuogoPartenza;
     @Required
     private String LuogoArrivo;
-    @Required
+
     private Date dataPartenza;
 
-
-    public Richiesta(String codRichiesta, int numPosti, String luogoPartenza, String luogoArrivo, Date dataPartenza) {
+    public Richiesta(int codRichiesta, String mailUtente, int numPosti, String luogoPartenza, String luogoArrivo, Date dataPartenza) {
         CodRichiesta = codRichiesta;
+        this.mailUtente = mailUtente;
         this.numPosti = numPosti;
         LuogoPartenza = luogoPartenza;
         LuogoArrivo = luogoArrivo;
@@ -31,11 +34,11 @@ public class Richiesta extends RealmObject {
     public Richiesta() {
     }
 
-    public String getCodRichiesta() {
+    public int getCodRichiesta() {
         return CodRichiesta;
     }
 
-    public void setCodRichiesta(String codRichiesta) {
+    public void setCodRichiesta(int codRichiesta) {
         CodRichiesta = codRichiesta;
     }
 

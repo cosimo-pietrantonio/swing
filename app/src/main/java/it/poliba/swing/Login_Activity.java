@@ -22,6 +22,8 @@ public class Login_Activity extends AppCompatActivity {
         Button bRegister = (Button) findViewById(R.id.buttonReg);
         final EditText etEmail = (EditText) findViewById(R.id.etMail);
         final EditText etPassword = (EditText) findViewById(R.id.etPass);
+
+
 // cofigurazione del DB nell'activity
         String syncServerURL = "https://swing-app.de1a.cloud.realm.io/swingdb";
         final SyncConfiguration config = new SyncConfiguration.Builder(SyncUser.current(), syncServerURL).build();
