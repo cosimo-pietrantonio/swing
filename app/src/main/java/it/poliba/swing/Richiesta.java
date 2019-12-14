@@ -19,11 +19,10 @@ public class Richiesta extends RealmObject {
     @Required
     private String LuogoArrivo;
 
-    private Date dataPartenza;
+    private String dataPartenza;
 
-    public Richiesta(int codRichiesta, String mailUtente, int numPosti, String luogoPartenza, String luogoArrivo, Date dataPartenza) {
+    public Richiesta(int codRichiesta, int numPosti, String luogoPartenza, String luogoArrivo, String dataPartenza) {
         CodRichiesta = codRichiesta;
-        this.mailUtente = mailUtente;
         this.numPosti = numPosti;
         LuogoPartenza = luogoPartenza;
         LuogoArrivo = luogoArrivo;
@@ -65,11 +64,11 @@ public class Richiesta extends RealmObject {
         LuogoArrivo = luogoArrivo;
     }
 
-    public Date getDataPartenza() {
+    public String getDataPartenza() {
         return dataPartenza;
     }
 
-    public void setDataPartenza(Date dataPartenza) {
+    public void setDataPartenza(String dataPartenza) {
         this.dataPartenza = dataPartenza;
     }
 }

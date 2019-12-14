@@ -8,9 +8,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioButton;
-import android.widget.Spinner;
-
-import java.util.ArrayList;
 
 import io.realm.Realm;
 import io.realm.SyncConfiguration;
@@ -48,7 +45,7 @@ public class RequestActivity extends AppCompatActivity {
         //spinner.setAdapter(adapter);
 
 
-        final Intent periodico = new Intent(this, PeriodicoScrolling_Activity.class);
+        final Intent periodico = new Intent(this, RichiestaPeriodicaScrolling_Activity.class);
 
         rbPeriod.setOnClickListener(new View.OnClickListener() {
             @Override

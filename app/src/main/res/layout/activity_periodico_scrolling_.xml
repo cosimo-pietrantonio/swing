@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    tools:context=".PeriodicoScrolling_Activity">
+    tools:context=".RichiestaPeriodicaScrolling_Activity">
 
     <androidx.constraintlayout.widget.Group
         android:id="@+id/group"
@@ -17,7 +17,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="52dp"
-        android:layout_marginTop="105dp"
+        android:layout_marginTop="30dp"
         android:layout_marginEnd="146dp"
         android:layout_marginBottom="24dp"
         android:ems="10"
@@ -34,7 +34,6 @@
         android:layout_width="213dp"
         android:layout_height="51dp"
         android:layout_marginStart="50dp"
-        android:layout_marginTop="24dp"
         android:layout_marginEnd="143dp"
         android:layout_marginBottom="22dp"
         android:ems="10"
@@ -42,7 +41,7 @@
         android:inputType="textPersonName"
         app:layout_constraintBottom_toTopOf="@+id/etOraPartenza"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.4"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/etLuogoArrivo" />
 
@@ -78,16 +77,17 @@
     <EditText
         android:id="@+id/etOraPartenza"
         android:layout_width="205dp"
-        android:layout_height="46dp"
+        android:layout_height="47dp"
         android:layout_marginStart="53dp"
-        android:layout_marginTop="22dp"
+        android:layout_marginTop="10dp"
         android:layout_marginEnd="153dp"
-        android:layout_marginBottom="62dp"
+        android:layout_marginBottom="30dp"
         android:ems="10"
         android:hint="Ora usuale"
         android:inputType="time"
-        app:layout_constraintBottom_toTopOf="@+id/cbLun"
+        app:layout_constraintBottom_toTopOf="@+id/etDataIn"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/etLuogoPartenza" />
 
@@ -103,11 +103,15 @@
         android:id="@+id/cbMar"
         android:layout_width="85dp"
         android:layout_height="27dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="50dp"
         android:layout_marginEnd="28dp"
         android:layout_marginBottom="20dp"
         android:text="Martedì"
         app:layout_constraintBottom_toTopOf="@+id/cbVen"
-        app:layout_constraintEnd_toStartOf="@+id/cbMer" />
+        app:layout_constraintEnd_toStartOf="@+id/cbMer"
+        app:layout_constraintStart_toEndOf="@+id/cbLun"
+        app:layout_constraintTop_toBottomOf="@+id/etDataIn" />
 
     <CheckBox
         android:id="@+id/cbMer"
@@ -169,5 +173,22 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/cbLun" />
+
+    <EditText
+        android:id="@+id/etDataIn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="53dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="145dp"
+        android:layout_marginBottom="55dp"
+        android:ems="10"
+        android:hint="Data di inizio richiesta"
+        android:inputType="date"
+        app:layout_constraintBottom_toTopOf="@+id/cbLun"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/etOraPartenza" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

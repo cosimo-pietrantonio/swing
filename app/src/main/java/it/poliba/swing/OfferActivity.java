@@ -32,7 +32,8 @@ public class OfferActivity extends AppCompatActivity {
         RadioButton rbSingola = findViewById(R.id.radioSingola);
 
 
-        final Intent periodica = new Intent(this, OffertaPeriodica_ScrollingActivity); //da creare la scrolling activity, da vedere insieme
+        final Intent periodica = new Intent(this, Offerta_Periodica.class);
+        // da creare la scrolling activity, da vedere insieme
         rbPeriodica.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
