@@ -29,7 +29,7 @@ public class MainActivity extends AppCompatActivity {
         SyncUser.logInAsync(credentials, AUTH_URL, new SyncUser.Callback<SyncUser>() {
             @Override
             public void onSuccess(SyncUser syncUser) {
-                String syncServerURL = "https://swing-app.de1a.cloud.realm.io/swingdb";
+                String syncServerURL = "https://swing-app.de1a.cloud.realm.io/swingDataB";
                 final SyncConfiguration config = new SyncConfiguration.Builder(SyncUser.current(), syncServerURL).build();
                 Realm realm = Realm.getInstance(config);
 

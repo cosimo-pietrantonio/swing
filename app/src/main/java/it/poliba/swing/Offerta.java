@@ -1,8 +1,8 @@
 package it.poliba.swing;
 
 import android.os.Bundle;
-import java.sql.*;
 import java.util.ArrayList;
+import java.util.Date;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import android.view.View;
@@ -22,20 +22,18 @@ public class Offerta extends RealmObject {
     private String luogoArrivo;
     @Required
     private Date data;
-    @Required
-    private Time ora;
+
 
     private float prezzo;
 
     public Offerta() {
     }
 
-    public Offerta(int codOfferta, RealmList<String> luogoPartenza, String luogoArrivo, Date data, Time ora, float prezzo) {
+    public Offerta(int codOfferta, RealmList<String> luogoPartenza, String luogoArrivo, Date data, float prezzo) {
         this.codOfferta = codOfferta;
         this.luogoPartenza = luogoPartenza;
         this.luogoArrivo = luogoArrivo;
         this.data = data;
-        this.ora = ora;
         this.prezzo = prezzo;
     }
 
@@ -55,9 +53,7 @@ public class Offerta extends RealmObject {
         return data;
     }
 
-    public Time getOra() {
-        return ora;
-    }
+
 
     public float getPrezzo() {
         return prezzo;

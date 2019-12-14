@@ -12,13 +12,13 @@ public class Richiesta extends RealmObject {
 
     //@Required
     private String mailUtente;
-    @Required
+
     private int numPosti;
     @Required
     private String LuogoPartenza;
     @Required
     private String LuogoArrivo;
-
+    @Required
     private String dataPartenza;
 
     public Richiesta(int codRichiesta, int numPosti, String luogoPartenza, String luogoArrivo, String dataPartenza) {
