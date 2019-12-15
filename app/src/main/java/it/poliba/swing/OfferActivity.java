@@ -22,10 +22,10 @@ public class OfferActivity extends AppCompatActivity {
         final SyncConfiguration config = new SyncConfiguration.Builder(SyncUser.current(), syncServerURL).build();
         final Realm realm = Realm.getInstance(config);
 
-        EditText etLuogoPartenza = findViewById(R.id.etLuogoPartenzaO);
-        EditText etLuogoArrivo = findViewById(R.id.etLuogoArrivoO);
-        EditText etDataPartenza =findViewById(R.id.etDataPartenzaO);
-        EditText etOraPartenza = findViewById(R.id.etOraPartenzaO);
+        EditText etLuogoPartenza = findViewById(R.id.etLuogoPartenza);
+        EditText etLuogoArrivo = findViewById(R.id.etLuogoArrivo);
+        EditText etDataPartenza =findViewById(R.id.etDataPartenza);
+        EditText etOraPartenza = findViewById(R.id.etOraPartenza);
         EditText etPrezzo = findViewById(R.id.etPrezzo);
         Button bOffri = findViewById(R.id.bPubblica);
         RadioButton rbPeriodica = findViewById(R.id.radioPeriodica);

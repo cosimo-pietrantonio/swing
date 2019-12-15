@@ -18,7 +18,7 @@ public class RequestActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_periodico_scrolling_);
+        setContentView(R.layout.activity_request);
 
         String syncServerURL = "https://swing-app.de1a.cloud.realm.io/swingDataB";
         final SyncConfiguration config = new SyncConfiguration.Builder(SyncUser.current(), syncServerURL).build();
@@ -27,7 +27,7 @@ public class RequestActivity extends AppCompatActivity {
         final EditText etLpartenza = findViewById(R.id.etLuogoPartenza);
         final EditText etLarrivo = findViewById(R.id.etLuogoArrivo);
         final EditText etPosti  = findViewById(R.id.etNumPosti);
-        Button bPub = findViewById(R.id.buttonPubblica);
+        Button bPub = findViewById(R.id.bPubblica);
         RadioButton rbSingle = findViewById(R.id.radioSingola);
         RadioButton rbPeriod = findViewById(R.id.radioPeriodica);
 
@@ -52,7 +52,7 @@ public class RequestActivity extends AppCompatActivity {
             public void onClick(View v) {
                 startActivity(periodico);
             }
-        } ) ;
+        } );
 
 
         bPub.setOnClickListener(new View.OnClickListener() {

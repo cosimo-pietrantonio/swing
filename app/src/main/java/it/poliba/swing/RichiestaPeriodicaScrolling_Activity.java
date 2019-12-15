@@ -21,7 +21,7 @@ public class RichiestaPeriodicaScrolling_Activity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_periodico_scrolling_);
+        setContentView(R.layout.activity_passaggio__periodico_);
 
         String syncServerURL = "https://swing-app.de1a.cloud.realm.io/swingDataB";
         final SyncConfiguration config = new SyncConfiguration.Builder(SyncUser.current(), syncServerURL).build();
@@ -39,8 +39,8 @@ public class RichiestaPeriodicaScrolling_Activity extends AppCompatActivity {
         final EditText etLuogoPar = findViewById(R.id.etLuogoPartenza);
         final EditText etLuogoArr = findViewById(R.id.etLuogoArrivo);
         final EditText etOra = findViewById(R.id.etOraPartenza);
-        final EditText etDataIn = findViewById(R.id.etDataIn);
-        final Button bPubb = findViewById(R.id.buttonPubblica);
+        final EditText etDataIn = findViewById(R.id.etDataPartenza);
+        final Button bPubb = findViewById(R.id.bPubblica);
 
         final RealmList<String> giorni= new RealmList<>();
 
