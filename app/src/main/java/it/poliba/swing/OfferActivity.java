@@ -22,12 +22,12 @@ public class OfferActivity extends AppCompatActivity {
         final SyncConfiguration config = new SyncConfiguration.Builder(SyncUser.current(), syncServerURL).build();
         final Realm realm = Realm.getInstance(config);
 
-        EditText etLuogoPartenza = findViewById(R.id.etLuogoPartenzaO);
-        EditText etLuogoArrivo = findViewById(R.id.etLuogoArrivoO);
-        EditText etDataPartenza =findViewById(R.id.etDataPartenzaO);
-        EditText etOraPartenza = findViewById(R.id.etOraPartenzaO);
-        EditText etPrezzo = findViewById(R.id.etPrezzo);
-        Button bOffri = findViewById(R.id.bPubblica);
+        final EditText etLuogoPartenza = findViewById(R.id.etLuogoPartenzaO);
+        final EditText etLuogoArrivo = findViewById(R.id.etLuogoArrivoO);
+        final EditText etDataPartenza =findViewById(R.id.etDataPartenzaO);
+        final EditText etOraPartenza = findViewById(R.id.etOraPartenzaO);
+        final EditText etPrezzo = findViewById(R.id.etPrezzo);
+        Button bOffri = findViewById(R.id.bOffri);
         RadioButton rbPeriodica = findViewById(R.id.radioPeriodica);
         RadioButton rbSingola = findViewById(R.id.radioSingola);
 
@@ -36,17 +36,34 @@ public class OfferActivity extends AppCompatActivity {
         // da creare la scrolling activity, da vedere insieme
         rbPeriodica.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
+            public void onClick(View view) {
                 startActivity(periodica);
             }
-        } ) ;
-
+        });
 
         bOffri.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
+            public void onClick(View view) {
 
+                final Offerta o = new Offerta();
+
+                String prezzo = etPrezzo.getText().toString();
+                int iprezzo = Integer.parseInt(prezzo);
+
+                o.setCodOfferta((int)Math.random());
+                o.setLuogoPartenza(etLuogoPartenza.); //usare add to list, non mi compare il metodo add di realmlist
+                o.setLuogoArrivo(etLuogoArrivo.getText().toString());
+                o.setPrezzo(iprezzo);
+
+                realm.executeTransaction(new Realm.Transaction() {
+                    @Override
+                    public void execute(Realm realm) {
+                        realm.copyFromRealm(o);
+                    }
+                });
             }
-        } );
+        });
+
+
     }
 }

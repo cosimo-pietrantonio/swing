@@ -20,6 +20,18 @@ public class Offerta_Periodica extends RealmObject {
     @Required
     private Date dataInizio;
 
+    RealmList<String> giorni = new RealmList<>();
+
+    public Offerta_Periodica(int codOfferta, RealmList<String> luogoPartenza, String luogoArrivo, Date dataInizio, RealmList<String> giorni) {
+        this.codOfferta = codOfferta;
+        this.luogoPartenza = luogoPartenza;
+        this.luogoArrivo = luogoArrivo;
+        this.dataInizio = dataInizio;
+        this.giorni = giorni;
+    }
+
+    public Offerta_Periodica () {
+    }
 
     public int getCodOfferta() {
         return codOfferta;
@@ -51,5 +63,13 @@ public class Offerta_Periodica extends RealmObject {
 
     public void setDataInizio(Date dataInizio) {
         this.dataInizio = dataInizio;
+    }
+
+    public RealmList<String> getGiorni() {
+        return giorni;
+    }
+
+    public void setGiorni(RealmList<String> giorni) {
+        this.giorni = giorni;
     }
 }

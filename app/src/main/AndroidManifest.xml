@@ -10,9 +10,13 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
+            android:name=".OffertaPeriodicaScrolling_Activity"
+            android:label="@string/title_activity_offerta_periodica_scrolling_"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity
             android:name=".RichiestaPeriodicaScrolling_Activity"
             android:label="@string/title_activity_request_scrolling_"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".RequestActivity" />
         <activity android:name=".Home_activity" />
         <activity android:name=".Register_Activity" />
