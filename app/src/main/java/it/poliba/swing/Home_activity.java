@@ -14,8 +14,10 @@ public class Home_activity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_activity);
         Button bRich = findViewById(R.id.bRichiesta);
+        Button bOfferta= findViewById(R.id.bOfferta);
 
         final Intent IntentRich = new Intent(this, RequestActivity.class);
+        final Intent IntentOff = new Intent(this , OfferActivity.class);
 
         bRich.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -24,6 +26,12 @@ public class Home_activity extends AppCompatActivity {
             }
         });
 
+        bOfferta.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(IntentOff);
+            }
+        });
 
     }
 }

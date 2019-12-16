@@ -21,6 +21,8 @@ public class Offerta extends RealmObject {
     private String luogoArrivo;
     @Required
     private Date data;
+    @Required
+    private String ora;
 
 
     private float prezzo;
@@ -74,5 +76,13 @@ public class Offerta extends RealmObject {
 
     public void setPrezzo(float prezzo) {
         this.prezzo = prezzo;
+    }
+
+    public String getOra() {
+        return ora;
+    }
+
+    public void setOra(String ora) {
+        this.ora = ora;
     }
 }

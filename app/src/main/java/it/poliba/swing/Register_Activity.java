@@ -53,7 +53,7 @@ public class Register_Activity extends AppCompatActivity {
                         {
 
                          //una volta loggati possiamo creare la configurazione che mette in contatto il server con i devices:
-                            String syncServerURL = "https://swing-app.de1a.cloud.realm.io/swingDataB";
+                            String syncServerURL = "https://swing-app.de1a.cloud.realm.io/temp2";
                             final SyncConfiguration config = new SyncConfiguration.Builder(SyncUser.current(), syncServerURL).build();
                             Realm realm = Realm.getInstance(config);
 
@@ -69,10 +69,9 @@ public class Register_Activity extends AppCompatActivity {
                                 uno.setDataNascita(full);
 
 
-                                boolean temp = false;
-                                if (temp == false) {
 
-                                }
+
+
                                 if (realm.where(utente.class).equalTo("email", etEmail.getText().toString()).count() != 0) {
                                     Toast.makeText(getApplicationContext(), "Email già in uso", Toast.LENGTH_LONG).show();
                                 }else{

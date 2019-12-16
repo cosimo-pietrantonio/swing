@@ -8,6 +8,10 @@ import android.widget.RadioButton;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+
 import io.realm.Realm;
 import io.realm.SyncConfiguration;
 import io.realm.SyncUser;
@@ -18,7 +22,7 @@ public class OfferActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_offerta);
 
-        String syncServerURL = "https://swing-app.de1a.cloud.realm.io/swingDataB";
+        String syncServerURL = "https://swing-app.de1a.cloud.realm.io/temp2";
         final SyncConfiguration config = new SyncConfiguration.Builder(SyncUser.current(), syncServerURL).build();
         final Realm realm = Realm.getInstance(config);
 
@@ -52,6 +56,13 @@ public class OfferActivity extends AppCompatActivity {
                 String prezzo = etPrezzo.getText().toString();
                 int iprezzo = Integer.parseInt(prezzo);
 
+                SimpleDateFormat f = new SimpleDateFormat("yyyy-mm-dd");
+
+                try {
+                    o.setData(f.parse(etDataPartenza.getText().toString()));
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
                 o.setCodOfferta((int)Math.random());
                 o.setLuogoPartenza(etLuogoPartenza.getText().toString());
                 o.setLuogoArrivo(etLuogoArrivo.getText().toString());
@@ -63,6 +74,7 @@ public class OfferActivity extends AppCompatActivity {
                         realm.copyFromRealm(o);
                     }
                 });
+
             }
         });
 

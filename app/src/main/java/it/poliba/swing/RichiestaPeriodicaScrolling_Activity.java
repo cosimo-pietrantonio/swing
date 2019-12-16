@@ -9,10 +9,16 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.Iterator;
 
 import io.realm.Realm;
 import io.realm.RealmList;
+import io.realm.RealmQuery;
+import io.realm.RealmResults;
 import io.realm.SyncConfiguration;
 import io.realm.SyncUser;
 
@@ -23,7 +29,7 @@ public class RichiestaPeriodicaScrolling_Activity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_periodico_scrolling_);
 
-        String syncServerURL = "https://swing-app.de1a.cloud.realm.io/swingDataB";
+        String syncServerURL = "https://swing-app.de1a.cloud.realm.io/temp2";
         final SyncConfiguration config = new SyncConfiguration.Builder(SyncUser.current(), syncServerURL).build();
         final Realm realm = Realm.getInstance(config);
 
@@ -43,6 +49,8 @@ public class RichiestaPeriodicaScrolling_Activity extends AppCompatActivity {
         final Button bPubb = findViewById(R.id.bRichiestaPeriodico);
 
         final RealmList<String> giorni= new RealmList<>();
+        final ArrayList<Offerta> risultatiDelMatch = new ArrayList<>();
+        final ArrayList<Offerta> res = new ArrayList<>();
 
         bPubb.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -96,6 +104,11 @@ public class RichiestaPeriodicaScrolling_Activity extends AppCompatActivity {
                             realm.copyToRealm(rp);
                         }
                     });
+
+                     //settore del matching periodico
+
+
+
                  }
             }
         });

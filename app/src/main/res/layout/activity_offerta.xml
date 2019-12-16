@@ -5,49 +5,24 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    tools:context=".Offerta">
+    tools:context=".OfferActivity">
 
 
     <include
         android:id="@+id/include"
         layout="@layout/content_offerta"
-        tools:layout_editor_absoluteX="25dp"
-        tools:layout_editor_absoluteY="173dp" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <androidx.constraintlayout.widget.Group
         android:id="@+id/group"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 
-    <EditText
-        android:id="@+id/etLuogoArrivoO"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="50dp"
-        android:layout_marginTop="32dp"
-        android:layout_marginEnd="148dp"
-        android:ems="10"
-        android:hint="Qual è la tua destinazione?"
-        android:inputType="textPersonName"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/etLuogoPartenza" />
 
-    <EditText
-        android:id="@+id/etLuogoPartenzaO"
-        android:layout_width="213dp"
-        android:layout_height="51dp"
-        android:layout_marginStart="50dp"
-        android:layout_marginTop="140dp"
-        android:layout_marginEnd="148dp"
-        android:ems="10"
-        android:hint="Da dove parti?"
-        android:inputType="textPersonName"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+
 
     <Button
         android:id="@+id/bOffri"
@@ -69,7 +44,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_end="711dp" />
+        app:layout_constraintGuide_end="429dp" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline2"
@@ -83,12 +58,15 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="50dp"
-        android:layout_marginTop="32dp"
-        android:layout_marginEnd="148dp"
+        android:layout_marginTop="26dp"
+        android:layout_marginEnd="50dp"
+        android:layout_marginBottom="30dp"
         android:ems="10"
         android:hint="Data di partenza"
         android:inputType="date"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/etOraPartenzaO"
+        app:layout_constraintEnd_toStartOf="@+id/include"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/etLuogoArrivoO" />
 
@@ -96,25 +74,23 @@
         android:id="@+id/etOraPartenzaO"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="50dp"
-        android:layout_marginTop="32dp"
-        android:layout_marginEnd="148dp"
+        android:layout_marginTop="17dp"
         android:ems="10"
         android:hint="Ora di partenza"
         android:inputType="time"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/etDataPartenza" />
+        app:layout_constraintTop_toBottomOf="@+id/etDataPartenzaO"
+        tools:layout_editor_absoluteX="51dp" />
+
 
     <RadioButton
         android:id="@+id/radioSingola"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="50dp"
-        android:layout_marginTop="63dp"
-        android:layout_marginBottom="57dp"
+        android:layout_marginStart="48dp"
+        android:layout_marginTop="164dp"
+        android:layout_marginEnd="10dp"
         android:text="Singola"
-        app:layout_constraintBottom_toTopOf="@+id/etLuogoPartenza"
+        app:layout_constraintEnd_toStartOf="@+id/radioPeriodica"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -123,28 +99,64 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="41dp"
-        android:layout_marginTop="63dp"
+        android:layout_marginTop="164dp"
         android:layout_marginEnd="148dp"
-        android:layout_marginBottom="57dp"
+        android:layout_marginBottom="50dp"
         android:text="Periodica"
-        app:layout_constraintBottom_toTopOf="@+id/etLuogoPartenza"
+        app:layout_constraintBottom_toTopOf="@+id/etLuogoPartenzaO"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toEndOf="@+id/radioSingola"
         app:layout_constraintTop_toTopOf="parent" />
-
 
     <com.google.android.material.textfield.TextInputEditText
         android:id="@+id/etPrezzo"
         android:layout_width="219dp"
         android:layout_height="40dp"
         android:layout_marginStart="52dp"
-        android:layout_marginTop="448dp"
+        android:layout_marginTop="10dp"
         android:layout_marginEnd="560dp"
+        android:layout_marginBottom="39dp"
         android:hint="Inserisci il prezzo"
         android:inputType="number"
+        app:layout_constraintBottom_toTopOf="@+id/bOffri"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toEndOf="@+id/include"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/etOraPartenzaO" />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="308dp"
+        android:layout_height="wrap_content"
+        tools:layout_editor_absoluteX="1dp"
+        tools:layout_editor_absoluteY="306dp">
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputEditText
+        android:id="@+id/etLuogoArrivoO"
+        android:layout_width="239dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="28dp"
+        android:hint="Dove arriverai?"
+        app:layout_constraintTop_toBottomOf="@+id/etLuogoPartenzaO"
+        tools:layout_editor_absoluteX="51dp" />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="218dp"
+        android:layout_height="wrap_content"
+        tools:layout_editor_absoluteX="1dp"
+        tools:layout_editor_absoluteY="228dp">
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputEditText
+        android:id="@+id/etLuogoPartenzaO"
+        android:layout_width="219dp"
+        android:layout_height="43dp"
+        android:hint="Da dove parti?"
+        tools:layout_editor_absoluteX="51dp"
+        tools:layout_editor_absoluteY="246dp" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -20,6 +20,8 @@ public class Richiesta extends RealmObject {
     private String LuogoArrivo;
     @Required
     private String dataPartenza;
+    @Required
+    private String ora;
 
     public Richiesta(int codRichiesta, int numPosti, String luogoPartenza, String luogoArrivo, String dataPartenza) {
         CodRichiesta = codRichiesta;
@@ -70,5 +72,13 @@ public class Richiesta extends RealmObject {
 
     public void setDataPartenza(String dataPartenza) {
         this.dataPartenza = dataPartenza;
+    }
+
+    public String getOra() {
+        return ora;
+    }
+
+    public void setOra(String ora) {
+        this.ora = ora;
     }
 }

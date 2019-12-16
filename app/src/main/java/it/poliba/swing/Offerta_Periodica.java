@@ -19,7 +19,7 @@ public class Offerta_Periodica extends RealmObject {
     private String luogoArrivo;
     @Required
     private Date dataInizio;
-
+    @Required
     RealmList<String> giorni = new RealmList<>();
 
     public Offerta_Periodica(int codOfferta, String luogoPartenza, String luogoArrivo, Date dataInizio, RealmList<String> giorni) {

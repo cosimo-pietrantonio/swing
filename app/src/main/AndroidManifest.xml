@@ -9,10 +9,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".MatchList_Activity"></activity>
         <activity
             android:name=".OffertaPeriodicaScrolling_Activity"
             android:label="@string/title_activity_offerta_periodica_scrolling_"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".RichiestaPeriodicaScrolling_Activity"
             android:label="@string/title_activity_request_scrolling_"
