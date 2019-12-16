@@ -52,7 +52,7 @@ public class Register_Activity extends AppCompatActivity {
                         utente a = new utente();
                         {
 
-                                //una volta loggati possiamo creare la configurazione che mette in contatto il server con i devices:
+                         //una volta loggati possiamo creare la configurazione che mette in contatto il server con i devices:
                             String syncServerURL = "https://swing-app.de1a.cloud.realm.io/swingDataB";
                             final SyncConfiguration config = new SyncConfiguration.Builder(SyncUser.current(), syncServerURL).build();
                             Realm realm = Realm.getInstance(config);

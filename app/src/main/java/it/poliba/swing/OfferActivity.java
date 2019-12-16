@@ -22,6 +22,8 @@ public class OfferActivity extends AppCompatActivity {
         final SyncConfiguration config = new SyncConfiguration.Builder(SyncUser.current(), syncServerURL).build();
         final Realm realm = Realm.getInstance(config);
 
+
+
         final EditText etLuogoPartenza = findViewById(R.id.etLuogoPartenzaO);
         final EditText etLuogoArrivo = findViewById(R.id.etLuogoArrivoO);
         final EditText etDataPartenza =findViewById(R.id.etDataPartenzaO);

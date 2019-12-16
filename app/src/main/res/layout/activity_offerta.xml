@@ -20,7 +20,7 @@
         android:layout_height="wrap_content" />
 
     <EditText
-        android:id="@+id/etLuogoArrivoO"
+        android:id="@+id/etLuogoArrivo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="50dp"
@@ -32,10 +32,10 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/etLuogoPartenzaO" />
+        app:layout_constraintTop_toBottomOf="@+id/etLuogoPartenza" />
 
     <EditText
-        android:id="@+id/etLuogoPartenzaO"
+        android:id="@+id/etLuogoPartenza"
         android:layout_width="213dp"
         android:layout_height="51dp"
         android:layout_marginStart="50dp"
@@ -79,7 +79,7 @@
         app:layout_constraintGuide_end="387dp" />
 
     <EditText
-        android:id="@+id/etDataPartenzaO"
+        android:id="@+id/etDataPartenza"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="50dp"
@@ -90,10 +90,10 @@
         android:inputType="date"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/etLuogoArrivoO" />
+        app:layout_constraintTop_toBottomOf="@+id/etLuogoArrivo" />
 
     <EditText
-        android:id="@+id/etOraPartenzaO"
+        android:id="@+id/etOraPartenza"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="50dp"
@@ -104,7 +104,7 @@
         android:inputType="time"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/etDataPartenzaO" />
+        app:layout_constraintTop_toBottomOf="@+id/etDataPartenza" />
 
     <RadioButton
         android:id="@+id/radioSingola"
@@ -114,7 +114,7 @@
         android:layout_marginTop="63dp"
         android:layout_marginBottom="57dp"
         android:text="Singola"
-        app:layout_constraintBottom_toTopOf="@+id/etLuogoPartenzaO"
+        app:layout_constraintBottom_toTopOf="@+id/etLuogoPartenza"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -127,7 +127,7 @@
         android:layout_marginEnd="148dp"
         android:layout_marginBottom="57dp"
         android:text="Periodica"
-        app:layout_constraintBottom_toTopOf="@+id/etLuogoPartenzaO"
+        app:layout_constraintBottom_toTopOf="@+id/etLuogoPartenza"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/radioSingola"
         app:layout_constraintTop_toTopOf="parent" />

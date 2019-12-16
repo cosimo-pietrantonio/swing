@@ -7,32 +7,35 @@
     tools:context=".RichiestaPeriodicaScrolling_Activity">
 
 
-
     <EditText
-        android:id="@+id/etLuogoArrivoO"
+        android:id="@+id/etLuogoArrivo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="50dp"
         android:layout_marginTop="32dp"
         android:layout_marginEnd="143dp"
+        android:layout_marginBottom="32dp"
         android:ems="10"
         android:hint="Dove vuoi arrivare?"
         android:inputType="textPersonName"
+        app:layout_constraintBottom_toTopOf="@+id/etOraPartenza"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/etLuogoPartenzaO" />
+        app:layout_constraintTop_toBottomOf="@+id/etLuogoPartenza" />
 
     <EditText
-        android:id="@+id/etLuogoPartenzaO"
+        android:id="@+id/etLuogoPartenza"
         android:layout_width="213dp"
         android:layout_height="51dp"
         android:layout_marginStart="50dp"
         android:layout_marginTop="72dp"
         android:layout_marginEnd="143dp"
+        android:layout_marginBottom="32dp"
         android:ems="10"
         android:hint="Da dove vuoi partire?"
         android:inputType="textPersonName"
+        app:layout_constraintBottom_toTopOf="@+id/etLuogoArrivo"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
@@ -42,13 +45,13 @@
         android:id="@+id/bOffriPeriodico"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="50dp"
-        android:layout_marginEnd="256dp"
+        tools:layout_editor_absoluteX="52dp"
+        tools:layout_editor_absoluteY="597dp"
         android:text="Offri"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        tools:layout_editor_absoluteY="548dp" />
+        app:layout_constraintTop_toBottomOf="@+id/cbDom" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline"
@@ -65,55 +68,62 @@
         app:layout_constraintGuide_begin="20dp" />
 
     <EditText
-        android:id="@+id/etOraPartenzaO"
+        android:id="@+id/etOraPartenza"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="50dp"
         android:layout_marginTop="32dp"
         android:layout_marginEnd="148dp"
+        android:layout_marginBottom="52dp"
         android:ems="10"
         android:hint="Ora usuale"
         android:inputType="time"
+        app:layout_constraintBottom_toTopOf="@+id/cbLun"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/etLuogoArrivoO" />
+        app:layout_constraintTop_toBottomOf="@+id/etLuogoArrivo" />
 
     <CheckBox
         android:id="@+id/cbLun"
         android:layout_width="85dp"
         android:layout_height="27dp"
         android:layout_marginStart="47dp"
-        android:layout_marginTop="75dp"
+        android:layout_marginTop="20dp"
         android:layout_marginEnd="40dp"
+        android:layout_marginBottom="24dp"
         android:text="Lunedì"
+        app:layout_constraintBottom_toTopOf="@+id/cbGio"
         app:layout_constraintEnd_toStartOf="@+id/cbMar"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/etOraPartenzaO" />
+        app:layout_constraintTop_toBottomOf="@+id/etOraPartenza" />
 
     <CheckBox
         android:id="@+id/cbMar"
-        android:layout_width="85dp"
-        android:layout_height="27dp"
-        android:layout_marginTop="74dp"
-        android:layout_marginEnd="32dp"
-        android:layout_marginBottom="26dp"
+        android:layout_width="86dp"
+        android:layout_height="31dp"
+        android:layout_marginTop="72dp"
+        android:layout_marginBottom="5dp"
         android:text="Martedì"
         app:layout_constraintBottom_toTopOf="@+id/cbVen"
-        app:layout_constraintEnd_toStartOf="@+id/cbMer"
-        app:layout_constraintTop_toBottomOf="@+id/etOraPartenzaO"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.51"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/etOraPartenza" />
 
     <CheckBox
         android:id="@+id/cbMer"
         android:layout_width="106dp"
         android:layout_height="25dp"
-        android:layout_marginEnd="25dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginEnd="24dp"
         android:text="Mercoledì"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintStart_toEndOf="@+id/cbMar"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.542" />
 
     <CheckBox
         android:id="@+id/cbGio"
@@ -132,21 +142,26 @@
         android:id="@+id/cbVen"
         android:layout_width="91dp"
         android:layout_height="22dp"
+        android:layout_marginTop="25dp"
+        android:layout_marginBottom="274dp"
         android:text="Venerdì"
-        tools:layout_editor_absoluteX="160dp"
-        tools:layout_editor_absoluteY="403dp" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cbMar" />
 
     <CheckBox
         android:id="@+id/cbSab"
         android:layout_width="79dp"
         android:layout_height="22dp"
         android:layout_marginStart="35dp"
-        android:layout_marginTop="26dp"
+        android:layout_marginTop="32dp"
         android:layout_marginEnd="53dp"
-        android:layout_marginBottom="306dp"
+        android:layout_marginBottom="269dp"
         android:text="Sabato"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.571"
         app:layout_constraintStart_toEndOf="@+id/cbVen"
         app:layout_constraintTop_toBottomOf="@+id/cbMer" />
 
@@ -157,14 +172,13 @@
         android:layout_marginStart="44dp"
         android:layout_marginTop="26dp"
         android:layout_marginEnd="271dp"
-        android:layout_marginBottom="60dp"
+        android:layout_marginBottom="28dp"
         android:text="Domenica"
         app:layout_constraintBottom_toTopOf="@+id/bPubblica"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/cbGio"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintTop_toBottomOf="@+id/cbGio" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
