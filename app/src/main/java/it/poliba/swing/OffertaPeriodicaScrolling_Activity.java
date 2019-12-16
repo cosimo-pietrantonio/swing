@@ -8,8 +8,6 @@ import android.widget.EditText;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
-import java.text.SimpleDateFormat;
-
 import io.realm.Realm;
 import io.realm.RealmList;
 import io.realm.SyncConfiguration;
@@ -37,7 +35,7 @@ public class OffertaPeriodicaScrolling_Activity extends AppCompatActivity {
         final EditText etLuogoArr = findViewById(R.id.etLuogoArrivoO);
         final EditText etOra = findViewById(R.id.etOraPartenzaO);
 
-        final Button bOffriPeriodico = findViewById(R.id.bOffriPeriodico);
+        final Button bOffriPeriodico = findViewById(R.id.bOffri);
 
         final RealmList<String> giorni= new RealmList<>();
 

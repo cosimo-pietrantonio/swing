@@ -27,7 +27,7 @@ public class RequestActivity extends AppCompatActivity {
         final EditText etLpartenza = findViewById(R.id.etLuogoPartenza);
         final EditText etLarrivo = findViewById(R.id.etLuogoArrivo);
         final EditText etPosti  = findViewById(R.id.etNumPosti);
-        Button bPub = findViewById(R.id.buttonPubblica);
+        Button bPub = findViewById(R.id.bPubblicaPeriodico);
         RadioButton rbSingle = findViewById(R.id.radioSingola);
         RadioButton rbPeriod = findViewById(R.id.radioPeriodica);
 

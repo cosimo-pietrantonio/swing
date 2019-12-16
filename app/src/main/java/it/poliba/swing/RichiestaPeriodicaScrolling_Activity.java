@@ -40,7 +40,7 @@ public class RichiestaPeriodicaScrolling_Activity extends AppCompatActivity {
         final EditText etLuogoArr = findViewById(R.id.etLuogoArrivo);
         final EditText etOra = findViewById(R.id.etOraPartenza);
         final EditText etDataIn = findViewById(R.id.etDataIn);
-        final Button bPubb = findViewById(R.id.buttonPubblica);
+        final Button bPubb = findViewById(R.id.bPubblicaPeriodico);
 
         final RealmList<String> giorni= new RealmList<>();
 
