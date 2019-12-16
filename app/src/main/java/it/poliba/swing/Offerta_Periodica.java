@@ -14,7 +14,7 @@ public class Offerta_Periodica extends RealmObject {
     @PrimaryKey
     private int codOfferta;
     @Required
-    private RealmList<String> luogoPartenza;
+    private String luogoPartenza;
     @Required
     private String luogoArrivo;
     @Required
@@ -22,7 +22,7 @@ public class Offerta_Periodica extends RealmObject {
 
     RealmList<String> giorni = new RealmList<>();
 
-    public Offerta_Periodica(int codOfferta, RealmList<String> luogoPartenza, String luogoArrivo, Date dataInizio, RealmList<String> giorni) {
+    public Offerta_Periodica(int codOfferta, String luogoPartenza, String luogoArrivo, Date dataInizio, RealmList<String> giorni) {
         this.codOfferta = codOfferta;
         this.luogoPartenza = luogoPartenza;
         this.luogoArrivo = luogoArrivo;
@@ -41,11 +41,11 @@ public class Offerta_Periodica extends RealmObject {
         this.codOfferta = codOfferta;
     }
 
-    public RealmList<String> getLuogoPartenza() {
+    public String getLuogoPartenza() {
         return luogoPartenza;
     }
 
-    public void setLuogoPartenza(RealmList<String> luogoPartenza) {
+    public void setLuogoPartenza(String luogoPartenza) {
         this.luogoPartenza = luogoPartenza;
     }
 

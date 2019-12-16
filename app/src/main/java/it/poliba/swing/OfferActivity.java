@@ -53,7 +53,7 @@ public class OfferActivity extends AppCompatActivity {
                 int iprezzo = Integer.parseInt(prezzo);
 
                 o.setCodOfferta((int)Math.random());
-                o.setLuogoPartenza(etLuogoPartenza.getText().toString()); //usare add to list, non mi compare il metodo add di realmlist
+                o.setLuogoPartenza(etLuogoPartenza.getText().toString());
                 o.setLuogoArrivo(etLuogoArrivo.getText().toString());
                 o.setPrezzo(iprezzo);
 

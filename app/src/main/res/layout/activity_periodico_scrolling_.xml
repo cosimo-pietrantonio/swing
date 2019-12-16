@@ -13,7 +13,7 @@
         android:layout_height="wrap_content" />
 
     <EditText
-        android:id="@+id/etLuogoArrivo"
+        android:id="@+id/etLuogoArrivoRP"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="52dp"
@@ -30,7 +30,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
-        android:id="@+id/etLuogoPartenza"
+        android:id="@+id/etLuogoPartenzaRP"
         android:layout_width="213dp"
         android:layout_height="51dp"
         android:layout_marginStart="50dp"
@@ -39,14 +39,14 @@
         android:ems="10"
         android:hint="Da dove vuoi partire?"
         android:inputType="textPersonName"
-        app:layout_constraintBottom_toTopOf="@+id/etOraPartenza"
+        app:layout_constraintBottom_toTopOf="@+id/etOraPartenzaO"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/etLuogoArrivo" />
+        app:layout_constraintTop_toBottomOf="@+id/etLuogoArrivoO" />
 
     <Button
-        android:id="@+id/bPubblicaPeriodico"
+        android:id="@+id/bRichiestaPeriodico"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="50dp"
@@ -75,7 +75,7 @@
         app:layout_constraintGuide_begin="20dp" />
 
     <EditText
-        android:id="@+id/etOraPartenza"
+        android:id="@+id/etOraPartenzaRP"
         android:layout_width="205dp"
         android:layout_height="47dp"
         android:layout_marginStart="53dp"
@@ -175,7 +175,7 @@
         app:layout_constraintTop_toBottomOf="@+id/cbLun" />
 
     <EditText
-        android:id="@+id/etDataIn"
+        android:id="@+id/etDataInRP"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="53dp"
@@ -189,6 +189,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/etOraPartenza" />
+        app:layout_constraintTop_toBottomOf="@+id/etOraPartenzaO" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

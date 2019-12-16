@@ -36,11 +36,11 @@ public class RichiestaPeriodicaScrolling_Activity extends AppCompatActivity {
         final CheckBox cbVen = findViewById(R.id.cbVen);
         final CheckBox cbSab = findViewById(R.id.cbSab);
         final CheckBox cbDom = findViewById(R.id.cbDom);
-        final EditText etLuogoPar = findViewById(R.id.etLuogoPartenza);
-        final EditText etLuogoArr = findViewById(R.id.etLuogoArrivo);
-        final EditText etOra = findViewById(R.id.etOraPartenza);
-        final EditText etDataIn = findViewById(R.id.etDataIn);
-        final Button bPubb = findViewById(R.id.bPubblicaPeriodico);
+        final EditText etLuogoPar = findViewById(R.id.etLuogoPartenzaRP);
+        final EditText etLuogoArr = findViewById(R.id.etLuogoArrivoRP);
+        final EditText etOra = findViewById(R.id.etOraPartenzaRP);
+        final EditText etDataIn = findViewById(R.id.etDataInRP);
+        final Button bPubb = findViewById(R.id.bRichiestaPeriodico);
 
         final RealmList<String> giorni= new RealmList<>();
 
@@ -97,14 +97,7 @@ public class RichiestaPeriodicaScrolling_Activity extends AppCompatActivity {
                         }
                     });
                  }
-
-
             }
         });
-
-
-
-
-
     }
         }

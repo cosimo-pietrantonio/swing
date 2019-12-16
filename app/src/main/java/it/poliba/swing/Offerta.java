@@ -8,7 +8,6 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import android.view.View;
 
 import io.realm.Realm;
-import io.realm.RealmList;
 import io.realm.RealmObject;
 import io.realm.annotations.PrimaryKey;
 import io.realm.annotations.Required;
@@ -17,7 +16,7 @@ public class Offerta extends RealmObject {
     @PrimaryKey
     private int codOfferta;
     @Required
-    private RealmList<String> luogoPartenza;
+    private String  luogoPartenza;
     @Required
     private String luogoArrivo;
     @Required
@@ -29,7 +28,7 @@ public class Offerta extends RealmObject {
     public Offerta() {
     }
 
-    public Offerta(int codOfferta, RealmList<String> luogoPartenza, String luogoArrivo, Date data, float prezzo) {
+    public Offerta(int codOfferta, String luogoPartenza, String luogoArrivo, Date data, float prezzo) {
         this.codOfferta = codOfferta;
         this.luogoPartenza = luogoPartenza;
         this.luogoArrivo = luogoArrivo;
@@ -41,7 +40,7 @@ public class Offerta extends RealmObject {
         return codOfferta;
     }
 
-    public RealmList<String> getLuogoPartenza() {
+    public String getLuogoPartenza() {
         return luogoPartenza;
     }
 
@@ -61,7 +60,7 @@ public class Offerta extends RealmObject {
         this.codOfferta = codOfferta;
     }
 
-    public void setLuogoPartenza(RealmList<String> luogoPartenza) {
+    public void setLuogoPartenza(String luogoPartenza) {
         this.luogoPartenza = luogoPartenza;
     }
 

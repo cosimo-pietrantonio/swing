@@ -31,11 +31,11 @@ public class OffertaPeriodicaScrolling_Activity extends AppCompatActivity {
         final CheckBox cbVen = findViewById(R.id.cbVen);
         final CheckBox cbSab = findViewById(R.id.cbSab);
         final CheckBox cbDom = findViewById(R.id.cbDom);
-        final EditText etLuogoPar = findViewById(R.id.etLuogoPartenzaO);
-        final EditText etLuogoArr = findViewById(R.id.etLuogoArrivoO);
-        final EditText etOra = findViewById(R.id.etOraPartenzaO);
+        final EditText etLuogoPar = findViewById(R.id.etLuogoPartenzaOP);
+        final EditText etLuogoArr = findViewById(R.id.etLuogoArrivoOP);
+        final EditText etOra = findViewById(R.id.etOraPartenzaOP);
 
-        final Button bOffriPeriodico = findViewById(R.id.bOffri);
+        final Button bOffriPeriodico = findViewById(R.id.bOffriPeriodico);
 
         final RealmList<String> giorni= new RealmList<>();
 
@@ -75,7 +75,7 @@ public class OffertaPeriodicaScrolling_Activity extends AppCompatActivity {
                     //creazione offerta periodica
                     final Offerta_Periodica rp= new Offerta_Periodica();
                     rp.setCodOfferta((int) Math.random());
-                    rp.setLuogoPartenza(etLuogoPar.); //stessa cosa, vedere come fare add list to realmlist
+                    rp.setLuogoPartenza(etLuogoPar.getText().toString());
                     rp.setLuogoArrivo(etLuogoArr.getText().toString());
                     rp.setGiorni(giorni);
 
