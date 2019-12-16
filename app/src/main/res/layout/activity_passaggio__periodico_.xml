@@ -42,15 +42,12 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/bPubblica"
+        android:id="@+id/bOffri"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="50dp"
-        android:layout_marginTop="29dp"
-        android:layout_marginEnd="256dp"
-        android:layout_marginBottom="135dp"
-        android:text="Pubblica"
-        app:layout_constraintBottom_toBottomOf="parent"
+        tools:layout_editor_absoluteX="52dp"
+        tools:layout_editor_absoluteY="597dp"
+        android:text="Offri"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"

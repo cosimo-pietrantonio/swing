@@ -53,9 +53,27 @@ public class Offerta extends RealmObject {
         return data;
     }
 
-
-
     public float getPrezzo() {
         return prezzo;
+    }
+
+    public void setCodOfferta(int codOfferta) {
+        this.codOfferta = codOfferta;
+    }
+
+    public void setLuogoPartenza(RealmList<String> luogoPartenza) {
+        this.luogoPartenza = luogoPartenza;
+    }
+
+    public void setLuogoArrivo(String luogoArrivo) {
+        this.luogoArrivo = luogoArrivo;
+    }
+
+    public void setData(Date data) {
+        this.data = data;
+    }
+
+    public void setPrezzo(float prezzo) {
+        this.prezzo = prezzo;
     }
 }

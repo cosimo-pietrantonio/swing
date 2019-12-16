@@ -94,4 +94,5 @@ public class Richiesta_Periodico extends RealmObject {
     public void setDataPartenza(String dataPartenza) {
         this.dataPartenza = dataPartenza;
     }
+
 }
