@@ -31,7 +31,7 @@ public class RequestActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_request);
 
-        String syncServerURL = "https://swing-app.de1a.cloud.realm.io/temp2";
+        String syncServerURL = "https://swing-app.de1a.cloud.realm.io/temp3";
         final SyncConfiguration config = new SyncConfiguration.Builder(SyncUser.current(), syncServerURL).build();
         final Realm realm = Realm.getInstance(config);
         final EditText etLpartenza = findViewById(R.id.etLuogoPartenza);
@@ -85,53 +85,58 @@ public class RequestActivity extends AppCompatActivity {
 
                 });
 
-                Date orarioConvertito = new Date();
-                final String orarioDaConv = etOra.getText().toString();
-                final DateFormat sdf= new SimpleDateFormat("hh:mm");
-                try {
-                      orarioConvertito = sdf.parse(orarioDaConv);
-                } catch (ParseException e) {
-                    e.printStackTrace();
-                }
+
 
                 // settore del matching
 
                 if (realm.where(Offerta.class).equalTo("luogoPartenza",etLpartenza.getText().toString())
                         .equalTo("luogoArrivo",etLarrivo.getText().toString()).count() != 0  ){
                     // inserire confronto su dataPartenza
-                    RealmQuery<Offerta> query = realm.where(Offerta.class).equalTo("luogoPartenza",etLpartenza.getText().toString())
+                    final RealmQuery<Offerta> query = realm.where(Offerta.class).equalTo("luogoPartenza",etLpartenza.getText().toString())
                             .equalTo("luogoArrivo",etLarrivo.getText().toString());
-                    RealmResults<Offerta> queryResults = query.findAll();
-                    Iterator<Offerta> resIter= queryResults.iterator();
-                    while (resIter.hasNext()){
+                    final RealmResults<Offerta> queryResults = query.findAll();
+                    final Iterator<Offerta> resIter= queryResults.iterator();
+                    while (resIter.hasNext()) {
                         res.add(resIter.next());
                     }
-                    Iterator<Offerta> arrayIterator = res.iterator();
-                    while(arrayIterator.hasNext()){
+/*
+                        final Iterator<Offerta> arrayIterator = res.iterator();
+                        while (arrayIterator.hasNext()) {
+                            String orarioOfferte = arrayIterator.next().getOra();
+                            String stringaOreOff = orarioOfferte.substring(0, 2);
+                            String stringaOreRich = etOra.getText().toString().substring(0, 2);
+                            int cifreOreOff = Integer.parseInt(orarioOfferte.substring(0, 2));
+                            int cifreOreRich = Integer.parseInt(etOra.getText().toString().substring(0, 2));
+                            int primaCifraOreOff = Integer.parseInt(stringaOreOff.substring(0, 1));
+                            int primaCifraOreRich = Integer.parseInt(stringaOreRich.substring(0, 1));
+                            int secondaCifraOreOff = Integer.parseInt(stringaOreOff.substring(1, 2));
+                            int secondaCifraOreRich = Integer.parseInt(stringaOreRich.substring(1, 2));
 
-                        String orarioListaDaConv = arrayIterator.next().getOra();
-                        Date orarioListaConvertito = new Date();
-                        try {
-                             orarioListaConvertito = sdf.parse(orarioListaDaConv);
-                        } catch (ParseException e) {
-                            e.printStackTrace();
+
+                            if (primaCifraOreOff == 0 && primaCifraOreRich == 0) {
+                                if (secondaCifraOreRich == secondaCifraOreOff + 1 || secondaCifraOreRich == secondaCifraOreOff - 1
+                                        || secondaCifraOreOff == secondaCifraOreRich)
+                                    risultatiDelMatch.add(arrayIterator.next());
+                            } else if (primaCifraOreOff == 0) {
+                                if ((cifreOreRich == 10 && secondaCifraOreOff == 9) || (cifreOreRich == 23 && secondaCifraOreOff == 0))
+                                    risultatiDelMatch.add(arrayIterator.next());
+                            } else if (primaCifraOreRich == 0) {
+                                if ((secondaCifraOreRich == 0 && cifreOreOff == 23) || (secondaCifraOreRich == 9 && cifreOreOff == 10))
+                                    risultatiDelMatch.add(arrayIterator.next());
+                            }
                         }
 
-                        if (orarioConvertito.compareTo(orarioListaConvertito) < 0){
-                            risultatiDelMatch.add(arrayIterator.next());
-                        }
+*/
+                    if ( !risultatiDelMatch.isEmpty() ){
 
-                   }
+                        startActivity(passaggioMatchList);
+                        Toast.makeText(getApplicationContext(), "Match riuscito!!!!!", Toast.LENGTH_LONG).show();
 
-                }
-                if (risultatiDelMatch.isEmpty() == false){
-
-                    startActivity(passaggioMatchList);
-                    Toast.makeText(getApplicationContext(), "Match riuscito!!!!!", Toast.LENGTH_LONG).show();
+                    } else{
+                        Toast.makeText(getApplicationContext(), "Match NON riuscito!!!!!", Toast.LENGTH_LONG).show();
 
                 }
-                else{
-                    Toast.makeText(getApplicationContext(), "Match NON riuscito!!!!!", Toast.LENGTH_LONG).show();
+
 
                 }
 

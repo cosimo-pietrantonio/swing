@@ -20,17 +20,15 @@ public class Offerta extends RealmObject {
     @Required
     private String luogoArrivo;
     @Required
-    private Date data;
+    private String data;
     @Required
     private String ora;
-
-
     private float prezzo;
 
     public Offerta() {
     }
 
-    public Offerta(int codOfferta, String luogoPartenza, String luogoArrivo, Date data, float prezzo) {
+    public Offerta(int codOfferta, String luogoPartenza, String luogoArrivo, String data, float prezzo) {
         this.codOfferta = codOfferta;
         this.luogoPartenza = luogoPartenza;
         this.luogoArrivo = luogoArrivo;
@@ -50,7 +48,7 @@ public class Offerta extends RealmObject {
         return luogoArrivo;
     }
 
-    public Date getData() {
+    public String getData() {
         return data;
     }
 
@@ -70,7 +68,7 @@ public class Offerta extends RealmObject {
         this.luogoArrivo = luogoArrivo;
     }
 
-    public void setData(Date data) {
+    public void setData(String data) {
         this.data = data;
     }
 

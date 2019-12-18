@@ -9,7 +9,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MatchList_Activity"></activity>
+        <activity android:name=".OfferActivity"></activity>
+        <activity android:name=".MatchList_Activity" />
         <activity
             android:name=".OffertaPeriodicaScrolling_Activity"
             android:label="@string/title_activity_offerta_periodica_scrolling_"

@@ -20,7 +20,7 @@ public class OffertaPeriodicaScrolling_Activity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_passaggio__periodico_);
 
-        String syncServerURL = "https://swing-app.de1a.cloud.realm.io/temp2";
+        String syncServerURL = "https://swing-app.de1a.cloud.realm.io/temp3";
         final SyncConfiguration config = new SyncConfiguration.Builder(SyncUser.current(), syncServerURL).build();
         final Realm realm = Realm.getInstance(config);
 
