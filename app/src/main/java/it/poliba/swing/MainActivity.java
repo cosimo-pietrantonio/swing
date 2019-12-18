@@ -2,6 +2,7 @@ package it.poliba.swing;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
@@ -17,9 +18,10 @@ import static it.poliba.swing.Constants.AUTH_URL;
 
 public class MainActivity extends AppCompatActivity {
 
-    private static int splash_time_out = 3000;
+    private static int splash_time_out = 1000;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Realm.init(getApplicationContext());
@@ -36,7 +38,7 @@ public class MainActivity extends AppCompatActivity {
                 System.out.println("sono qui");
                 Log.i("Login", "Admin identificato");
 
-                new Handler().postDelayed(new Runnable() {
+               new Handler().postDelayed(new Runnable() {
                     @Override
                     public void run() {
                         Intent homeIntent = new Intent(MainActivity.this, Login_Activity.class);

@@ -2,6 +2,7 @@ package it.poliba.swing;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -37,7 +38,6 @@ public class Login_Activity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 startActivity(a);
-
             }
         });
 
