@@ -9,6 +9,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.NoActionBar">
+        <activity android:name=".Profilo"></activity>
+        <activity android:name=".Modifica_profilo" />
+        <activity android:name=".Offerta" />
+        <activity android:name=".Richiesta" />
         <activity android:name=".Home_activity" />
         <activity android:name=".Register_Activity" />
         <activity android:name=".Login_Activity" />

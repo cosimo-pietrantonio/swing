@@ -3,6 +3,11 @@
     <string name="title_activity_home_">Home_activity_</string>
     <string name="title_activity_register1">activity_register1</string>
     <string name="large_text">
+        <string name="11cognome">cognome</string>
+        <string name="nome">nome</string>
+        <string name="email">email</string>
+        <string name="data">data di nascita</string>
+
         "Material is the metaphor.\n\n"
 
         "A material metaphor is the unifying theory of a rationalized space and a system of motion."

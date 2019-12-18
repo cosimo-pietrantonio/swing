@@ -9,10 +9,13 @@ import android.view.View;
 import android.widget.*;
 
 import io.realm.Realm;
+import io.realm.RealmQuery;
+import io.realm.RealmResults;
 import io.realm.SyncConfiguration;
 import io.realm.SyncUser;
 
 public class Login_Activity extends AppCompatActivity {
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,35 +26,52 @@ public class Login_Activity extends AppCompatActivity {
         Button bRegister = (Button) findViewById(R.id.buttonReg);
         final EditText etEmail = (EditText) findViewById(R.id.etMail);
         final EditText etPassword = (EditText) findViewById(R.id.etPass);
+        final utente u1 = new utente();
 
-
-// cofigurazione del DB nell'activity
-        String syncServerURL = "https://swing-app.de1a.cloud.realm.io/temp3";
+        // cofigurazione del DB nell'activity
+        String syncServerURL = "https://swing-app.de1a.cloud.realm.io/temp2";
         final SyncConfiguration config = new SyncConfiguration.Builder(SyncUser.current(), syncServerURL).build();
         final Realm realm = Realm.getInstance(config);
 
 
         final Intent a = new Intent(this, Register_Activity.class);
         final Intent b = new Intent(this, Home_activity.class);
+        final Intent c = new Intent(this, Richiesta.class);//per prova
+        final Intent d = new Intent(this, Offerta.class);//per prova
+        final Intent e = new Intent(this, Profilo.class);//per prova
 
         bRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(a);
+                startActivity(a);   // Modifica effettuata
             }
         });
 
         bLogIn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (realm.where(utente.class).equalTo("email", etEmail.getText().toString()).equalTo("password", etPassword.getText().toString()).count() != 0) {
-                    startActivity(b);
+
+                RealmQuery<utente> query = realm.where(utente.class);
+                query.equalTo("email", etEmail.getText().toString());
+                query.equalTo("password", etPassword.getText().toString());
+                RealmResults<utente> result = query.findAll();
+                long temp = query.count();
+
+                if (temp != 0) {
+                    u1.setCognome(result.get(0).getCognome());
+                    u1.setNome(result.get(0).getNome());
+                    u1.setDataNascita(result.get(0).getDataNascita());
+                    u1.setEmail(result.get(0).getEmail());
+                    u1.setPassword(result.get(0).getPassword());
+                    Bundle b1 = new Bundle();
+                    b1.putParcelable("object_key", u1);
+                    e.putExtras(b1);
+                    startActivity(e);
                 } else if (realm.where(utente.class).equalTo("email", etEmail.getText().toString()).count() != 0 && realm.where(utente.class).equalTo("email", etEmail.getText().toString()).equalTo("password", etPassword.getText().toString()).count() == 0) {
                     Toast.makeText(getApplicationContext(), "La Password che hai inserito è errata" , Toast.LENGTH_LONG).show();
                 } else if (realm.where(utente.class).equalTo("email", etEmail.getText().toString()).count() == 0) {
                     Toast.makeText(getApplicationContext(), "L'Email che hai inserito è errata" , Toast.LENGTH_LONG).show();
                 }
-
             }
 
 
