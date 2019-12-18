@@ -23,13 +23,7 @@ public class Richiesta extends RealmObject {
     @Required
     private String ora;
 
-    public Richiesta(int codRichiesta, int numPosti, String luogoPartenza, String luogoArrivo, String dataPartenza) {
-        CodRichiesta = codRichiesta;
-        this.numPosti = numPosti;
-        LuogoPartenza = luogoPartenza;
-        LuogoArrivo = luogoArrivo;
-        this.dataPartenza = dataPartenza;
-    }
+
 
     public Richiesta() {
     }

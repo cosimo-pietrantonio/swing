@@ -2,7 +2,6 @@ package it.poliba.swing;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -26,19 +25,19 @@ public class Login_Activity extends AppCompatActivity {
         Button bRegister = (Button) findViewById(R.id.buttonReg);
         final EditText etEmail = (EditText) findViewById(R.id.etMail);
         final EditText etPassword = (EditText) findViewById(R.id.etPass);
-        final utente u1 = new utente();
+        final Utente u1 = new Utente();
 
         // cofigurazione del DB nell'activity
-        String syncServerURL = "https://swing-app.de1a.cloud.realm.io/temp2";
+        String syncServerURL = "https://swing-app.de1a.cloud.realm.io/temp6";
         final SyncConfiguration config = new SyncConfiguration.Builder(SyncUser.current(), syncServerURL).build();
         final Realm realm = Realm.getInstance(config);
 
 
         final Intent a = new Intent(this, Register_Activity.class);
-        final Intent b = new Intent(this, Home_activity.class);
         final Intent c = new Intent(this, Richiesta.class);//per prova
         final Intent d = new Intent(this, Offerta.class);//per prova
-        final Intent e = new Intent(this, Profilo.class);//per prova
+        final Intent f = new Intent(this, Profilo_Activity.class);//per prova
+        final Intent b = new Intent(this,Home_Activity.class);
 
         bRegister.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -51,10 +50,10 @@ public class Login_Activity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                RealmQuery<utente> query = realm.where(utente.class);
+                RealmQuery<Utente> query = realm.where(Utente.class);
                 query.equalTo("email", etEmail.getText().toString());
                 query.equalTo("password", etPassword.getText().toString());
-                RealmResults<utente> result = query.findAll();
+                RealmResults<Utente> result = query.findAll();
                 long temp = query.count();
 
                 if (temp != 0) {
@@ -65,11 +64,11 @@ public class Login_Activity extends AppCompatActivity {
                     u1.setPassword(result.get(0).getPassword());
                     Bundle b1 = new Bundle();
                     b1.putParcelable("object_key", u1);
-                    e.putExtras(b1);
-                    startActivity(e);
-                } else if (realm.where(utente.class).equalTo("email", etEmail.getText().toString()).count() != 0 && realm.where(utente.class).equalTo("email", etEmail.getText().toString()).equalTo("password", etPassword.getText().toString()).count() == 0) {
+                    b.putExtras(b1);
+                    startActivity(b);
+                } else if (realm.where(Utente.class).equalTo("email", etEmail.getText().toString()).count() != 0 && realm.where(Utente.class).equalTo("email", etEmail.getText().toString()).equalTo("password", etPassword.getText().toString()).count() == 0) {
                     Toast.makeText(getApplicationContext(), "La Password che hai inserito è errata" , Toast.LENGTH_LONG).show();
-                } else if (realm.where(utente.class).equalTo("email", etEmail.getText().toString()).count() == 0) {
+                } else if (realm.where(Utente.class).equalTo("email", etEmail.getText().toString()).count() == 0) {
                     Toast.makeText(getApplicationContext(), "L'Email che hai inserito è errata" , Toast.LENGTH_LONG).show();
                 }
             }

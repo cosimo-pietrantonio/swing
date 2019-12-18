@@ -5,10 +5,9 @@ import android.os.Parcelable;
 
 import io.realm.RealmObject;
 import io.realm.annotations.Required;
-import java.util.Date;
 import io.realm.annotations.PrimaryKey;
 
-public class utente extends RealmObject implements Parcelable {
+public class Utente extends RealmObject implements Parcelable {
     @PrimaryKey
     @Required
     private String email;
@@ -23,7 +22,7 @@ public class utente extends RealmObject implements Parcelable {
 
 
 
-    public utente() {
+    public Utente() {
     }
 
 
@@ -54,7 +53,7 @@ public class utente extends RealmObject implements Parcelable {
         return 0;
     }
 
-    private utente(Parcel in) {
+    private Utente(Parcel in) {
         readFromParcel(in);
     }
 
@@ -66,14 +65,14 @@ public class utente extends RealmObject implements Parcelable {
         password= in.readString();
     }
 
-    public static final Parcelable.Creator<utente> CREATOR
-            = new Parcelable.Creator<utente>() {
-        public utente createFromParcel(Parcel in) {
-            return new utente(in);
+    public static final Parcelable.Creator<Utente> CREATOR
+            = new Parcelable.Creator<Utente>() {
+        public Utente createFromParcel(Parcel in) {
+            return new Utente(in);
         }
 
-        public utente[] newArray(int size) {
-            return new utente[size];
+        public Utente[] newArray(int size) {
+            return new Utente[size];
         }
     };
 

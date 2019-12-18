@@ -6,20 +6,18 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.text.TextUtils;
-import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import java.util.Random;
 import io.realm.Realm;
 import io.realm.RealmQuery;
 import io.realm.RealmResults;
 import io.realm.SyncConfiguration;
 import io.realm.SyncUser;
 
-public class Profilo extends AppCompatActivity implements io.realm.RealmModel{
+public class Profilo_Activity extends AppCompatActivity implements io.realm.RealmModel{
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,13 +25,13 @@ public class Profilo extends AppCompatActivity implements io.realm.RealmModel{
         setContentView(R.layout.activity_profilo);
 
         // cofigurazione del DB nell'activity
-        String syncServerURL = "https://swing-app.de1a.cloud.realm.io/temp2";
+        String syncServerURL = "https://swing-app.de1a.cloud.realm.io/temp6";
         final SyncConfiguration config = new SyncConfiguration.Builder(SyncUser.current(), syncServerURL).build();
         final Realm realm = Realm.getInstance(config);
 
-        final Intent a = new Intent(this, Modifica_profilo.class);
-        utente utente = new utente();
-        final utente U =new utente();
+        final Intent a = new Intent(this, ModficaProfilo_Activity.class);
+        Utente utente = new Utente();
+        final Utente U =new Utente();
         TextView e = findViewById(R.id.em);
         TextView c = findViewById(R.id.co);
         TextView n = findViewById(R.id.no);
@@ -56,8 +54,8 @@ public class Profilo extends AppCompatActivity implements io.realm.RealmModel{
         //lettura richieste e offerte ad esso associato
         RealmQuery<Richiesta> query1 = realm.where(Richiesta.class);
         RealmQuery<Offerta> query2 = realm.where(Offerta.class);
-        //query1.equalTo("email", utente.getEmail());
-        //query2.equalTo("email", utente.getEmail());
+        //query1.equalTo("email", Utente.getEmail());
+        //query2.equalTo("email", Utente.getEmail());
         final RealmResults<Richiesta> result1 = query1.findAll();
         final RealmResults<Offerta> result2 = query2.findAll();
 
@@ -89,7 +87,7 @@ public class Profilo extends AppCompatActivity implements io.realm.RealmModel{
         add.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                final TextView add = new TextView(Profilo.this);
+                final TextView add = new TextView(Profilo_Activity.this);
                 //get partenza destinazione data
                 add.setText("Bari-noci   ore: 15:00  ciao ciao");
                 add.setPadding(5,5,0,15);

@@ -109,4 +109,21 @@
     <string name="title_activity_request_scrolling_">RequestScrolling_Activity</string>
     <string name="title_activity_offerta_periodica_scrolling_">OffertaPeriodicaScrolling_Activity
     </string>
+    -<string-array name="numbers">
+
+    <item>Lunedì</item>
+
+    <item>Martedì</item>
+
+    <item>Mercoledì</item>
+
+    <item>Giovedì</item>
+
+    <item>Venerdi</item>
+
+    <item>Sabato</item>
+
+    <item>Domenica</item>
+
+</string-array>
 </resources>

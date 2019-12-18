@@ -17,7 +17,7 @@ import io.realm.RealmResults;
 import io.realm.SyncConfiguration;
 import io.realm.SyncUser;
 
-public class Modifica_profilo extends AppCompatActivity implements DatePickerDialog.OnDateSetListener  {
+public class ModficaProfilo_Activity extends AppCompatActivity implements DatePickerDialog.OnDateSetListener  {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,11 +33,11 @@ public class Modifica_profilo extends AppCompatActivity implements DatePickerDia
         final int StartMonth= 12;
         final int StartDay= 31;
         Button salva = findViewById(R.id.salva);
-        utente u = new utente();
+        Utente u = new Utente();
 
 
         //data picker dialog
-        final DatePickerDialog datePickerDialog = new DatePickerDialog(this,Modifica_profilo.this,StartYear,StartMonth,StartDay );
+        final DatePickerDialog datePickerDialog = new DatePickerDialog(this, ModficaProfilo_Activity.this,StartYear,StartMonth,StartDay );
 
         data.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -68,7 +68,7 @@ public class Modifica_profilo extends AppCompatActivity implements DatePickerDia
         });
 
         // cofigurazione del DB nell'activity
-        String syncServerURL = "https://swing-app.de1a.cloud.realm.io/temp2";
+        String syncServerURL = "https://swing-app.de1a.cloud.realm.io/temp6";
         final SyncConfiguration config = new SyncConfiguration.Builder(SyncUser.current(), syncServerURL).build();
         final Realm realm = Realm.getInstance(config);
 
@@ -85,8 +85,8 @@ public class Modifica_profilo extends AppCompatActivity implements DatePickerDia
         data.setHint(u.getDataNascita());
         password.setHint(u.getPassword());
 
-        final utente finalU = new utente();
-        final utente finaluu = new utente();
+        final Utente finalU = new Utente();
+        final Utente finaluu = new Utente();
         finaluu.setPassword(u.getPassword());
         salva.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -130,7 +130,7 @@ public class Modifica_profilo extends AppCompatActivity implements DatePickerDia
                 realm.executeTransaction(new Realm.Transaction() {
                     @Override
                     public void execute(Realm realm) {
-                        RealmResults <utente> utenti = realm.where(utente.class).equalTo("email",email).findAll();
+                        RealmResults <Utente> utenti = realm.where(Utente.class).equalTo("email",email).findAll();
                         utenti.setValue("nome",Nome );
                         utenti.setValue("cognome", Cognome);
                         utenti.setValue("password", Password);

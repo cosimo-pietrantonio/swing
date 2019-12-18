@@ -16,25 +16,23 @@ public class Offerta extends RealmObject {
     @PrimaryKey
     private int codOfferta;
     @Required
-    private String  luogoPartenza;
+    private String luogoPartenza;
     @Required
     private String luogoArrivo;
     @Required
     private String data;
     @Required
     private String ora;
-    private float prezzo;
+    @Required
+    private String emailUtente;
+
+    private double prezzo;
+
+    private int numPostiDisponibili;
 
     public Offerta() {
     }
 
-    public Offerta(int codOfferta, String luogoPartenza, String luogoArrivo, String data, float prezzo) {
-        this.codOfferta = codOfferta;
-        this.luogoPartenza = luogoPartenza;
-        this.luogoArrivo = luogoArrivo;
-        this.data = data;
-        this.prezzo = prezzo;
-    }
 
     public int getCodOfferta() {
         return codOfferta;
@@ -52,9 +50,6 @@ public class Offerta extends RealmObject {
         return data;
     }
 
-    public float getPrezzo() {
-        return prezzo;
-    }
 
     public void setCodOfferta(int codOfferta) {
         this.codOfferta = codOfferta;
@@ -72,7 +67,7 @@ public class Offerta extends RealmObject {
         this.data = data;
     }
 
-    public void setPrezzo(float prezzo) {
+    public void setPrezzo(double prezzo) {
         this.prezzo = prezzo;
     }
 
@@ -82,5 +77,26 @@ public class Offerta extends RealmObject {
 
     public void setOra(String ora) {
         this.ora = ora;
+    }
+
+    public int getNumPostiDisponibili() {
+        return numPostiDisponibili;
+    }
+
+
+    public String getEmailUtente() {
+        return emailUtente;
+    }
+
+    public void setEmailUtente(String emailUtente) {
+        this.emailUtente = emailUtente;
+    }
+
+    public double getPrezzo() {
+        return prezzo;
+    }
+
+    public void setNumPostiDisponibili(int numPostiDisponibili) {
+        this.numPostiDisponibili = numPostiDisponibili;
     }
 }

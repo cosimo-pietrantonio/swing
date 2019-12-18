@@ -31,7 +31,7 @@ public class RequestActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_request);
 
-        String syncServerURL = "https://swing-app.de1a.cloud.realm.io/temp3";
+        String syncServerURL = "https://swing-app.de1a.cloud.realm.io/temp6";
         final SyncConfiguration config = new SyncConfiguration.Builder(SyncUser.current(), syncServerURL).build();
         final Realm realm = Realm.getInstance(config);
         final EditText etLpartenza = findViewById(R.id.etLuogoPartenza);

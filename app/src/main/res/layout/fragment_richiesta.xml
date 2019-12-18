@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/yellow"
+    tools:context=".Fragment_Richiesta">
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="100dp"
+        >
+
+        <EditText
+            android:id="@+id/partenza"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="20dp"
+            android:alpha="1"
+            android:hint="Partenza"></EditText>
+
+        <EditText
+            android:id="@+id/destinazione"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="80dp"
+            android:alpha="1"
+            android:hint="Destinazione"></EditText>
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="300dp">
+
+        <TextView
+            android:id="@+id/tv_Data"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:layout_gravity="left"
+            android:layout_marginLeft="30dp"
+            android:textSize="16sp"
+            android:text="Data"
+            android:clickable="true">
+        </TextView>
+
+        <TextView
+            android:id="@+id/tv_ora"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:layout_gravity="left"
+            android:layout_marginLeft="140dp"
+            android:textSize="16sp"
+            android:text="Ora"
+            android:clickable="true">
+
+        </TextView>
+
+        <TextView
+            android:id="@+id/tv_posti"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="posti"
+            android:textSize="16dp"
+            android:layout_marginTop="30dp"
+            android:layout_marginLeft="230dp"/>
+
+        <NumberPicker
+            android:id="@+id/numberPicker"
+            android:layout_width="wrap_content"
+            android:layout_height="128dp"
+            android:layout_marginLeft="220dp"
+            android:layout_marginTop="70dp"
+            android:alpha="0" />
+        <TextView
+            android:id="@+id/giorni"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Giorni"
+            android:layout_marginTop="150dp"
+            android:textSize="16sp"
+            android:layout_marginLeft="25dp"
+            android:alpha="0"
+            android:enabled="false"/>
+
+        <EditText
+            android:id="@+id/et_data"
+            android:layout_width="55dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="40dp"
+            android:layout_marginLeft="20dp"
+            android:textSize="16sp"
+            android:textAlignment="center"
+            android:editable="false"
+            />
+
+        <EditText
+            android:id="@+id/et_ora"
+            android:layout_width="55dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="40dp"
+            android:layout_marginLeft="125dp"
+            android:textSize="16sp"
+            android:textAlignment="center"
+            android:editable="false"
+            />
+
+        <EditText
+            android:id="@+id/et_posti"
+            android:layout_width="55dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="40dp"
+            android:layout_marginLeft="225dp"
+            android:textSize="16sp"
+            android:textAlignment="center"
+            android:editable="false"
+            />
+    </androidx.cardview.widget.CardView>
+
+    <Switch
+        android:id="@+id/switch1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="25dp"
+        android:layout_gravity="center_horizontal"
+        android:text="Abbonamento" />
+
+
+</FrameLayout>
