@@ -1,44 +1,57 @@
 package it.poliba.swing;
-
-import androidx.appcompat.app.AppCompatActivity;
-
+import android.app.DatePickerDialog;
+import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.CalendarView;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Toast;
-
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-
-import io.realm.ObjectServerError;
+import androidx.appcompat.app.AppCompatActivity;
 import io.realm.Realm;
 import io.realm.SyncConfiguration;
-import io.realm.SyncCredentials;
-import io.realm.SyncManager;
 import io.realm.SyncUser;
 
-import static it.poliba.swing.Constants.AUTH_URL;
-
-public class Register_Activity extends AppCompatActivity {
+public class Register_Activity extends AppCompatActivity implements DatePickerDialog.OnDateSetListener  {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.content_scrolling);
+        setContentView(R.layout.activity_reg_);
 
-        final EditText etCognome = (EditText) findViewById(R.id.cognome);
-        final EditText etNome = (EditText) findViewById(R.id.nome);
-        final EditText etEmail = (EditText) findViewById(R.id.email);
+        final EditText etCognome = (EditText) findViewById(R.id.c);
+        final EditText etNome = (EditText) findViewById(R.id.n);
+        final EditText etEmail = (EditText) findViewById(R.id.e);
         final EditText etPassword = (EditText) findViewById(R.id.password);
-        final CalendarView cWnascita = (CalendarView) findViewById(R.id.calendarView);
+        final EditText etData = (EditText) findViewById(R.id.data);
+        final int StartYear = 2000;
+        final int StartMonth= 12;
+        final int StartDay= 31;
+        final Intent login = new Intent(this, Login_Activity.class);
         Button bReg = (Button) findViewById(R.id.registrati);
 
+        final DatePickerDialog datePickerDialog = new DatePickerDialog(Register_Activity.this,Register_Activity.this,StartYear,StartMonth,StartDay );
 
+        etData.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                datePickerDialog.show();
+            }
+        });
+
+        datePickerDialog.setOnDateSetListener(new DatePickerDialog.OnDateSetListener() {
+            @Override
+            public void onDateSet(DatePicker datePicker, int i, int i1, int i2) {
+                //DatePicker date = datePickerDialog.getDatePicker();
+
+                String day,month,year;
+                day= Integer.toString(i2);
+                month=Integer.toString(i1+1);
+                year=Integer.toString(i);
+                String data=day+"/"+month+"/"+year;
+                etData.setText(data);
+            }
+        });
 
         bReg.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -47,54 +60,49 @@ public class Register_Activity extends AppCompatActivity {
                 if (etNome.getText().toString().equals("") || etCognome.getText().toString().equals("")
                         || etEmail.getText().toString().equals("") || etPassword.getText().toString().equals("")) {
                     Toast.makeText(getApplicationContext(), "tutti i campi devono essere compilati", Toast.LENGTH_LONG).show();
-                } else
-                    {
-                        utente a = new utente();
-                        {
-
-                         //una volta loggati possiamo creare la configurazione che mette in contatto il server con i devices:
-                            String syncServerURL = "https://swing-app.de1a.cloud.realm.io/temp3";
-                            final SyncConfiguration config = new SyncConfiguration.Builder(SyncUser.current(), syncServerURL).build();
-                            Realm realm = Realm.getInstance(config);
-
-                                final utente uno = new utente();
-
-                                uno.setCognome(etCognome.getText().toString());
-                                uno.setNome(etNome.getText().toString());
-                                uno.setEmail(etEmail.getText().toString());
-                                uno.setPassword(etPassword.getText().toString());
+                } else{
+                    utente a = new utente();
 
 
-                                String full = new SimpleDateFormat("yyyy-MM-dd").format(cWnascita.getDate());
-                                uno.setDataNascita(full);
+                    //una volta loggati possiamo creare la configurazione che mette in contatto il server con i devices:
+                    String syncServerURL = "https://swing-app.de1a.cloud.realm.io/temp2";
+                    final SyncConfiguration config = new SyncConfiguration.Builder(SyncUser.current(), syncServerURL).build();
+                    Realm realm = Realm.getInstance(config);
 
+                    final utente uno = new utente();
 
+                    uno.setCognome(etCognome.getText().toString());
+                    uno.setNome(etNome.getText().toString());
+                    uno.setEmail(etEmail.getText().toString());
+                    uno.setPassword(etPassword.getText().toString());
+                    uno.setDataNascita(etData.getText().toString());
 
-
-
-                                if (realm.where(utente.class).equalTo("email", etEmail.getText().toString()).count() != 0) {
-                                    Toast.makeText(getApplicationContext(), "Email già in uso", Toast.LENGTH_LONG).show();
-                                }else{
-                                    realm.executeTransaction(new Realm.Transaction() {
-                                    @Override
-                                    public void execute(Realm realm) {
-                                         realm.copyToRealm(uno);
-                                    }
-
-                                    });
-                                }
-                                }
-
-
-
-
+                    if (realm.where(utente.class).equalTo("email", etEmail.getText().toString()).count() != 0) {
+                        Toast.makeText(getApplicationContext(), "Email già in uso", Toast.LENGTH_LONG).show();
+                    } else {
+                        realm.executeTransaction(new Realm.Transaction() {
+                            @Override
+                            public void execute(Realm realm) {
+                                realm.copyToRealm(uno);
+                                Toast.makeText(getApplicationContext(), "Registrazione effettuata con successo", Toast.LENGTH_LONG).show();
+                                startActivity(login);
+                                finish();
                             }
 
+                        });
+                    }
 
-                        }
-            });
                 }
+
             }
+        });
+    }
+
+    @Override
+    public void onDateSet(DatePicker datePicker, int i, int i1, int i2) {
+
+    }
+}
 
 
 

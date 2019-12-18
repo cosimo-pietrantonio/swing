@@ -6,18 +6,19 @@
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
     android:background="@drawable/sfondo4"
-    tools:context=".Register_Activity">
+    tools:context=".Offerta">
 
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@drawable/sfondo4"
         android:fillViewport="true">
-
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            tools:context=".Register_Activity">
+            android:background="@drawable/sfondo4"
+            tools:context=".Offerta">
 
 
             <androidx.cardview.widget.CardView
@@ -25,16 +26,16 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
-                android:layout_marginTop="50dp"
+                android:layout_marginTop="100dp"
                 android:layout_marginEnd="20dp"
                 app:cardBackgroundColor="#FFFFFF"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/editText2">
+                app:layout_constraintTop_toTopOf="parent">
 
                 <EditText
-                    android:id="@+id/c"
+                    android:id="@+id/partenza"
                     android:layout_width="match_parent"
                     android:layout_height="40dp"
                     android:layout_marginStart="15dp"
@@ -43,13 +44,12 @@
                     android:background="#00FFFFFF"
                     android:ems="10"
                     android:fontFamily="@font/roboto_thin"
-                    android:hint="Cognome"
-                    android:inputType="textPersonName"
+                    android:hint="Partenza"
                     android:textColor="#000000"
                     android:textColorHint="#000000"
                     android:textSize="20sp" />
-
             </androidx.cardview.widget.CardView>
+
 
 
             <androidx.cardview.widget.CardView
@@ -57,7 +57,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
-                android:layout_marginTop="30dp"
+                android:layout_marginTop="150dp"
                 android:layout_marginEnd="20dp"
                 app:cardBackgroundColor="#FFFFFF"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -65,7 +65,7 @@
                 app:layout_constraintTop_toBottomOf="@id/cardView1">
 
                 <EditText
-                    android:id="@+id/n"
+                    android:id="@+id/destinazione"
                     android:layout_width="match_parent"
                     android:layout_height="40dp"
                     android:layout_marginStart="15dp"
@@ -74,14 +74,12 @@
                     android:background="#00FFFFFF"
                     android:ems="10"
                     android:fontFamily="@font/roboto_thin"
-                    android:hint="Nome"
-                    android:inputType="textPersonName"
+                    android:hint="Destinazione"
                     android:textColor="#000000"
                     android:textColorHint="#000000"
                     android:textSize="20sp" />
 
             </androidx.cardview.widget.CardView>
-
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/cardView3"
@@ -91,69 +89,10 @@
                 android:layout_marginTop="30dp"
                 android:layout_marginEnd="20dp"
                 app:cardBackgroundColor="#FFFFFF"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/cardView2">
-
-                <EditText
-                    android:id="@+id/e"
-                    android:layout_width="match_parent"
-                    android:layout_height="40dp"
-                    android:layout_marginStart="15dp"
-                    android:layout_marginTop="5dp"
-                    android:layout_marginBottom="5dp"
-                    android:background="#00FFFFFF"
-                    android:ems="10"
-                    android:fontFamily="@font/roboto_thin"
-                    android:hint="Email "
-                    android:inputType="textEmailAddress"
-                    android:textColor="#000000"
-                    android:textColorHint="#000000"
-                    android:textSize="20sp" />
-
-            </androidx.cardview.widget.CardView>
-
-            <androidx.cardview.widget.CardView
-                android:id="@+id/cardView4"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="20dp"
-                android:layout_marginTop="30dp"
-                android:layout_marginEnd="20dp"
-                app:cardBackgroundColor="#FFFFFF"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/cardView3">
-
-                <EditText
-                    android:id="@+id/password"
-                    android:layout_width="match_parent"
-                    android:layout_height="40dp"
-                    android:layout_marginStart="15dp"
-                    android:layout_marginTop="5dp"
-                    android:layout_marginBottom="5dp"
-                    android:background="#00FFFFFF"
-                    android:ems="10"
-                    android:fontFamily="@font/roboto_thin"
-                    android:hint="Password "
-                    android:inputType="textPassword"
-                    android:textColor="#000000"
-                    android:textColorHint="#000000"
-                    android:textSize="20sp" />
-
-            </androidx.cardview.widget.CardView>
-
-            <androidx.cardview.widget.CardView
-                android:id="@+id/cardView5"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="20dp"
-                android:layout_marginTop="30dp"
-                android:layout_marginEnd="20dp"
-                app:cardBackgroundColor="#FFFFFF"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/cardView4">
 
                 <EditText
                     android:id="@+id/data"
@@ -164,51 +103,48 @@
                     android:layout_marginBottom="5dp"
                     android:background="#00FFFFFF"
                     android:ems="10"
-                    android:fontFamily="@font/roboto_thin"
                     android:focusable="false"
-                    android:hint="Data di nascita"
+                    android:fontFamily="@font/roboto_thin"
+                    android:hint="Data di partenza"
+                    android:textColor="#000000"
+                    android:textColorHint="#000000"
+                    android:textSize="20sp" />
+            </androidx.cardview.widget.CardView>
+
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cardView4"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="150dp"
+                android:layout_marginEnd="20dp"
+                android:layout_marginBottom="100dp"
+                app:cardBackgroundColor="#FFFFFF"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/cardView3">
+
+                <EditText
+                    android:id="@+id/posti"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:layout_marginStart="15dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginBottom="5dp"
+                    android:background="#00FFFFFF"
+                    android:ems="10"
+                    android:fontFamily="@font/roboto_thin"
+                    android:hint="N° posti"
                     android:textColor="#000000"
                     android:textColorHint="#000000"
                     android:textSize="20sp" />
 
             </androidx.cardview.widget.CardView>
 
-
-            <Button
-                android:id="@+id/registrati"
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:layout_marginStart="20dp"
-                android:layout_marginTop="30dp"
-                android:layout_marginEnd="20dp"
-                android:background="#59FFFFFF"
-                android:fontFamily="@font/roboto_thin"
-                android:ems="10"
-                android:text="REGISTRATI"
-                android:textColor="#000000"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/cardView5" />
-
-            <EditText
-                android:id="@+id/editText2"
-                android:layout_width="362dp"
-                android:layout_height="48dp"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="52dp"
-                android:backgroundTint="#00FFFFFF"
-                android:ems="10"
-                android:fontFamily="@font/roboto_thin"
-                android:inputType="textPersonName"
-                android:text="Inserisci tutti i campi per registrarti"
-                android:textSize="19sp"
-                android:textStyle="bold"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.047"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
         </androidx.constraintlayout.widget.ConstraintLayout>
+
     </ScrollView>
+
 </LinearLayout>
