@@ -22,9 +22,6 @@ public class MatchList_Activity extends AppCompatActivity {
         Boolean bitRic=true;
 
 
-
-
-
         if(bitRic == true){
             add.setText("Bari-noci   ore: 15:00  ciao ciao");
             add.setPadding(5,5,0,15);

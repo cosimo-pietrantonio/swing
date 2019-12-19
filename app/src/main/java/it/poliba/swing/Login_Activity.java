@@ -21,11 +21,13 @@ public class Login_Activity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login_);
 
+
         Button bLogIn = (Button) findViewById(R.id.buttonLogIn);
         Button bRegister = (Button) findViewById(R.id.buttonReg);
         final EditText etEmail = (EditText) findViewById(R.id.etMail);
         final EditText etPassword = (EditText) findViewById(R.id.etPass);
         final Utente u1 = new Utente();
+
 
         // cofigurazione del DB nell'activity
         String syncServerURL = "https://swing-app.de1a.cloud.realm.io/temp6";
@@ -34,22 +36,22 @@ public class Login_Activity extends AppCompatActivity {
 
 
         final Intent a = new Intent(this, Register_Activity.class);
-        final Intent c = new Intent(this, Richiesta.class);//per prova
-        final Intent d = new Intent(this, Offerta.class);//per prova
-        final Intent f = new Intent(this, Profilo_Activity.class);//per prova
-        final Intent b = new Intent(this,Home_Activity.class);
+        final Intent b = new Intent(this, Home_activity.class);
+        final Intent c = new Intent(this, Richiesta.class);//inutile
+        final Intent d = new Intent(this, Offerta.class);//inutile
+
 
         bRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(a);   // Modifica effettuata
+                startActivity(a);
             }
         });
+
 
         bLogIn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
                 RealmQuery<Utente> query = realm.where(Utente.class);
                 query.equalTo("email", etEmail.getText().toString());
                 query.equalTo("password", etPassword.getText().toString());
@@ -66,14 +68,13 @@ public class Login_Activity extends AppCompatActivity {
                     b1.putParcelable("object_key", u1);
                     b.putExtras(b1);
                     startActivity(b);
+                    Toast.makeText(getApplicationContext(), "Login avvenuto correttamente" , Toast.LENGTH_LONG).show();
                 } else if (realm.where(Utente.class).equalTo("email", etEmail.getText().toString()).count() != 0 && realm.where(Utente.class).equalTo("email", etEmail.getText().toString()).equalTo("password", etPassword.getText().toString()).count() == 0) {
                     Toast.makeText(getApplicationContext(), "La Password che hai inserito è errata" , Toast.LENGTH_LONG).show();
                 } else if (realm.where(Utente.class).equalTo("email", etEmail.getText().toString()).count() == 0) {
                     Toast.makeText(getApplicationContext(), "L'Email che hai inserito è errata" , Toast.LENGTH_LONG).show();
                 }
             }
-
-
         });
     }
 }

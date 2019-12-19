@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.DatePicker;
 import android.widget.EditText;
@@ -44,7 +45,7 @@ public class Fragment_Richiesta extends DialogFragment implements DatePickerDial
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         final View view = inflater.inflate(R.layout.fragment_richiesta,container,false);
-
+        Button invia = view.findViewById(R.id.InviaR);
         final NumberPicker np = view.findViewById(R.id.numberPicker);
         np.setMinValue(1);
         np.setMaxValue(7);
@@ -179,13 +180,21 @@ public class Fragment_Richiesta extends DialogFragment implements DatePickerDial
                 }
             }
         });
+
+
+
+
+        //inviare dati
+        invia.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
+
+
         return  view;
     }
-
-
-
-
-
 
 
 

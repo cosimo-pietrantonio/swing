@@ -1,20 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#3F51B5"
-    android:alpha="1">
+    android:background="@color/yellow"
+    tools:context=".FragmentOfferta">
 
     <androidx.cardview.widget.CardView
         android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:layout_marginTop="100dp"
-        >
+        android:layout_marginTop="100dp">
 
         <EditText
-            android:id="@+id/partenza_offerta"
+            android:id="@+id/partenza"
             android:layout_width="300dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
@@ -22,14 +21,19 @@
             android:alpha="1"
             android:hint="Partenza"></EditText>
 
+
         <EditText
-            android:id="@+id/destinazione_offerta"
+            android:id="@+id/destinazione"
             android:layout_width="300dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="80dp"
             android:alpha="1"
             android:hint="Destinazione"></EditText>
+
+
+
+
     </androidx.cardview.widget.CardView>
 
     <androidx.cardview.widget.CardView
@@ -39,7 +43,7 @@
         android:layout_marginTop="300dp">
 
         <TextView
-            android:id="@+id/tv_Data_offerta"
+            android:id="@+id/tv_Data"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="30dp"
@@ -51,7 +55,7 @@
         </TextView>
 
         <TextView
-            android:id="@+id/tv_ora_offerta"
+            android:id="@+id/tv_ora"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="30dp"
@@ -64,7 +68,7 @@
         </TextView>
 
         <TextView
-            android:id="@+id/tv_posti_offerta"
+            android:id="@+id/tv_posti"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="posti"
@@ -122,6 +126,32 @@
             android:textAlignment="center"
             android:editable="false"
             />
+
+        <Button
+            android:id="@+id/InviaO"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="190dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginLeft="10dp"
+            android:text="Invia"
+            android:textSize="16sp"
+            android:textAlignment="center">
+        </Button>
+
+
+        <EditText
+            android:id="@+id/et_prezzo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="95dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:hint="Prezzo"
+            android:textSize="16sp"
+            android:textAlignment="center"
+            android:editable="false"
+            />
     </androidx.cardview.widget.CardView>
 
     <Switch
@@ -131,32 +161,5 @@
         android:layout_marginTop="25dp"
         android:layout_gravity="center_horizontal"
         android:text="Abbonamento" />
-
-    <androidx.cardview.widget.CardView
-        android:layout_width="300dp"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="600dp">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="30dp"
-            android:layout_gravity="left"
-            android:text="Prezzo:"
-            android:textSize="20sp"/>
-
-
-        <EditText
-            android:id="@+id/prezzo"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="22dp"
-            android:layout_marginLeft="75dp"
-            android:ems="10"
-            android:inputType="numberDecimal"/>
-    </androidx.cardview.widget.CardView>
-
-
 
 </FrameLayout>

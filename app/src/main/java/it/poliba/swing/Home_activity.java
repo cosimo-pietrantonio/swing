@@ -1,5 +1,6 @@
 package it.poliba.swing;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -13,25 +14,29 @@ import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.OvershootInterpolator;
+import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.TextView;
 
 
-public class Home_Activity extends AppCompatActivity implements View.OnClickListener{
+public class Home_activity extends AppCompatActivity implements View.OnClickListener{
 
     boolean stato=false; //flase: menu chiuso, true:menu aperto
     FloatingActionButton principale;
     FloatingActionButton profilo;
     FloatingActionButton notifiche;
     OvershootInterpolator interpolator = new OvershootInterpolator();
-
+    final  Intent intentProfilo = new Intent(this, Profilo_Activity.class);
+    final  Intent intentNotifiche = new Intent(this, MatchList_Activity.class);
+    Utente utente = new Utente();
     Fragment richiedi = new Fragment_Richiesta();  //fragment richiesta
     Fragment offri = new FragmentOfferta();       //fragment offerta
+    EditText data = findViewById(R.id.et_data);
+
     TextView offerta;
     TextView richiesta;
     FrameLayout layout_offerta;
     FrameLayout layout_richiesta;
-
     TextView et;
 
 
@@ -41,6 +46,27 @@ public class Home_Activity extends AppCompatActivity implements View.OnClickList
         setContentView(R.layout.activity_home_activity);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+
+        //ricezione dati utete loggato
+        Intent b = getIntent();
+        Bundle b1 = b.getExtras();
+        if (b1 != null) {
+            utente = b1.getParcelable("object_key");
+        }
+
+
+        //set dell'intent per il profilo
+        Bundle b2 = new Bundle();
+        b2.putParcelable("object_key", utente);
+        intentProfilo.putExtras(b2);
+
+        //set dell'intent per il matchActivity
+        Bundle b3 = new Bundle();
+        b3.putParcelable("object_key", utente);
+        intentNotifiche.putExtras(b3);
+
+
 
         menu();
 
@@ -62,10 +88,8 @@ public class Home_Activity extends AppCompatActivity implements View.OnClickList
                 offerta.setAlpha(0f);
                 params_ricerca.width=300;
                 params_offerta.width=1140;
-
                 layout_richiesta.setLayoutParams(params_ricerca);
                 layout_offerta.setLayoutParams(params_offerta);
-
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_offerta,offri).commit();
                 getSupportFragmentManager().beginTransaction().remove(richiedi).commit();
             }
@@ -88,8 +112,6 @@ public class Home_Activity extends AppCompatActivity implements View.OnClickList
             }
         });
     }
-
-
 
 
     //METODO PER IL MENU CON FLOATIN ACTION BUTTON
@@ -122,6 +144,7 @@ public class Home_Activity extends AppCompatActivity implements View.OnClickList
         notifiche.animate().translationY(150f).alpha(0f).setInterpolator(interpolator).start();
     }
 
+
     @Override
     public void onClick(View v)
     {
@@ -136,9 +159,9 @@ public class Home_Activity extends AppCompatActivity implements View.OnClickList
                     closeMenu();
                 }
             case R.id.profilo:
-                Log.i("info","profilo");
+                startActivity(intentProfilo);
             case R.id.notifiche:
-                Log.i("info","notifiche");
+                startActivity(intentNotifiche);
         }
     }
 }

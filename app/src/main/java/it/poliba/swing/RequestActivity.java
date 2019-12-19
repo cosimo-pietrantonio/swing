@@ -86,7 +86,6 @@ public class RequestActivity extends AppCompatActivity {
                 });
 
 
-
                 // settore del matching
 
                 if (realm.where(Offerta.class).equalTo("luogoPartenza",etLpartenza.getText().toString())

@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.DatePicker;
 import android.widget.EditText;
@@ -42,8 +43,10 @@ public class FragmentOfferta extends DialogFragment implements DatePickerDialog.
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        final View view = inflater.inflate(R.layout.fragment_offerta, container, false);
 
+
+        final View view = inflater.inflate(R.layout.fragment_offerta, container, false);
+        Button invia = view.findViewById(R.id.InviaO);
         final NumberPicker np = view.findViewById(R.id.numberPicker_offerta);
         np.setMinValue(1);
         np.setMaxValue(7);
@@ -157,8 +160,22 @@ public class FragmentOfferta extends DialogFragment implements DatePickerDialog.
                 }
             }
         });
+
+
+        //invia dati
+        invia.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
+
         return view;
     }
+
+
+
+
 
     final int StartYear = 2019;
     final int StartMonth= 12;
@@ -206,5 +223,6 @@ public class FragmentOfferta extends DialogFragment implements DatePickerDialog.
         String time =""+hour+":"+minute+"";
         et_ora_offerta.setText(time);
     }
+
 
 }

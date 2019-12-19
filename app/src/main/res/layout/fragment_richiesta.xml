@@ -30,6 +30,10 @@
             android:layout_marginTop="80dp"
             android:alpha="1"
             android:hint="Destinazione"></EditText>
+
+
+
+
     </androidx.cardview.widget.CardView>
 
     <androidx.cardview.widget.CardView
@@ -84,7 +88,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Giorni"
-            android:layout_marginTop="150dp"
+            android:layout_marginTop="95dp"
             android:textSize="16sp"
             android:layout_marginLeft="25dp"
             android:alpha="0"
@@ -122,6 +126,19 @@
             android:textAlignment="center"
             android:editable="false"
             />
+
+        <Button
+            android:id="@+id/InviaR"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="140dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginLeft="10dp"
+            android:text="Invia"
+            android:textSize="16sp"
+            android:textAlignment="center">
+        </Button>
+
     </androidx.cardview.widget.CardView>
 
     <Switch
@@ -131,6 +148,8 @@
         android:layout_marginTop="25dp"
         android:layout_gravity="center_horizontal"
         android:text="Abbonamento" />
+
+
 
 
 </FrameLayout>
