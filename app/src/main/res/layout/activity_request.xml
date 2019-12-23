@@ -13,7 +13,7 @@
         android:layout_height="wrap_content" />
 
     <EditText
-        android:id="@+id/etLuogoArrivo"
+        android:id="@+id/etLuogoArrivoF"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="43dp"
@@ -28,7 +28,7 @@
         app:layout_constraintStart_toStartOf="parent" />
 
     <EditText
-        android:id="@+id/etLuogoPartenza"
+        android:id="@+id/etLuogoPartenzaF"
         android:layout_width="213dp"
         android:layout_height="51dp"
         android:layout_marginStart="43dp"
@@ -37,7 +37,7 @@
         android:ems="10"
         android:hint="Da dove vuoi partire?"
         android:inputType="textPersonName"
-        app:layout_constraintBottom_toTopOf="@+id/etLuogoArrivo"
+        app:layout_constraintBottom_toTopOf="@+id/etLuogoArrivoF"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent" />
@@ -79,7 +79,7 @@
         android:ems="10"
         android:hint="Data di partenza"
         android:inputType="date"
-        app:layout_constraintBottom_toTopOf="@+id/etOra"
+        app:layout_constraintBottom_toTopOf="@+id/etOraRichiesta"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent" />
@@ -91,7 +91,7 @@
         android:layout_marginStart="50dp"
         android:layout_marginBottom="20dp"
         android:text="Singolo"
-        app:layout_constraintBottom_toTopOf="@+id/etLuogoPartenza"
+        app:layout_constraintBottom_toTopOf="@+id/etLuogoPartenzaF"
         app:layout_constraintStart_toStartOf="parent" />
 
     <RadioButton
@@ -101,7 +101,7 @@
         android:layout_marginEnd="148dp"
         android:layout_marginBottom="20dp"
         android:text="Periodico"
-        app:layout_constraintBottom_toTopOf="@+id/etLuogoPartenza"
+        app:layout_constraintBottom_toTopOf="@+id/etLuogoPartenzaF"
         app:layout_constraintEnd_toEndOf="parent" />
 
     <EditText
@@ -117,7 +117,7 @@
         app:layout_constraintStart_toStartOf="parent" />
 
     <EditText
-        android:id="@+id/etOra"
+        android:id="@+id/etOraRichiesta"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="43dp"

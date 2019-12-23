@@ -8,6 +8,10 @@ import android.text.TextUtils;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import io.realm.Realm;
+import io.realm.SyncConfiguration;
+import io.realm.SyncUser;
+
 public class MatchList_Activity extends AppCompatActivity {
 
     @Override
@@ -20,6 +24,10 @@ public class MatchList_Activity extends AppCompatActivity {
         final LinearLayout richieste = findViewById(R.id.l3);
         Boolean bitOff=false;
         Boolean bitRic=true;
+
+        String syncServerURL = "https://swing-app.de1a.cloud.realm.io/temp7";
+        final SyncConfiguration config = new SyncConfiguration.Builder(SyncUser.current(), syncServerURL).build();
+        final Realm realm = Realm.getInstance(config);
 
 
         if(bitRic == true){

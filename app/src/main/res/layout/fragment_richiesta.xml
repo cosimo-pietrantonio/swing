@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/yellow"
-    tools:context=".Fragment_Richiesta">
+    tools:context=".FragmentRichiesta">
 
     <androidx.cardview.widget.CardView
         android:layout_width="300dp"
@@ -14,7 +14,7 @@
         >
 
         <EditText
-            android:id="@+id/partenza"
+            android:id="@+id/etLuogoPartenzaF"
             android:layout_width="300dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
@@ -23,7 +23,7 @@
             android:hint="Partenza"></EditText>
 
         <EditText
-            android:id="@+id/destinazione"
+            android:id="@+id/etLuogoArrivoF"
             android:layout_width="300dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
@@ -37,6 +37,7 @@
     </androidx.cardview.widget.CardView>
 
     <androidx.cardview.widget.CardView
+        android:id="@+id/CardViewDOP"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
@@ -46,24 +47,23 @@
             android:id="@+id/tv_Data"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="30dp"
             android:layout_gravity="left"
             android:layout_marginLeft="30dp"
-            android:textSize="16sp"
+            android:layout_marginTop="30dp"
+            android:clickable="true"
             android:text="Data"
-            android:clickable="true">
-        </TextView>
+            android:textSize="16sp"></TextView>
 
         <TextView
             android:id="@+id/tv_ora"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="30dp"
             android:layout_gravity="left"
             android:layout_marginLeft="140dp"
-            android:textSize="16sp"
+            android:layout_marginTop="30dp"
+            android:clickable="true"
             android:text="Ora"
-            android:clickable="true">
+            android:textSize="16sp">
 
         </TextView>
 
@@ -71,73 +71,70 @@
             android:id="@+id/tv_posti"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="posti"
-            android:textSize="16dp"
+            android:layout_marginLeft="230dp"
             android:layout_marginTop="30dp"
-            android:layout_marginLeft="230dp"/>
+            android:text="posti?"
+            android:textSize="16dp" />
 
         <NumberPicker
-            android:id="@+id/numberPicker"
+            android:id="@+id/numberPickerGiorni"
             android:layout_width="wrap_content"
             android:layout_height="128dp"
             android:layout_marginLeft="220dp"
             android:layout_marginTop="70dp"
             android:alpha="0" />
+
         <TextView
             android:id="@+id/giorni"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Giorni"
-            android:layout_marginTop="95dp"
-            android:textSize="16sp"
             android:layout_marginLeft="25dp"
+            android:layout_marginTop="95dp"
             android:alpha="0"
-            android:enabled="false"/>
+            android:enabled="false"
+            android:text="Giorni"
+            android:textSize="16sp" />
 
         <EditText
-            android:id="@+id/et_data"
+            android:id="@+id/etDataRichiesta"
             android:layout_width="55dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="40dp"
             android:layout_marginLeft="20dp"
-            android:textSize="16sp"
-            android:textAlignment="center"
+            android:layout_marginTop="40dp"
             android:editable="false"
-            />
+            android:textAlignment="center"
+            android:textSize="16sp" />
 
         <EditText
-            android:id="@+id/et_ora"
+            android:id="@+id/etOraRichiesta"
             android:layout_width="55dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="40dp"
             android:layout_marginLeft="125dp"
-            android:textSize="16sp"
-            android:textAlignment="center"
+            android:layout_marginTop="40dp"
             android:editable="false"
-            />
+            android:textAlignment="center"
+            android:textSize="16sp" />
 
         <EditText
-            android:id="@+id/et_posti"
+            android:id="@+id/etPostiRichiesta"
             android:layout_width="55dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="40dp"
             android:layout_marginLeft="225dp"
-            android:textSize="16sp"
-            android:textAlignment="center"
+            android:layout_marginTop="40dp"
             android:editable="false"
-            />
+            android:textAlignment="center"
+            android:textSize="16sp" />
 
         <Button
             android:id="@+id/InviaR"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
             android:layout_marginTop="140dp"
             android:layout_marginRight="10dp"
-            android:layout_marginLeft="10dp"
             android:text="Invia"
-            android:textSize="16sp"
-            android:textAlignment="center">
-        </Button>
+            android:textAlignment="center"
+            android:textSize="16sp"></Button>
 
     </androidx.cardview.widget.CardView>
 

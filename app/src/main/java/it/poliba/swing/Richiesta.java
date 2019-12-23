@@ -64,6 +64,14 @@ public class Richiesta extends RealmObject {
         return dataPartenza;
     }
 
+    public String getMailUtente() {
+        return mailUtente;
+    }
+
+    public void setMailUtente(String mailUtente) {
+        this.mailUtente = mailUtente;
+    }
+
     public void setDataPartenza(String dataPartenza) {
         this.dataPartenza = dataPartenza;
     }

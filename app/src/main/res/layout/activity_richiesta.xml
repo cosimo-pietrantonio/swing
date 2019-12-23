@@ -66,7 +66,7 @@
                 app:layout_constraintTop_toBottomOf="@id/cardView0">
 
                 <EditText
-                    android:id="@+id/partenza"
+                    android:id="@+id/etLuogoPartenzaF"
                     android:layout_width="match_parent"
                     android:layout_height="40dp"
                     android:layout_marginStart="15dp"
@@ -95,7 +95,7 @@
                 app:layout_constraintTop_toBottomOf="@id/cardView1">
 
                 <EditText
-                    android:id="@+id/destinazione"
+                    android:id="@+id/etLuogoArrivoF"
                     android:layout_width="match_parent"
                     android:layout_height="40dp"
                     android:layout_marginStart="15dp"

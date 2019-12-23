@@ -13,7 +13,7 @@
         android:layout_marginTop="100dp">
 
         <EditText
-            android:id="@+id/partenza"
+            android:id="@+id/etLuogoPartenzaF"
             android:layout_width="300dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
@@ -23,7 +23,7 @@
 
 
         <EditText
-            android:id="@+id/destinazione"
+            android:id="@+id/etLuogoArrivoF"
             android:layout_width="300dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
@@ -95,7 +95,7 @@
             android:enabled="false"/>
 
         <EditText
-            android:id="@+id/et_data_offerta"
+            android:id="@+id/etDataOfferta"
             android:layout_width="55dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="40dp"
@@ -106,7 +106,7 @@
             />
 
         <EditText
-            android:id="@+id/et_ora_offerta"
+            android:id="@+id/etOraOfferta"
             android:layout_width="55dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="40dp"
@@ -117,7 +117,7 @@
             />
 
         <EditText
-            android:id="@+id/et_posti_offerta"
+            android:id="@+id/etPostiOfferta"
             android:layout_width="55dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="40dp"
@@ -141,7 +141,7 @@
 
 
         <EditText
-            android:id="@+id/et_prezzo"
+            android:id="@+id/etPrezzo"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="95dp"

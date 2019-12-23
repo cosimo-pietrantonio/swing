@@ -21,16 +21,22 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.DialogFragment;
-import androidx.fragment.app.Fragment;
 
 import java.util.ArrayList;
 import java.util.Calendar;
 
+import io.realm.Realm;
+import io.realm.SyncConfiguration;
+import io.realm.SyncUser;
+
 public class FragmentOfferta extends DialogFragment implements DatePickerDialog.OnDateSetListener,TimePickerDialog.OnTimeSetListener
 {
+    EditText et_luogo_partenza;
+    EditText et_luogo_arrivo;
     EditText et_data_offerta;
     EditText et_ora_offerta;
     EditText et_posti_offerta;
+    EditText et_prezzo;
     Switch abboamento;
     boolean controllo_posti = false;
 
@@ -45,6 +51,16 @@ public class FragmentOfferta extends DialogFragment implements DatePickerDialog.
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
 
+
+        //configurazione  DB
+        String syncServerURL = "https://swing-app.de1a.cloud.realm.io/7";
+        final SyncConfiguration config = new SyncConfiguration.Builder(SyncUser.current(), syncServerURL).build();
+        final Realm realm = Realm.getInstance(config);
+
+        //ricevo mail utente
+        final String mailUtente = this.getArguments().getString("object_key");
+
+
         final View view = inflater.inflate(R.layout.fragment_offerta, container, false);
         Button invia = view.findViewById(R.id.InviaO);
         final NumberPicker np = view.findViewById(R.id.numberPicker_offerta);
@@ -52,7 +68,7 @@ public class FragmentOfferta extends DialogFragment implements DatePickerDialog.
         np.setMaxValue(7);
         np.setOnValueChangedListener(onValueChangeListener);
 
-        et_data_offerta = view.findViewById(R.id.et_data_offerta);
+        et_data_offerta = view.findViewById(R.id.etDataOfferta);
         et_data_offerta.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -60,7 +76,7 @@ public class FragmentOfferta extends DialogFragment implements DatePickerDialog.
             }
         });
 
-        et_ora_offerta = view.findViewById(R.id.et_ora_offerta);
+        et_ora_offerta = view.findViewById(R.id.etOraOfferta);
         et_ora_offerta.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -68,7 +84,7 @@ public class FragmentOfferta extends DialogFragment implements DatePickerDialog.
             }
         });
 
-        et_posti_offerta = view.findViewById(R.id.et_posti_offerta);
+        et_posti_offerta = view.findViewById(R.id.etPostiOfferta);
         et_posti_offerta.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -166,6 +182,37 @@ public class FragmentOfferta extends DialogFragment implements DatePickerDialog.
         invia.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+                String prezzo = et_prezzo.getText().toString();
+                final double dprezzo = Double.parseDouble(prezzo);
+
+
+                String posti = et_posti_offerta.getText().toString();
+                final int iposti = Integer.parseInt(posti);
+
+
+                final Offerta o = new Offerta();
+                double numerocodoff = Math.random() * 99999999;
+                final int cod = (int) numerocodoff;
+
+
+                o.setData(et_data_offerta.getText().toString());
+                o.setCodOfferta(cod);
+                o.setLuogoPartenza(et_luogo_partenza.getText().toString());
+                o.setLuogoArrivo(et_luogo_arrivo.getText().toString());
+                o.setPrezzo(dprezzo);
+                o.setOra(et_ora_offerta.getText().toString());
+                o.setNumPostiDisponibili(iposti);
+                o.setEmailUtente(mailUtente);
+
+
+                realm.executeTransaction(new Realm.Transaction() {
+                    @Override
+                    public void execute(Realm realm) {
+                        realm.copyToRealm(o);
+                    }
+                });
+
 
             }
         });

@@ -10,7 +10,6 @@ import androidx.appcompat.widget.Toolbar;
 
 import androidx.fragment.app.Fragment;
 
-import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.OvershootInterpolator;
@@ -18,20 +17,23 @@ import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.TextView;
 
+import io.realm.Realm;
+import io.realm.SyncConfiguration;
+import io.realm.SyncUser;
 
-public class Home_activity extends AppCompatActivity implements View.OnClickListener{
 
-    boolean stato=false; //flase: menu chiuso, true:menu aperto
+public class Home_activity extends AppCompatActivity implements View.OnClickListener
+   {
+
+    boolean stato=false; //false: menu chiuso, true : menu aperto
     FloatingActionButton principale;
     FloatingActionButton profilo;
     FloatingActionButton notifiche;
     OvershootInterpolator interpolator = new OvershootInterpolator();
-    final  Intent intentProfilo = new Intent(this, Profilo_Activity.class);
-    final  Intent intentNotifiche = new Intent(this, MatchList_Activity.class);
-    Utente utente = new Utente();
-    Fragment richiedi = new Fragment_Richiesta();  //fragment richiesta
+
+    it.poliba.swing.utente utente = new utente();
+    Fragment richiedi = new FragmentRichiesta();  //fragment richiesta
     Fragment offri = new FragmentOfferta();       //fragment offerta
-    EditText data = findViewById(R.id.et_data);
 
     TextView offerta;
     TextView richiesta;
@@ -40,17 +42,31 @@ public class Home_activity extends AppCompatActivity implements View.OnClickList
     TextView et;
 
 
+    final Intent intentProfilo = new Intent(this, Profilo_Activity.class);
+    final Intent intentNotifiche = new Intent(this, MatchList_Activity.class);
+
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_activity);
+        EditText data = findViewById(R.id.etDataRichiesta);
+
+
+
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        String syncServerURL = "https://swing-app.de1a.cloud.realm.io/temp7";
+        final SyncConfiguration config = new SyncConfiguration.Builder(SyncUser.current(), syncServerURL).build();
+        final Realm realm = Realm.getInstance(config);
+
+
 
         //ricezione dati utete loggato
-        Intent b = getIntent();
-        Bundle b1 = b.getExtras();
+        Intent getter = getIntent();
+        Bundle b1 = getter.getExtras();
         if (b1 != null) {
             utente = b1.getParcelable("object_key");
         }
@@ -61,14 +77,14 @@ public class Home_activity extends AppCompatActivity implements View.OnClickList
         b2.putParcelable("object_key", utente);
         intentProfilo.putExtras(b2);
 
-        //set dell'intent per il matchActivity
+        //set dell'intent per il matchListActivity
         Bundle b3 = new Bundle();
         b3.putParcelable("object_key", utente);
         intentNotifiche.putExtras(b3);
 
 
 
-        menu();
+        //menu();
 
         offerta = findViewById(R.id.offerta);
         richiesta = findViewById(R.id.ricerca);
@@ -88,9 +104,16 @@ public class Home_activity extends AppCompatActivity implements View.OnClickList
                 offerta.setAlpha(0f);
                 params_ricerca.width=300;
                 params_offerta.width=1140;
+
+                //invio stringa mail
+                Bundle args = new Bundle();
+                args.putString("object_key",utente.getEmail());
+                offri.setArguments(args);
+
                 layout_richiesta.setLayoutParams(params_ricerca);
                 layout_offerta.setLayoutParams(params_offerta);
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_offerta,offri).commit();
+
                 getSupportFragmentManager().beginTransaction().remove(richiedi).commit();
             }
         });
@@ -103,7 +126,9 @@ public class Home_activity extends AppCompatActivity implements View.OnClickList
                 offerta.setAlpha(1f);
                 params_offerta.width=300;
                 params_ricerca.width=1140;
-
+                Bundle args = new Bundle();
+                args.putString("object_key",utente.getEmail());
+                richiedi.setArguments(args);
                 layout_richiesta.setLayoutParams(params_ricerca);
                 layout_offerta.setLayoutParams(params_offerta);
 

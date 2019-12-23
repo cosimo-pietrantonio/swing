@@ -10,16 +10,11 @@ import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.Toast;
 
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.Iterator;
 
 import io.realm.Realm;
 import io.realm.RealmQuery;
-import io.realm.RealmRecyclerViewAdapter;
 import io.realm.RealmResults;
 import io.realm.SyncConfiguration;
 import io.realm.SyncUser;
@@ -31,14 +26,16 @@ public class RequestActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_request);
 
-        String syncServerURL = "https://swing-app.de1a.cloud.realm.io/temp6";
+        String syncServerURL = "https://swing-app.de1a.cloud.realm.io/temp7";
         final SyncConfiguration config = new SyncConfiguration.Builder(SyncUser.current(), syncServerURL).build();
         final Realm realm = Realm.getInstance(config);
-        final EditText etLpartenza = findViewById(R.id.etLuogoPartenza);
+
+
+        final EditText etLpartenza = findViewById(R.id.etLuogoPartenzaF);
         final EditText etData = findViewById(R.id.etDataPartenza);
-        final EditText etLarrivo = findViewById(R.id.etLuogoArrivo);
+        final EditText etLarrivo = findViewById(R.id.etLuogoArrivoF);
         final EditText etPosti  = findViewById(R.id.etNumPosti);
-        final EditText etOra    = findViewById(R.id.etOra);
+        final EditText etOra    = findViewById(R.id.etOraRichiesta);
         Button bPub = findViewById(R.id.bRichiesta);
         RadioButton rbSingle = findViewById(R.id.radioSingola);
         RadioButton rbPeriod = findViewById(R.id.radioPeriodica);

@@ -23,7 +23,7 @@
         android:ems="10"
         android:hint="Dove vuoi arrivare?"
         android:inputType="textPersonName"
-        app:layout_constraintBottom_toTopOf="@+id/etLuogoPartenza"
+        app:layout_constraintBottom_toTopOf="@+id/etLuogoPartenzaF"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
@@ -89,7 +89,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/etLuogoPartenza" />
+        app:layout_constraintTop_toBottomOf="@+id/etLuogoPartenzaF" />
 
     <CheckBox
         android:id="@+id/cbLun"
