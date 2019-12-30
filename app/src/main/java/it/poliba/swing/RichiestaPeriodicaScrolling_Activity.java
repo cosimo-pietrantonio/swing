@@ -9,16 +9,11 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
-import java.util.Iterator;
 
 import io.realm.Realm;
 import io.realm.RealmList;
-import io.realm.RealmQuery;
-import io.realm.RealmResults;
 import io.realm.SyncConfiguration;
 import io.realm.SyncUser;
 
@@ -88,7 +83,7 @@ public class RichiestaPeriodicaScrolling_Activity extends AppCompatActivity {
                     Toast.makeText(getApplicationContext(), "Compilare tutti i campi", Toast.LENGTH_LONG).show();
                 else {
                     //creazione richiesta periodica
-                     final Richiesta_Periodico rp= new Richiesta_Periodico();
+                     final Richiesta_Periodica rp= new Richiesta_Periodica();
                      rp.setCodRichiesta((int) Math.random());
                      rp.setLuogoPartenza(etLuogoPar.getText().toString());
                      rp.setLuogoArrivo(etLuogoArr.getText().toString());

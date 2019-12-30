@@ -41,10 +41,8 @@ public class Home_activity extends AppCompatActivity implements View.OnClickList
     FrameLayout layout_richiesta;
     TextView et;
 
-
-    final Intent intentProfilo = new Intent(this, Profilo_Activity.class);
-    final Intent intentNotifiche = new Intent(this, MatchList_Activity.class);
-
+    Intent prof = new Intent();
+    Intent not = new Intent();
 
 
     @Override
@@ -53,12 +51,15 @@ public class Home_activity extends AppCompatActivity implements View.OnClickList
         setContentView(R.layout.activity_home_activity);
         EditText data = findViewById(R.id.etDataRichiesta);
 
+        final Intent intentProfil = new Intent(this, Profilo_Activity.class);
+        final Intent intentNotifich = new Intent(this, MatchList_Activity.class);
+
 
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        String syncServerURL = "https://swing-app.de1a.cloud.realm.io/temp7";
+        String syncServerURL = "https://swing-app.de1a.cloud.realm.io/temp8";
         final SyncConfiguration config = new SyncConfiguration.Builder(SyncUser.current(), syncServerURL).build();
         final Realm realm = Realm.getInstance(config);
 
@@ -72,15 +73,16 @@ public class Home_activity extends AppCompatActivity implements View.OnClickList
         }
 
 
+
         //set dell'intent per il profilo
         Bundle b2 = new Bundle();
         b2.putParcelable("object_key", utente);
-        intentProfilo.putExtras(b2);
+        intentProfil.putExtras(b2);
 
         //set dell'intent per il matchListActivity
         Bundle b3 = new Bundle();
         b3.putParcelable("object_key", utente);
-        intentNotifiche.putExtras(b3);
+        intentNotifich.putExtras(b3);
 
 
 
@@ -106,9 +108,9 @@ public class Home_activity extends AppCompatActivity implements View.OnClickList
                 params_offerta.width=1140;
 
                 //invio stringa mail
-                Bundle args = new Bundle();
+               /* Bundle args = new Bundle();
                 args.putString("object_key",utente.getEmail());
-                offri.setArguments(args);
+                offri.setArguments(args); */
 
                 layout_richiesta.setLayoutParams(params_ricerca);
                 layout_offerta.setLayoutParams(params_offerta);
@@ -136,7 +138,11 @@ public class Home_activity extends AppCompatActivity implements View.OnClickList
                 getSupportFragmentManager().beginTransaction().remove(offri).commit();
             }
         });
+        prof = intentProfil;
+        not = intentNotifich;
+
     }
+
 
 
     //METODO PER IL MENU CON FLOATIN ACTION BUTTON
@@ -184,9 +190,9 @@ public class Home_activity extends AppCompatActivity implements View.OnClickList
                     closeMenu();
                 }
             case R.id.profilo:
-                startActivity(intentProfilo);
+                startActivity(prof);
             case R.id.notifiche:
-                startActivity(intentNotifiche);
+                startActivity(not);
         }
     }
 }

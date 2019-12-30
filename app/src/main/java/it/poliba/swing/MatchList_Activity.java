@@ -25,7 +25,7 @@ public class MatchList_Activity extends AppCompatActivity {
         Boolean bitOff=false;
         Boolean bitRic=true;
 
-        String syncServerURL = "https://swing-app.de1a.cloud.realm.io/temp7";
+        String syncServerURL = "https://swing-app.de1a.cloud.realm.io/temp8";
         final SyncConfiguration config = new SyncConfiguration.Builder(SyncUser.current(), syncServerURL).build();
         final Realm realm = Realm.getInstance(config);
 

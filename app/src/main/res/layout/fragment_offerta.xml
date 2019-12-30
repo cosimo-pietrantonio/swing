@@ -124,7 +124,6 @@
             android:layout_marginLeft="225dp"
             android:textSize="16sp"
             android:textAlignment="center"
-            android:editable="false"
             />
 
         <Button
@@ -139,18 +138,16 @@
             android:textAlignment="center">
         </Button>
 
-
         <EditText
             android:id="@+id/etPrezzo"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="95dp"
             android:layout_marginLeft="20dp"
+            android:layout_marginTop="95dp"
             android:layout_marginRight="20dp"
             android:hint="Prezzo"
-            android:textSize="16sp"
             android:textAlignment="center"
-            android:editable="false"
+            android:textSize="16sp"
             />
     </androidx.cardview.widget.CardView>
 

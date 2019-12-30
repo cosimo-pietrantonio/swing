@@ -12,7 +12,6 @@
         <activity android:name=".OffertaActivity"></activity>
         <activity android:name=".Profilo_Activity" />
         <activity android:name=".ModficaProfilo_Activity" />
-        <activity android:name=".RequestActivity" />
         <activity android:name=".Home_activity" />
         <activity android:name=".Register_Activity" />
         <activity android:name=".Login_Activity" />

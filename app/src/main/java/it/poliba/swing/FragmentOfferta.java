@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.content.DialogInterface;
+import android.icu.text.UnicodeSetSpanner;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -53,12 +54,12 @@ public class FragmentOfferta extends DialogFragment implements DatePickerDialog.
 
 
         //configurazione  DB
-        String syncServerURL = "https://swing-app.de1a.cloud.realm.io/7";
+        String syncServerURL = "https://swing-app.de1a.cloud.realm.io/temp8";
         final SyncConfiguration config = new SyncConfiguration.Builder(SyncUser.current(), syncServerURL).build();
         final Realm realm = Realm.getInstance(config);
 
         //ricevo mail utente
-        final String mailUtente = this.getArguments().getString("object_key");
+        //final String mailUtente = this.getArguments().getString("object_key");
 
 
         final View view = inflater.inflate(R.layout.fragment_offerta, container, false);
@@ -67,6 +68,9 @@ public class FragmentOfferta extends DialogFragment implements DatePickerDialog.
         np.setMinValue(1);
         np.setMaxValue(7);
         np.setOnValueChangedListener(onValueChangeListener);
+
+        et_luogo_arrivo= view.findViewById(R.id.etLuogoArrivoF);
+        et_luogo_partenza= view.findViewById(R.id.etLuogoPartenzaF);
 
         et_data_offerta = view.findViewById(R.id.etDataOfferta);
         et_data_offerta.setOnClickListener(new View.OnClickListener() {
@@ -100,6 +104,8 @@ public class FragmentOfferta extends DialogFragment implements DatePickerDialog.
                 }
             }
         });
+
+        et_prezzo = view.findViewById(R.id.etPrezzo);
 
         abboamento = view.findViewById(R.id.switch1);
         day = getResources().getStringArray(R.array.numbers);
@@ -196,6 +202,8 @@ public class FragmentOfferta extends DialogFragment implements DatePickerDialog.
                 final int cod = (int) numerocodoff;
 
 
+
+
                 o.setData(et_data_offerta.getText().toString());
                 o.setCodOfferta(cod);
                 o.setLuogoPartenza(et_luogo_partenza.getText().toString());
@@ -203,7 +211,7 @@ public class FragmentOfferta extends DialogFragment implements DatePickerDialog.
                 o.setPrezzo(dprezzo);
                 o.setOra(et_ora_offerta.getText().toString());
                 o.setNumPostiDisponibili(iposti);
-                o.setEmailUtente(mailUtente);
+               // o.setEmailUtente(mailUtente);
 
 
                 realm.executeTransaction(new Realm.Transaction() {
@@ -213,6 +221,13 @@ public class FragmentOfferta extends DialogFragment implements DatePickerDialog.
                     }
                 });
 
+                // verifico caricam offerta
+
+                if (realm.where(Offerta.class).count()!= 0) {
+                    Toast.makeText(getContext(), "Ci sono offerte sul DB", Toast.LENGTH_LONG).show();
+                } else {
+                    Toast.makeText(getContext(), "non ci sono offerte sul DB ", Toast.LENGTH_LONG).show();
+                }
 
             }
         });

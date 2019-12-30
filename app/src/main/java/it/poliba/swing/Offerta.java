@@ -23,7 +23,7 @@ public class Offerta extends RealmObject {
     private String data;
     @Required
     private String ora;
-    @Required
+    //@Required
     private String emailUtente;
 
     private double prezzo;

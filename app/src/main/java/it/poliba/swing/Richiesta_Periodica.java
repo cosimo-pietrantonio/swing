@@ -8,7 +8,7 @@ import io.realm.RealmObject;
 import io.realm.annotations.PrimaryKey;
 import io.realm.annotations.Required;
 
-public class Richiesta_Periodico extends RealmObject {
+public class Richiesta_Periodica extends RealmObject {
     @PrimaryKey
     private int CodRichiesta;
 
@@ -25,7 +25,7 @@ public class Richiesta_Periodico extends RealmObject {
     @Required
     RealmList<String> giorni = new RealmList<>();
 
-    public Richiesta_Periodico(int codRichiesta, String mailUtente, int numPosti, String luogoPartenza, String luogoArrivo, String dataPartenza, RealmList<String> giorni) {
+    public Richiesta_Periodica(int codRichiesta, String mailUtente, int numPosti, String luogoPartenza, String luogoArrivo, String dataPartenza, RealmList<String> giorni) {
         CodRichiesta = codRichiesta;
         this.mailUtente = mailUtente;
         this.numPosti = numPosti;
@@ -35,7 +35,7 @@ public class Richiesta_Periodico extends RealmObject {
         this.giorni = giorni;
     }
 
-    public Richiesta_Periodico() {
+    public Richiesta_Periodica() {
     }
 
     public RealmList<String> getGiorni() {

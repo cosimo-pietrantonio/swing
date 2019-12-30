@@ -21,6 +21,7 @@ public class Offerta_Periodica extends RealmObject {
     private Date dataInizio;
     @Required
     RealmList<String> giorni = new RealmList<>();
+    private String emailUtente;
 
     public Offerta_Periodica(int codOfferta, String luogoPartenza, String luogoArrivo, Date dataInizio, RealmList<String> giorni) {
         this.codOfferta = codOfferta;
