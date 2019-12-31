@@ -27,6 +27,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 
 import io.realm.Realm;
+import io.realm.RealmList;
 import io.realm.SyncConfiguration;
 import io.realm.SyncUser;
 
@@ -46,6 +47,11 @@ public class FragmentOfferta extends DialogFragment implements DatePickerDialog.
     boolean[] checkedItems;
     ArrayList<Integer> UserItem = new ArrayList<>(); //contiene le posizioni all'interno della dialog degli elementi selezionati
     TextView giorni_offerta;
+
+    final Offerta o = new Offerta();
+    final Offerta_Periodica op = new Offerta_Periodica();
+    RealmList<String> giorniSel = new RealmList<>();
+
 
     @Nullable
     @Override
@@ -92,6 +98,7 @@ public class FragmentOfferta extends DialogFragment implements DatePickerDialog.
         et_posti_offerta.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 if (controllo_posti == false) {
                     np.setEnabled(true);
                     np.setAlpha(1f);
@@ -131,7 +138,6 @@ public class FragmentOfferta extends DialogFragment implements DatePickerDialog.
                                 if (!UserItem.contains(position)) {
                                     UserItem.add(position);
                                 }
-
                             } else {
                                 for (int i = 0; i < UserItem.size(); i++) {
                                     if (UserItem.get(i) == position) {
@@ -152,6 +158,7 @@ public class FragmentOfferta extends DialogFragment implements DatePickerDialog.
                                 giorni_selezionati = "";
                                 for (int i = 0; i < UserItem.size(); i++) {
                                     giorni_selezionati = giorni_selezionati + day[UserItem.get(i)];
+                                    giorniSel.add(day[UserItem.get(i)]);
                                     if (i != UserItem.size() - 1) {
                                         giorni_selezionati = giorni_selezionati + "-";
                                     }
@@ -189,39 +196,53 @@ public class FragmentOfferta extends DialogFragment implements DatePickerDialog.
             @Override
             public void onClick(View view) {
 
-                String prezzo = et_prezzo.getText().toString();
-                final double dprezzo = Double.parseDouble(prezzo);
-
-
-                String posti = et_posti_offerta.getText().toString();
-                final int iposti = Integer.parseInt(posti);
-
-
-                final Offerta o = new Offerta();
                 double numerocodoff = Math.random() * 99999999;
                 final int cod = (int) numerocodoff;
 
+                if (!UserItem.isEmpty()) {
+
+                    String prezzo = et_prezzo.getText().toString();
+                    final double dprezzo = Double.parseDouble(prezzo);
+
+
+                    String posti = et_posti_offerta.getText().toString();
+                    final int iposti = Integer.parseInt(posti);
 
 
 
-                o.setData(et_data_offerta.getText().toString());
-                o.setCodOfferta(cod);
-                o.setLuogoPartenza(et_luogo_partenza.getText().toString());
-                o.setLuogoArrivo(et_luogo_arrivo.getText().toString());
-                o.setPrezzo(dprezzo);
-                o.setOra(et_ora_offerta.getText().toString());
-                o.setNumPostiDisponibili(iposti);
-               // o.setEmailUtente(mailUtente);
+
+                    o.setData(et_data_offerta.getText().toString());
+                    o.setCodOfferta(cod);
+                    o.setLuogoPartenza(et_luogo_partenza.getText().toString());
+                    o.setLuogoArrivo(et_luogo_arrivo.getText().toString());
+                    o.setPrezzo(dprezzo);
+                    o.setOra(et_ora_offerta.getText().toString());
+                    o.setNumPostiDisponibili(iposti);
+                    // o.setEmailUtente(mailUtente);
 
 
-                realm.executeTransaction(new Realm.Transaction() {
-                    @Override
-                    public void execute(Realm realm) {
-                        realm.copyToRealm(o);
-                    }
-                });
+                    realm.executeTransaction(new Realm.Transaction() {
+                        @Override
+                        public void execute(Realm realm) {
+                            realm.copyToRealm(o);
+                        }
+                    });
+                }else {
 
-                // verifico caricam offerta
+                    op.setDataInizio(et_data_offerta.getText().toString());
+                    op.setCodOfferta(cod);
+                    op.setLuogoPartenza(et_luogo_partenza.getText().toString());
+                    op.setLuogoArrivo(et_luogo_arrivo.getText().toString());
+                    op.setGiorni(giorniSel);
+                    realm.executeTransaction(new Realm.Transaction() {
+                        @Override
+                        public void execute(Realm realm) {
+                            realm.copyToRealm(op);
+                        }
+                    });
+
+                }
+                    // verifico caricam offerta
 
                 if (realm.where(Offerta.class).count()!= 0) {
                     Toast.makeText(getContext(), "Ci sono offerte sul DB", Toast.LENGTH_LONG).show();

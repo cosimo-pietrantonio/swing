@@ -29,6 +29,7 @@ import java.util.Calendar;
 import java.util.Iterator;
 
 import io.realm.Realm;
+import io.realm.RealmList;
 import io.realm.RealmQuery;
 import io.realm.RealmResults;
 import io.realm.SyncConfiguration;
@@ -46,6 +47,12 @@ public class FragmentRichiesta extends DialogFragment implements DatePickerDialo
 
     final ArrayList<Offerta> risultatiDelMatch = new ArrayList<>();
     final ArrayList<Offerta> resMatchSemplice = new ArrayList<>();
+    RealmList<String> giorniSel = new RealmList<>();
+    final Richiesta r = new Richiesta();
+    Richiesta_Periodica rp= new Richiesta_Periodica();
+
+
+
 
 
     String[] day; //contiene tutti gli elementi
@@ -163,6 +170,7 @@ public class FragmentRichiesta extends DialogFragment implements DatePickerDialo
                                 giorni_selezionati = "";
                                 for (int i = 0; i < UserItem.size(); i++) {
                                     giorni_selezionati = giorni_selezionati + day[UserItem.get(i)];
+                                    giorniSel.add(day[UserItem.get(i)]);
                                     if (i != UserItem.size() - 1) {
                                         giorni_selezionati = giorni_selezionati + "-";
                                     }
@@ -202,21 +210,15 @@ public class FragmentRichiesta extends DialogFragment implements DatePickerDialo
             @Override
             public void onClick(View view) {
 
-                final Richiesta r = new Richiesta();
+
                 String numero = et_posti.getText().toString();
                 int intero = Integer.parseInt(numero);
-
-
-                r.setDataPartenza(et_data.getText().toString());
                 double numerocodrich = Math.random() * 99999999;
-                r.setCodRichiesta((int) numerocodrich);
-                r.setLuogoPartenza(et_LPartenza.getText().toString());
-                r.setLuogoArrivo(et_LArrivo.getText().toString());
-                r.setNumPosti(intero);
-                r.setOra(et_ora.getText().toString());
-               // r.setMailUtente(mailUtente);
 
                 if (UserItem.isEmpty()) {
+
+
+
                     realm.executeTransaction(new Realm.Transaction() {
                         @Override
                         public void execute(Realm realm) {
@@ -224,13 +226,27 @@ public class FragmentRichiesta extends DialogFragment implements DatePickerDialo
                             realm.copyToRealm(r);
                         }
                     });
-                    if (realm.where(Richiesta.class).count()!= 0) {
-                        Toast.makeText(getContext(), "Ci sono richieste sul DB", Toast.LENGTH_LONG).show();
+                    //controllo se la transazione è andata a buon fine
+                    if (realm.where(Richiesta.class).equalTo("CodRichiesta",(int) numerocodrich).count() != 0) {
+                        Toast.makeText(getContext(), "Richiesta correttamente pubblicata", Toast.LENGTH_LONG).show();
                     } else {
-                        Toast.makeText(getContext(), "non ci sono richieste sul DB ", Toast.LENGTH_LONG).show();
+                        Toast.makeText(getContext(), "La richiesta non è andata a buon fine ", Toast.LENGTH_LONG).show();
                     }
                 } else {
-                    // qui va caricata la richiesta periodica
+                    rp.setCodRichiesta( (int) numerocodrich);
+                    rp.setDataPartenza(et_data.getText().toString());
+                    rp.setCodRichiesta((int) numerocodrich);
+                    rp.setLuogoPartenza(et_LPartenza.getText().toString());
+                    rp.setLuogoArrivo(et_LArrivo.getText().toString());
+                    rp.setNumPosti(intero);
+                    rp.setGiorni(giorniSel);
+                    // rp.setMailUtente(mailUtente);
+                    realm.executeTransaction(new Realm.Transaction() {
+                        @Override
+                        public void execute(Realm realm) {
+                            realm.copyToRealm(rp);
+                        }
+                    });
 
                 }
 
@@ -271,7 +287,7 @@ public class FragmentRichiesta extends DialogFragment implements DatePickerDialo
                             .equalTo("luogoPartenza", et_LPartenza.getText().toString())
                             .equalTo("luogoArrivo", et_LArrivo.getText().toString());
 
-                    if (queryP.equalTo("emailUtente", r.getMailUtente()).count() == 0) {
+                    if (queryP.equalTo("emailUtente", rp.getMailUtente()).count() == 0) {
                         if (queryP.count() != 0) {
                             RealmResults<Offerta_Periodica> queryResultsP = queryP.findAll();
                             Iterator<Offerta_Periodica> i = queryResultsP.iterator();
