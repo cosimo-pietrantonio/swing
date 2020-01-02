@@ -45,6 +45,8 @@ public class FragmentRichiesta extends DialogFragment implements DatePickerDialo
     EditText et_LArrivo;
     boolean controllo_posti = false;
 
+
+
     final ArrayList<Offerta> risultatiDelMatch = new ArrayList<>();
     final ArrayList<Offerta> resMatchSemplice = new ArrayList<>();
     RealmList<String> giorniSel = new RealmList<>();
@@ -62,6 +64,8 @@ public class FragmentRichiesta extends DialogFragment implements DatePickerDialo
     TextView giorni;
 
 
+
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -71,8 +75,11 @@ public class FragmentRichiesta extends DialogFragment implements DatePickerDialo
         final SyncConfiguration config = new SyncConfiguration.Builder(SyncUser.current(), syncServerURL).build();
         final Realm realm = Realm.getInstance(config);
 
+
+        /*
         //ricevo stringa mail
-        //final String mailUtente = this.getArguments().getString("object_key");
+        Bundle b= getArguments();
+        final String mailUtente = b.getString("object_key"); */
 
 
         final View view = inflater.inflate(R.layout.fragment_richiesta, container, false);
@@ -217,12 +224,17 @@ public class FragmentRichiesta extends DialogFragment implements DatePickerDialo
 
                 if (UserItem.isEmpty()) {
 
+                    Home_activity activity = new Home_activity();
+                    String mailUtente = activity.getMail();
+
                     r.setCodRichiesta( (int) numerocodrich);
                     r.setDataPartenza(et_data.getText().toString());
                     r.setLuogoPartenza(et_LPartenza.getText().toString());
                     r.setLuogoArrivo(et_LArrivo.getText().toString());
                     r.setNumPosti(intero);
                     r.setOra(et_ora.getText().toString());
+                    r.setMailUtente(mailUtente);
+
 
 
                     realm.executeTransaction(new Realm.Transaction() {

@@ -32,8 +32,8 @@ public class Home_activity extends AppCompatActivity implements View.OnClickList
     OvershootInterpolator interpolator = new OvershootInterpolator();
 
     it.poliba.swing.utente utente = new utente();
-    Fragment richiedi = new FragmentRichiesta();  //fragment richiesta
-    Fragment offri = new FragmentOfferta();       //fragment offerta
+    Fragment fragRichiesta = new FragmentRichiesta();  //fragment richiesta
+    Fragment fragOfferta = new FragmentOfferta();       //fragment offerta
 
     TextView offerta;
     TextView richiesta;
@@ -44,6 +44,8 @@ public class Home_activity extends AppCompatActivity implements View.OnClickList
     Intent prof = new Intent();
     Intent not = new Intent();
 
+    public String mailUtente;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,6 +55,7 @@ public class Home_activity extends AppCompatActivity implements View.OnClickList
 
         final Intent intentProfil = new Intent(this, Profilo_Activity.class);
         final Intent intentNotifich = new Intent(this, MatchList_Activity.class);
+
 
 
 
@@ -71,7 +74,6 @@ public class Home_activity extends AppCompatActivity implements View.OnClickList
         if (b1 != null) {
             utente = b1.getParcelable("object_key");
         }
-
 
 
         //set dell'intent per il profilo
@@ -95,7 +97,7 @@ public class Home_activity extends AppCompatActivity implements View.OnClickList
         final ViewGroup.LayoutParams params_offerta = layout_offerta.getLayoutParams();
         final ViewGroup.LayoutParams params_ricerca = layout_richiesta.getLayoutParams();
 
-        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_ricerca,richiedi).commit();
+        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_ricerca,fragRichiesta).commit();
         richiesta.setAlpha(0f);
 
         offerta.setOnClickListener(new View.OnClickListener() {
@@ -108,15 +110,15 @@ public class Home_activity extends AppCompatActivity implements View.OnClickList
                 params_offerta.width=1140;
 
                 //invio stringa mail
-               /* Bundle args = new Bundle();
+                Bundle args = new Bundle();
                 args.putString("object_key",utente.getEmail());
-                offri.setArguments(args); */
+                fragOfferta.setArguments(args);
 
                 layout_richiesta.setLayoutParams(params_ricerca);
                 layout_offerta.setLayoutParams(params_offerta);
-                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_offerta,offri).commit();
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_offerta,fragOfferta).commit();
 
-                getSupportFragmentManager().beginTransaction().remove(richiedi).commit();
+                getSupportFragmentManager().beginTransaction().remove(fragRichiesta).commit();
             }
         });
 
@@ -128,20 +130,30 @@ public class Home_activity extends AppCompatActivity implements View.OnClickList
                 offerta.setAlpha(1f);
                 params_offerta.width=300;
                 params_ricerca.width=1140;
+
                 Bundle args = new Bundle();
                 args.putString("object_key",utente.getEmail());
-                richiedi.setArguments(args);
+                fragRichiesta.setArguments(args);
+
                 layout_richiesta.setLayoutParams(params_ricerca);
                 layout_offerta.setLayoutParams(params_offerta);
 
-                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_ricerca,richiedi).commit();
-                getSupportFragmentManager().beginTransaction().remove(offri).commit();
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_ricerca,fragRichiesta).commit();
+                getSupportFragmentManager().beginTransaction().remove(fragOfferta).commit();
             }
         });
         prof = intentProfil;
         not = intentNotifich;
 
+
+
+
     }
+
+//metodo per il passaggio della mail
+    public String getMail(){
+        return utente.getEmail();
+   }
 
 
 
