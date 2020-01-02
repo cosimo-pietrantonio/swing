@@ -22,7 +22,7 @@ import io.realm.SyncConfiguration;
 import io.realm.SyncUser;
 
 
-public class Home_activity extends AppCompatActivity implements View.OnClickListener
+public class Home_Activity extends AppCompatActivity implements View.OnClickListener
    {
 
     boolean stato=false; //false: menu chiuso, true : menu aperto

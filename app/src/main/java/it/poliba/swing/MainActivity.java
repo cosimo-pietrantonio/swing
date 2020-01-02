@@ -48,12 +48,11 @@ public class MainActivity extends AppCompatActivity {
                     }
                 },splash_time_out);
             }
-
             @Override
             public void onError(ObjectServerError error) {
-
             }
             });
+
 
     }
 }

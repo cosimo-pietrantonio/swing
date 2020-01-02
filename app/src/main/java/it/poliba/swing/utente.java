@@ -7,7 +7,7 @@ import io.realm.RealmObject;
 import io.realm.annotations.Required;
 import io.realm.annotations.PrimaryKey;
 
-public class utente extends RealmObject  implements Parcelable
+public class utente extends RealmObject implements Parcelable
          {
     @PrimaryKey
     @Required
