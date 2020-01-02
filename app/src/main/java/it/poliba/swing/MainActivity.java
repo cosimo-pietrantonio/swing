@@ -18,7 +18,7 @@ import static it.poliba.swing.Constants.AUTH_URL;
 
 public class MainActivity extends AppCompatActivity {
 
-    private static int splash_time_out = 1000;
+    private static int splash_time_out = 3000;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
