@@ -19,7 +19,7 @@ public class OffertaActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_offerta);
-        String syncServerURL = "https://swing-app.de1a.cloud.realm.io/temp7";
+        String syncServerURL = "https://swing-app.de1a.cloud.realm.io/temp9";
         final SyncConfiguration config = new SyncConfiguration.Builder(SyncUser.current(), syncServerURL).build();
         final Realm realm = Realm.getInstance(config);
 

@@ -60,7 +60,7 @@ public class FragmentOfferta extends DialogFragment implements DatePickerDialog.
 
 
         //configurazione  DB
-        String syncServerURL = "https://swing-app.de1a.cloud.realm.io/temp8";
+        String syncServerURL = "https://swing-app.de1a.cloud.realm.io/temp9";
         final SyncConfiguration config = new SyncConfiguration.Builder(SyncUser.current(), syncServerURL).build();
         final Realm realm = Realm.getInstance(config);
 
@@ -199,7 +199,7 @@ public class FragmentOfferta extends DialogFragment implements DatePickerDialog.
                 double numerocodoff = Math.random() * 99999999;
                 final int cod = (int) numerocodoff;
 
-                if (!UserItem.isEmpty()) {
+                if (UserItem.isEmpty()) {
 
                     String prezzo = et_prezzo.getText().toString();
                     final double dprezzo = Double.parseDouble(prezzo);
@@ -227,7 +227,7 @@ public class FragmentOfferta extends DialogFragment implements DatePickerDialog.
                             realm.copyToRealm(o);
                         }
                     });
-                }else {
+                } else {
 
                     op.setDataInizio(et_data_offerta.getText().toString());
                     op.setCodOfferta(cod);

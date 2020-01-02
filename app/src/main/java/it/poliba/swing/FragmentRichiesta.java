@@ -67,7 +67,7 @@ public class FragmentRichiesta extends DialogFragment implements DatePickerDialo
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
 
-        String syncServerURL = "https://swing-app.de1a.cloud.realm.io/temp8";
+        String syncServerURL = "https://swing-app.de1a.cloud.realm.io/temp9";
         final SyncConfiguration config = new SyncConfiguration.Builder(SyncUser.current(), syncServerURL).build();
         final Realm realm = Realm.getInstance(config);
 
@@ -217,6 +217,12 @@ public class FragmentRichiesta extends DialogFragment implements DatePickerDialo
 
                 if (UserItem.isEmpty()) {
 
+                    r.setCodRichiesta( (int) numerocodrich);
+                    r.setDataPartenza(et_data.getText().toString());
+                    r.setLuogoPartenza(et_LPartenza.getText().toString());
+                    r.setLuogoArrivo(et_LArrivo.getText().toString());
+                    r.setNumPosti(intero);
+                    r.setOra(et_ora.getText().toString());
 
 
                     realm.executeTransaction(new Realm.Transaction() {
@@ -235,7 +241,6 @@ public class FragmentRichiesta extends DialogFragment implements DatePickerDialo
                 } else {
                     rp.setCodRichiesta( (int) numerocodrich);
                     rp.setDataPartenza(et_data.getText().toString());
-                    rp.setCodRichiesta((int) numerocodrich);
                     rp.setLuogoPartenza(et_LPartenza.getText().toString());
                     rp.setLuogoArrivo(et_LArrivo.getText().toString());
                     rp.setNumPosti(intero);
@@ -265,15 +270,15 @@ public class FragmentRichiesta extends DialogFragment implements DatePickerDialo
                         {
 
                             final RealmResults<Offerta> queryRes = queryMatchSingolo.equalTo("data", et_data.getText().toString()).findAll();
-                            final Iterator<Offerta> resIter = queryRes.iterator();
+                            /*final Iterator<Offerta> resIter = queryRes.iterator(); */
 
                             String stringaPosti = et_posti.getText().toString();
                             int intPostiRichiesta = Integer.parseInt(stringaPosti);
 
-                            while (resIter.hasNext()) {
-                                if (resIter.next().getNumPostiDisponibili() >= intPostiRichiesta) {
-                                    System.out.println("Stringa del next: "+resIter.next().getLuogoArrivo());
-                                    resMatchSemplice.add(resIter.next());
+                            for (int i=0; i < queryRes.size(); i++) {
+                                if (queryRes.get(i).getNumPostiDisponibili() >= intPostiRichiesta) {
+                                    System.out.println("Stringa del next: "+queryRes.get(i).getLuogoArrivo());
+                                    resMatchSemplice.add(queryRes.get(i));
                                 }
                             }
                         }
