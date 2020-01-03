@@ -4,13 +4,13 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    android:background="@drawable/sfondo4"
+    android:background="@color/pink"
     tools:context=".Profilo_Activity">
 
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/sfondo4"
+        android:background="@color/pink"
         android:fitsSystemWindows="true"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -30,7 +30,7 @@
                 android:id="@+id/cardView1"
                 android:layout_width="match_parent"
                 android:layout_height="80dp"
-                app:cardBackgroundColor="#FFD24E">
+                app:cardBackgroundColor="#b3b3b3">
 
                 <TextView
                     android:id="@+id/titolo"
@@ -39,7 +39,7 @@
                     android:layout_marginLeft="15dp"
                     android:layout_marginTop="20dp"
                     android:layout_marginBottom="20dp"
-                    android:background="#FFD24E"
+                    android:background="#b3b3b3"
                     android:ems="10"
                     android:fontFamily="@font/roboto_thin"
                     android:inputType="textPersonName"

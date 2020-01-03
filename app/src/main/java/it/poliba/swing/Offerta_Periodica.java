@@ -11,8 +11,6 @@ import io.realm.annotations.Required;
 
 public class Offerta_Periodica extends RealmObject {
 
-    //@Required
-    private String mailUtente;
     @PrimaryKey
     private int codOfferta;
     @Required
@@ -24,9 +22,10 @@ public class Offerta_Periodica extends RealmObject {
     @Required
     RealmList<String> giorni = new RealmList<>();
 
-    public Offerta_Periodica(int codOfferta, String mailUtente, String luogoPartenza, String luogoArrivo, String dataInizio, RealmList<String> giorni) {
+    private String mailUtente;
+
+    public Offerta_Periodica(int codOfferta, String luogoPartenza, String luogoArrivo, String dataInizio, RealmList<String> giorni) {
         this.codOfferta = codOfferta;
-        this.mailUtente = mailUtente;
         this.luogoPartenza = luogoPartenza;
         this.luogoArrivo = luogoArrivo;
         this.dataInizio = dataInizio;
@@ -76,11 +75,12 @@ public class Offerta_Periodica extends RealmObject {
         this.giorni = giorni;
     }
 
-    public String getMailUtente() {
+    public String getEmailUtente() {
         return mailUtente;
     }
 
-    public void setMailUtente(String mailUtente) {
-        this.mailUtente = mailUtente;
+    public void setEmailUtente(String emailUtente) {
+        this.mailUtente = emailUtente;
     }
+
 }

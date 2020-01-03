@@ -5,11 +5,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.service.autofill.FieldClassification;
 import android.text.TextUtils;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -27,8 +25,10 @@ public class MatchList_Activity extends AppCompatActivity {
         setContentView(R.layout.activity_match_list_);
 
         final TextView add = new TextView(MatchList_Activity.this);
-        final LinearLayout offerte = findViewById(R.id.l2);
-        final LinearLayout richieste = findViewById(R.id.l3);
+        final LinearLayout offerteATT = findViewById(R.id.l);
+        final LinearLayout offerteTRO = findViewById(R.id.l4);
+        final LinearLayout richiesteATT = findViewById(R.id.l3);
+        final LinearLayout richiesteTRO = findViewById(R.id.l2);
         Boolean bitOff=false;
         Boolean bitRic=true;
         utente ut1 = new utente();
@@ -37,16 +37,11 @@ public class MatchList_Activity extends AppCompatActivity {
 
 
 
-        String syncServerURL = "https://swing-app.de1a.cloud.realm.io/temp9";
+        String syncServerURL = "https://swing-app.de1a.cloud.realm.io/temp10";
         final SyncConfiguration config = new SyncConfiguration.Builder(SyncUser.current(), syncServerURL).build();
         final Realm realm = Realm.getInstance(config);
 
-        //ricezione dati utete loggato
-        Intent getter = getIntent();
-        Bundle b = getter.getExtras();
-        if (b != null) {
-             ut1 = b.getParcelable("object_key");
-        }
+
 
 
         if(bitRic == true){
@@ -63,7 +58,7 @@ public class MatchList_Activity extends AppCompatActivity {
             add.setFocusableInTouchMode(true);
             add.setHorizontallyScrolling(true);
             add.setSelected(true);
-            offerte.addView(add);
+            //offerte.addView(add);
         }
 
         if(bitOff == true){
@@ -80,7 +75,7 @@ public class MatchList_Activity extends AppCompatActivity {
             add.setFocusableInTouchMode(true);
             add.setHorizontallyScrolling(true);
             add.setSelected(true);
-            offerte.addView(add);
+            //offerte.addView(add);
         }
 
 
@@ -88,9 +83,87 @@ public class MatchList_Activity extends AppCompatActivity {
         RealmResults<Richiesta> richiesteSingAttive = getRichiesteSingole(ut1.getEmail(),realm);
         RealmResults<Richiesta_Periodica> richiestePeriodAttive = getRichiestePeriodiche(ut1.getEmail(),realm);
 
+
+        //AGGIUNTA DI RICHIESTE SINGOLE ATTIVE AL LAYOUT
+        for(int i=0; i<richiesteSingAttive.size(); i++){
+            add.setText(richiesteSingAttive.get(i).getLuogoPartenza()+ "-" + richiesteSingAttive.get(i).getLuogoArrivo() + " " + richiesteSingAttive.get(i).getOra() + " " + richiesteSingAttive.get(i).getDataPartenza());
+            add.setPadding(5,5,0,15);
+            add.setTextColor(Color.BLACK);
+            add.setTextSize(25);
+            add.setBackgroundColor(Color.WHITE);
+            add.setFocusable(true);
+            add.setSingleLine(true);
+            add.setEllipsize(TextUtils.TruncateAt.MARQUEE);
+            add.setMarqueeRepeatLimit(100);
+            add.setFocusable(true);
+            add.setFocusableInTouchMode(true);
+            add.setHorizontallyScrolling(true);
+            add.setSelected(true);
+            richiesteATT.addView(add);
+        }
+
+        //AGGIUNTA DI RICHIESTE periodiche ATTIVE AL LAYOUT
+        for(int i=0; i<richiesteSingAttive.size(); i++){
+            add.setText(richiestePeriodAttive.get(i).getLuogoPartenza()+ "-" + richiestePeriodAttive.get(i).getLuogoArrivo()+ " " + richiestePeriodAttive.get(i).getGiorni());
+            add.setPadding(5,5,0,15);
+            add.setTextColor(Color.BLACK);
+            add.setTextSize(25);
+            add.setBackgroundColor(Color.WHITE);
+            add.setFocusable(true);
+            add.setSingleLine(true);
+            add.setEllipsize(TextUtils.TruncateAt.MARQUEE);
+            add.setMarqueeRepeatLimit(100);
+            add.setFocusable(true);
+            add.setFocusableInTouchMode(true);
+            add.setHorizontallyScrolling(true);
+            add.setSelected(true);
+            richiesteATT.addView(add);
+        }
+
+
+
+
         // RICEZIONE OFFERTE ATTIVE
         RealmResults<Offerta> offerteSingAttive = getOfferteSingole(ut1.getEmail(),realm);
         RealmResults<Offerta_Periodica> offertePeriodAttive = getOffertePeriodiche(ut1.getEmail(),realm);
+
+        //AGGIUNTA DI OFFERTE SINGOLE ATTIVE AL LAYOUT
+        for(int i=0; i<richiesteSingAttive.size(); i++){
+            add.setText(offerteSingAttive.get(i).getLuogoPartenza()+ "-" + offerteSingAttive.get(i).getLuogoArrivo() + " " + offerteSingAttive.get(i).getOra() + " " + offerteSingAttive.get(i).getData());
+            add.setPadding(5,5,0,15);
+            add.setTextColor(Color.BLACK);
+            add.setTextSize(25);
+            add.setBackgroundColor(Color.WHITE);
+            add.setFocusable(true);
+            add.setSingleLine(true);
+            add.setEllipsize(TextUtils.TruncateAt.MARQUEE);
+            add.setMarqueeRepeatLimit(100);
+            add.setFocusable(true);
+            add.setFocusableInTouchMode(true);
+            add.setHorizontallyScrolling(true);
+            add.setSelected(true);
+            offerteATT.addView(add);
+        }
+
+        //AGGIUNTA DI OFFERTE PERIODICHE ATTIVE AL LAYOUT
+        for(int i=0; i<richiesteSingAttive.size(); i++){
+            add.setText(offertePeriodAttive.get(i).getLuogoPartenza()+ "-" + offertePeriodAttive.get(i).getLuogoArrivo() + " " + offertePeriodAttive.get(i).getGiorni());
+            add.setPadding(5,5,0,15);
+            add.setTextColor(Color.BLACK);
+            add.setTextSize(25);
+            add.setBackgroundColor(Color.WHITE);
+            add.setFocusable(true);
+            add.setSingleLine(true);
+            add.setEllipsize(TextUtils.TruncateAt.MARQUEE);
+            add.setMarqueeRepeatLimit(100);
+            add.setFocusable(true);
+            add.setFocusableInTouchMode(true);
+            add.setHorizontallyScrolling(true);
+            add.setSelected(true);
+            offerteATT.addView(add);
+        }
+
+
 
         // MATCH PER RICHIESTE SINGOLE ATTIVE
         for (int i=0; i < richiesteSingAttive.size(); i++){
@@ -111,7 +184,6 @@ public class MatchList_Activity extends AppCompatActivity {
         }
 
         //  MATCH PER RICHIESTE PERIODICHE ATTIVE
-
         for(int k=0; k < richiestePeriodAttive.size(); k++){
             Richiesta_Periodica rp = richiestePeriodAttive.get(k);
 
