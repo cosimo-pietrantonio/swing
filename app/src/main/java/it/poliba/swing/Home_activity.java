@@ -31,7 +31,7 @@ public class Home_activity extends AppCompatActivity implements View.OnClickList
     FloatingActionButton notifiche;
     OvershootInterpolator interpolator = new OvershootInterpolator();
 
-    it.poliba.swing.utente utente = new utente();
+    Utente utente = new Utente();
     Fragment fragRichiesta = new FragmentRichiesta();  //fragment richiesta
     Fragment fragOfferta = new FragmentOfferta();       //fragment offerta
 
