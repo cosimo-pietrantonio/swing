@@ -71,10 +71,6 @@ public class FragmentOfferta extends DialogFragment implements DatePickerDialog.
 
         final View view = inflater.inflate(R.layout.fragment_offerta, container, false);
         Button invia = view.findViewById(R.id.InviaO);
-        final NumberPicker np = view.findViewById(R.id.numberPicker_offerta);
-        np.setMinValue(1);
-        np.setMaxValue(7);
-        np.setOnValueChangedListener(onValueChangeListener);
 
         et_luogo_arrivo= view.findViewById(R.id.etLuogoArrivoF);
         et_luogo_partenza= view.findViewById(R.id.etLuogoPartenzaF);
@@ -92,24 +88,6 @@ public class FragmentOfferta extends DialogFragment implements DatePickerDialog.
             @Override
             public void onClick(View v) {
                 showTimePickerDialog();
-            }
-        });
-
-        et_posti_offerta = view.findViewById(R.id.etPostiOfferta);
-        et_posti_offerta.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                if (controllo_posti == false) {
-                    np.setEnabled(true);
-                    np.setAlpha(1f);
-                    controllo_posti = true;
-
-                } else {
-                    np.setEnabled(false);
-                    np.setAlpha(0f);
-                    controllo_posti = false;
-                }
             }
         });
 
