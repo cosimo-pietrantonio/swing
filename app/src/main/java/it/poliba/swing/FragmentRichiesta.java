@@ -272,7 +272,7 @@ public class FragmentRichiesta extends DialogFragment implements DatePickerDialo
 
                     final RealmQuery<Offerta> queryMatchSingolo = realm.where(Offerta.class).equalTo("luogoPartenza", et_LPartenza.getText().toString())
                             .equalTo("luogoArrivo", et_LArrivo.getText().toString());
-                    //MATCH PER OFF-RICH SINGOLE
+                    //MATCH PER RICH SINGOLE
                     //Controllo se c'è già un' offerta pubblicata dall'utente richiedente con gli stessi parametri della richiesta
                     if (queryMatchSingolo.equalTo("emailUtente", r.getMailUtente()).equalTo("data", et_data.getText().toString()).count() == 0) {
 
