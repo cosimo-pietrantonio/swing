@@ -30,8 +30,8 @@ public class Profilo_Activity extends AppCompatActivity implements io.realm.Real
         final Realm realm = Realm.getInstance(config);
 
         final Intent a = new Intent(this, ModficaProfilo_Activity.class);
-        Utente utente = new Utente();
-        final it.poliba.swing.Utente U =new Utente();
+        utente utente = new utente();
+        final it.poliba.swing.utente U =new utente();
         TextView e = findViewById(R.id.em);
         TextView c = findViewById(R.id.co);
         TextView n = findViewById(R.id.no);
