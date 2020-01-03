@@ -6,9 +6,7 @@ import android.os.Bundle;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
-import androidx.annotation.ColorInt;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
 
 import androidx.coordinatorlayout.widget.CoordinatorLayout;
 import androidx.fragment.app.Fragment;
@@ -34,7 +32,7 @@ public class Home_activity extends AppCompatActivity
     FloatingActionButton notifiche;
     OvershootInterpolator interpolator = new OvershootInterpolator();
 
-    Utente utente = new Utente();
+    it.poliba.swing.utente utente = new utente();
     Fragment fragRichiesta = new FragmentRichiesta();  //fragment richiesta
     Fragment fragOfferta = new FragmentOfferta();       //fragment offerta
 
@@ -121,7 +119,7 @@ public class Home_activity extends AppCompatActivity
                 int white = Color.parseColor("#FFFFFF");
                 Home.setBackgroundColor(pink);
                 Alto_destra.setBackgroundColor(pink);
-                Alto_sinistra.setBackground(getDrawable(R.drawable.icona_piccola_bianca));
+                Alto_sinistra.setBackground(getDrawable(R.drawable.icona_home_bianca));
 
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_offerta,fragOfferta).commit();
                 getSupportFragmentManager().beginTransaction().remove(fragRichiesta).commit();
@@ -149,7 +147,7 @@ public class Home_activity extends AppCompatActivity
                 int pink = Color.parseColor("#f3e7e7");
                 int white = Color.parseColor("#FFFFFF");
                 Alto_destra.setBackgroundColor(white);
-                Alto_sinistra.setBackground(getDrawable(R.drawable.icona_piccola_rosa));
+                Alto_sinistra.setBackground(getDrawable(R.drawable.icona_home_rosa));
 
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_ricerca,fragRichiesta).commit();
                 getSupportFragmentManager().beginTransaction().remove(fragOfferta).commit();

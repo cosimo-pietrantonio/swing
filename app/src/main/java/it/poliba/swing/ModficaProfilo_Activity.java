@@ -33,7 +33,7 @@ public class ModficaProfilo_Activity extends AppCompatActivity implements DatePi
         final int StartMonth= 12;
         final int StartDay= 31;
         Button salva = findViewById(R.id.salva);
-        Utente u = new Utente();
+        utente u = new utente();
 
 
         //data picker dialog
@@ -85,8 +85,8 @@ public class ModficaProfilo_Activity extends AppCompatActivity implements DatePi
         data.setHint(u.getDataNascita());
         password.setHint(u.getPassword());
 
-        final Utente finalU = new Utente();
-        final Utente finaluu = new Utente();
+        final utente finalU = new utente();
+        final utente finaluu = new utente();
         finaluu.setPassword(u.getPassword());
         salva.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -130,7 +130,7 @@ public class ModficaProfilo_Activity extends AppCompatActivity implements DatePi
                 realm.executeTransaction(new Realm.Transaction() {
                     @Override
                     public void execute(Realm realm) {
-                        RealmResults <Utente> utenti = realm.where(Utente.class).equalTo("email",email).findAll();
+                        RealmResults <utente> utenti = realm.where(utente.class).equalTo("email",email).findAll();
                         utenti.setValue("nome",Nome );
                         utenti.setValue("cognome", Cognome);
                         utenti.setValue("password", Password);

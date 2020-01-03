@@ -7,7 +7,7 @@ import io.realm.RealmObject;
 import io.realm.annotations.PrimaryKey;
 import io.realm.annotations.Required;
 
-public class Utente extends RealmObject implements Parcelable{
+public class utente extends RealmObject implements Parcelable{
 
 
     @PrimaryKey
@@ -23,7 +23,7 @@ public class Utente extends RealmObject implements Parcelable{
     private String dataNascita;
 
 
-    public Utente() {
+    public utente() {
     }
 
 
@@ -76,7 +76,7 @@ public class Utente extends RealmObject implements Parcelable{
             return 0;
         }
 
-        private Utente(Parcel in) {
+        private utente(Parcel in) {
             readFromParcel(in);
         }
 
@@ -88,14 +88,14 @@ public class Utente extends RealmObject implements Parcelable{
             password= in.readString();
         }
 
-        public static final Parcelable.Creator<Utente> CREATOR
-                = new Parcelable.Creator<Utente>() {
-            public Utente createFromParcel(Parcel in) {
-                return new Utente(in);
+        public static final Parcelable.Creator<utente> CREATOR
+                = new Parcelable.Creator<utente>() {
+            public utente createFromParcel(Parcel in) {
+                return new utente(in);
             }
 
-            public Utente[] newArray(int size) {
-                return new Utente[size];
+            public utente[] newArray(int size) {
+                return new utente[size];
             }
         };
 

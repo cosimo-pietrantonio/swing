@@ -5,11 +5,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.service.autofill.FieldClassification;
 import android.text.TextUtils;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -33,7 +31,7 @@ public class MatchList_Activity extends AppCompatActivity {
         final LinearLayout richiesteTRO = findViewById(R.id.l2);
         Boolean bitOff=false;
         Boolean bitRic=true;
-        Utente ut1 = new Utente();
+        utente ut1 = new utente();
         ArrayList<Offerta> offerteSingoleDelMatch = new ArrayList<>();
 
 
