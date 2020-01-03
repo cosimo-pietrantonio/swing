@@ -226,8 +226,6 @@ public class FragmentRichiesta extends DialogFragment implements DatePickerDialo
 
                 if (UserItem.isEmpty()) {
 
-                    Home_activity activity = new Home_activity();
-                    String mailUtente = activity.getMail();
 
                     r.setCodRichiesta((int) numerocodrich);
                     r.setDataPartenza(et_data.getText().toString());
@@ -235,7 +233,7 @@ public class FragmentRichiesta extends DialogFragment implements DatePickerDialo
                     r.setLuogoArrivo(et_LArrivo.getText().toString());
                     r.setNumPosti(intero);
                     r.setOra(et_ora.getText().toString());
-                    r.setMailUtente(mailUtente);
+                    r.setMailUtente(((Home_activity) getActivity()).utente.getEmail());
 
 
                     realm.executeTransaction(new Realm.Transaction() {
@@ -258,7 +256,7 @@ public class FragmentRichiesta extends DialogFragment implements DatePickerDialo
                     rp.setLuogoArrivo(et_LArrivo.getText().toString());
                     rp.setNumPosti(intero);
                     rp.setGiorni(giorniSel);
-                    // rp.setMailUtente(mailUtente);
+                    rp.setMailUtente(((Home_activity) getActivity()).utente.getEmail());
                     realm.executeTransaction(new Realm.Transaction() {
                         @Override
                         public void execute(Realm realm) {
@@ -276,7 +274,7 @@ public class FragmentRichiesta extends DialogFragment implements DatePickerDialo
                             .equalTo("luogoArrivo", et_LArrivo.getText().toString());
                     //MATCH PER OFF-RICH SINGOLE
                     //Controllo se c'è già un' offerta pubblicata dall'utente richiedente con gli stessi parametri della richiesta
-                    //if (queryMatchSingolo.equalTo("emailUtente", r.getMailUtente()).equalTo("data", et_data.getText().toString()).count() == 0) {
+                    if (queryMatchSingolo.equalTo("emailUtente", r.getMailUtente()).equalTo("data", et_data.getText().toString()).count() == 0) {
 
                     if (queryMatchSingolo.equalTo("data", et_data.getText().toString()).count() != 0) {
 
@@ -288,29 +286,36 @@ public class FragmentRichiesta extends DialogFragment implements DatePickerDialo
 
                         for (int i = 0; i < queryRes.size(); i++) {
                             if (queryRes.get(i).getNumPostiDisponibili() >= intPostiRichiesta) {
-                                System.out.println("Stringa del next: " + queryRes.get(i).getLuogoArrivo());
                                 resMatchSemplice.add(queryRes.get(i));
                             }
                         }
-                    }
-                    /*} else {
+                    } }else {
                         Toast.makeText(getContext(), "C'è un offerta da te formulata " +
                                 "con gli stessi parametri richiesti in questa data !! "
-                                , Toast.LENGTH_LONG).show();   } */
+                                , Toast.LENGTH_LONG).show();   }
                 } else {
                     //MATCH PER OFF-RICH PERIODICHE
                     final RealmQuery<Offerta_Periodica> queryP = realm.where(Offerta_Periodica.class)
                             .equalTo("luogoPartenza", et_LPartenza.getText().toString())
                             .equalTo("luogoArrivo", et_LArrivo.getText().toString());
 
+                    System.err.println("LISTA GIORNI SELEZIONATI");
+                    for (int count=0;count<giorniSel.size(); count++){
+                        System.out.println(giorniSel.get(count)); }
 
-                    //if (queryP.equalTo("emailUtente", rp.getMailUtente()).count() == 0) {
+
+                    if (queryP.equalTo("emailUtente", rp.getMailUtente()).count() == 0) {
                     if (queryP.count() != 0) {
 
                         RealmResults<Offerta_Periodica> queryResultsP = queryP.findAll();
 
                         for (int i = 0; i < queryResultsP.size(); i++) {
                             trovati = 0;
+
+                            System.err.println("LISTA GIORNI DELL'' OFFERTA "+i);
+                            for (int count1=0; count1<queryResultsP.get(i).getGiorni().size(); count1++){
+                               System.out.println(queryResultsP.get(i).getGiorni().get(count1));
+                            }
 
                             for (int k = 0; k < queryResultsP.get(i).getGiorni().size(); k++) {
                                 if (trovati == giorniSel.size()) {
@@ -328,8 +333,7 @@ public class FragmentRichiesta extends DialogFragment implements DatePickerDialo
                         }
                     }
                 }
-
-                //               }
+                }
 
 // Discuto i risultati del match :
                 if (!resMatchPeriodico.isEmpty()) {

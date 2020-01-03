@@ -25,9 +25,12 @@ import androidx.fragment.app.DialogFragment;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Iterator;
 
 import io.realm.Realm;
 import io.realm.RealmList;
+import io.realm.RealmQuery;
+import io.realm.RealmResults;
 import io.realm.SyncConfiguration;
 import io.realm.SyncUser;
 
@@ -51,6 +54,7 @@ public class FragmentOfferta extends DialogFragment implements DatePickerDialog.
     final Offerta o = new Offerta();
     final Offerta_Periodica op = new Offerta_Periodica();
     RealmList<String> giorniSel = new RealmList<>();
+    ArrayList<Richiesta> resMatchSemplice = new ArrayList<>();
 
 
     @Nullable
@@ -218,7 +222,7 @@ public class FragmentOfferta extends DialogFragment implements DatePickerDialog.
                     o.setPrezzo(dprezzo);
                     o.setOra(et_ora_offerta.getText().toString());
                     o.setNumPostiDisponibili(iposti);
-                    // o.setEmailUtente(mailUtente);
+                    o.setEmailUtente(((Home_activity) getActivity()).utente.getEmail());
 
 
                     realm.executeTransaction(new Realm.Transaction() {
@@ -234,6 +238,8 @@ public class FragmentOfferta extends DialogFragment implements DatePickerDialog.
                     op.setLuogoPartenza(et_luogo_partenza.getText().toString());
                     op.setLuogoArrivo(et_luogo_arrivo.getText().toString());
                     op.setGiorni(giorniSel);
+                    op.setEmailUtente(((Home_activity) getActivity()).utente.getEmail());
+
                     realm.executeTransaction(new Realm.Transaction() {
                         @Override
                         public void execute(Realm realm) {
@@ -250,6 +256,44 @@ public class FragmentOfferta extends DialogFragment implements DatePickerDialog.
                     Toast.makeText(getContext(), "non ci sono offerte sul DB ", Toast.LENGTH_LONG).show();
                 }
 
+
+                //MATCH
+
+                //singola
+
+                if (UserItem.isEmpty()) {
+                    final RealmQuery<Richiesta> queryMatchSingolo = realm.where(Richiesta.class).equalTo("luogoPartenza", et_luogo_partenza.getText().toString()).equalTo("luogoArrivo", et_luogo_arrivo.getText().toString());
+                    if (queryMatchSingolo.equalTo("emailUtente", o.getEmailUtente()).equalTo("data", et_data_offerta.getText().toString()).count() == 0) {
+                        if (queryMatchSingolo.equalTo("data", et_data_offerta.getText().toString()).count() != 0) {
+                            final RealmResults<Richiesta> queryRes = queryMatchSingolo.equalTo("data", et_data_offerta.getText().toString()).findAll();
+                            String stringaPosti = et_posti_offerta.getText().toString();
+                            int intPostiOfferta = Integer.parseInt(stringaPosti);
+                            for (int i = 0; i < queryRes.size(); i++) {
+                                if (queryRes.get(i).getNumPosti() <= intPostiOfferta) {
+                                    System.out.println("Stringa del next: " + queryRes.get(i).getLuogoArrivo());
+                                    resMatchSemplice.add(queryRes.get(i));
+                                }
+                            }
+                        }
+                    } else {Toast.makeText(getContext(),"C'è già un'' offerta da te inserita con questi parametri",Toast.LENGTH_LONG).show(); }
+                }else {
+                    //periodica
+                    final RealmQuery<Richiesta_Periodica> queryP = realm.where(Richiesta_Periodica.class).equalTo("luogoPartenza", et_luogo_partenza.getText().toString()).equalTo("luogoArrivo", et_luogo_arrivo.getText().toString());
+                    if (queryP.equalTo("emailUtente", op.getEmailUtente()).count() == 0) {
+                        if (queryP.count() != 0) {
+                            RealmResults<Richiesta_Periodica> queryResultsP = queryP.findAll();
+                            Iterator<Richiesta_Periodica> i = queryResultsP.iterator();
+                            while (i.hasNext()) {
+                            }
+                        }
+                    }
+                }
+                //risultati match
+                if (!resMatchSemplice.isEmpty()) {
+                    Toast.makeText(getContext(), "Match Semplice riuscito ", Toast.LENGTH_LONG).show();
+                } else {
+                    Toast.makeText(getContext(), "Match semplice non riuscito", Toast.LENGTH_LONG).show();
+                }
             }
         });
 

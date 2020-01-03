@@ -2,13 +2,17 @@ package it.poliba.swing;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.service.autofill.FieldClassification;
 import android.text.TextUtils;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import io.realm.Realm;
+import io.realm.RealmQuery;
+import io.realm.RealmResults;
 import io.realm.SyncConfiguration;
 import io.realm.SyncUser;
 
@@ -24,10 +28,18 @@ public class MatchList_Activity extends AppCompatActivity {
         final LinearLayout richieste = findViewById(R.id.l3);
         Boolean bitOff=false;
         Boolean bitRic=true;
+        utente ut1 = new utente();
 
         String syncServerURL = "https://swing-app.de1a.cloud.realm.io/temp9";
         final SyncConfiguration config = new SyncConfiguration.Builder(SyncUser.current(), syncServerURL).build();
         final Realm realm = Realm.getInstance(config);
+
+        //ricezione dati utete loggato
+        Intent getter = getIntent();
+        Bundle b = getter.getExtras();
+        if (b != null) {
+             ut1 = b.getParcelable("object_key");
+        }
 
 
         if(bitRic == true){
@@ -65,9 +77,28 @@ public class MatchList_Activity extends AppCompatActivity {
         }
 
 
+        // RICEZIONE RICHIESTE ATTIVE
+        RealmResults<Richiesta> richiesteSingAttive = getRichiesteSingole(ut1.getEmail(),realm);
+        RealmResults<Richiesta_Periodica> richiestePeriodAttive = getRichiestePeriodiche(ut1.getEmail(),realm);
+
+        // MATCH PER RICHIESTE SINGOLE ATTIVE
 
 
+
+
+        }
+
+
+
+
+    public RealmResults<Richiesta> getRichiesteSingole(String mailUtente, Realm realm){
+        RealmQuery querySing = realm.where(Richiesta.class).equalTo("mailUtente",mailUtente);
+        return querySing.findAll();
     }
 
+    public RealmResults<Richiesta_Periodica> getRichiestePeriodiche (String mailUtente, Realm realm){
+        RealmQuery queryPeriod = realm.where(Richiesta_Periodica.class).equalTo("mailUtente",mailUtente);
+        return queryPeriod.findAll();
 
+    }
 }
