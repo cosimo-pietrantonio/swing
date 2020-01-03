@@ -30,7 +30,7 @@ public class MatchList_Activity extends AppCompatActivity {
         final LinearLayout richiesteTRO = findViewById(R.id.l2);
         Boolean bitOff=false;
         Boolean bitRic=true;
-        Utente ut1 = new Utente();
+        utente ut1 = new utente();
         ArrayList<Offerta> offerteSingoleDelMatch = new ArrayList<>();
 
 

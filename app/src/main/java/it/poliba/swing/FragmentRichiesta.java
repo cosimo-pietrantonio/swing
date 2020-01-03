@@ -81,16 +81,6 @@ public class FragmentRichiesta extends DialogFragment implements DatePickerDialo
 
         final View view = inflater.inflate(R.layout.fragment_richiesta, container, false);
         Button invia = view.findViewById(R.id.InviaR);
-        final NumberPicker np = view.findViewById(R.id.numberPickerGiorni);
-        np.setMinValue(1);
-        np.setMaxValue(7);
-        np.setOnValueChangedListener(new NumberPicker.OnValueChangeListener() {
-            @Override
-            public void onValueChange(NumberPicker picker, int oldVal, int newVal) {
-
-            }
-        });
-
 
         et_LPartenza = view.findViewById(R.id.etLuogoPartenzaF);
         et_LArrivo = view.findViewById(R.id.etLuogoArrivoF);
@@ -112,21 +102,6 @@ public class FragmentRichiesta extends DialogFragment implements DatePickerDialo
         });
 
         et_posti = view.findViewById(R.id.etPostiRichiesta);
-        et_posti.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (controllo_posti == false) {
-                    np.setEnabled(true);
-                    np.setAlpha(1f);
-                    controllo_posti = true;
-
-                } else {
-                    np.setEnabled(false);
-                    np.setAlpha(0f);
-                    controllo_posti = false;
-                }
-            }
-        });
 
         abbonamento = view.findViewById(R.id.switch1);
         day = getResources().getStringArray(R.array.numbers);
@@ -276,6 +251,8 @@ public class FragmentRichiesta extends DialogFragment implements DatePickerDialo
 
                     if (queryMatchSingolo.equalTo("emailUtente", r.getMailUtente())
                             .equalTo("data", et_data.getText().toString()).count() == 0) {
+                    //MATCH PER RICH SINGOLE
+
 
                     if (queryMatchSingolo.equalTo("data", et_data.getText().toString()).count() != 0) {
 
