@@ -51,7 +51,7 @@ public class FragmentRichiesta extends DialogFragment implements DatePickerDialo
     final ArrayList<Offerta> resMatchSemplice = new ArrayList<>();
     RealmList<String> giorniSel = new RealmList<>();
     final Richiesta r = new Richiesta();
-    Richiesta_Periodica rp= new Richiesta_Periodica();
+    final Richiesta_Periodica rp= new Richiesta_Periodica();
 
 
 
@@ -73,15 +73,10 @@ public class FragmentRichiesta extends DialogFragment implements DatePickerDialo
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
 
-        String syncServerURL = "https://swing-app.de1a.cloud.realm.io/temp9";
+        String syncServerURL = "https://swing-app.de1a.cloud.realm.io/temp12";
         final SyncConfiguration config = new SyncConfiguration.Builder(SyncUser.current(), syncServerURL).build();
         final Realm realm = Realm.getInstance(config);
 
-
-        /*
-        //ricevo stringa mail
-        Bundle b= getArguments();
-        final String mailUtente = b.getString("object_key"); */
 
 
         final View view = inflater.inflate(R.layout.fragment_richiesta, container, false);
@@ -233,7 +228,7 @@ public class FragmentRichiesta extends DialogFragment implements DatePickerDialo
                     r.setLuogoArrivo(et_LArrivo.getText().toString());
                     r.setNumPosti(intero);
                     r.setOra(et_ora.getText().toString());
-                    r.setMailUtente(((Home_activity) getActivity()).utente.getEmail());
+                    r.setMailUtente(((Home_Activity) getActivity()).utente.getEmail());
 
 
                     realm.executeTransaction(new Realm.Transaction() {
@@ -244,7 +239,7 @@ public class FragmentRichiesta extends DialogFragment implements DatePickerDialo
                         }
                     });
                     //controllo se la transazione è andata a buon fine
-                    if (realm.where(Richiesta.class).equalTo("CodRichiesta", (int) numerocodrich).count() != 0) {
+                    if (realm.where(Richiesta.class).equalTo("codRichiesta", (int) numerocodrich).count() != 0) {
                         Toast.makeText(getContext(), "Richiesta correttamente pubblicata", Toast.LENGTH_LONG).show();
                     } else {
                         Toast.makeText(getContext(), "La richiesta non è andata a buon fine ", Toast.LENGTH_LONG).show();
@@ -256,7 +251,7 @@ public class FragmentRichiesta extends DialogFragment implements DatePickerDialo
                     rp.setLuogoArrivo(et_LArrivo.getText().toString());
                     rp.setNumPosti(intero);
                     rp.setGiorni(giorniSel);
-                    rp.setMailUtente(((Home_activity) getActivity()).utente.getEmail());
+                    rp.setMailUtente(((Home_Activity) getActivity()).utente.getEmail());
                     realm.executeTransaction(new Realm.Transaction() {
                         @Override
                         public void execute(Realm realm) {
@@ -270,16 +265,21 @@ public class FragmentRichiesta extends DialogFragment implements DatePickerDialo
                 // settore del matching
                 if (UserItem.isEmpty()) {
 
-                    final RealmQuery<Offerta> queryMatchSingolo = realm.where(Offerta.class).equalTo("luogoPartenza", et_LPartenza.getText().toString())
+                    //MATCH PER RICHIESTE SINGOLE
+
+                    final RealmQuery<Offerta> queryMatchSingolo = realm.where(Offerta.class)
+                            .equalTo("luogoPartenza", et_LPartenza.getText().toString())
                             .equalTo("luogoArrivo", et_LArrivo.getText().toString());
-                    //MATCH PER RICH SINGOLE
+
+
                     //Controllo se c'è già un' offerta pubblicata dall'Utente richiedente con gli stessi parametri della richiesta
-                    if (queryMatchSingolo.equalTo("emailUtente", r.getMailUtente()).equalTo("data", et_data.getText().toString()).count() == 0) {
+
+                    if (queryMatchSingolo.equalTo("emailUtente", r.getMailUtente())
+                            .equalTo("data", et_data.getText().toString()).count() == 0) {
 
                     if (queryMatchSingolo.equalTo("data", et_data.getText().toString()).count() != 0) {
 
                         final RealmResults<Offerta> queryRes = queryMatchSingolo.equalTo("data", et_data.getText().toString()).findAll();
-                        /*final Iterator<Offerta> resIter = queryRes.iterator(); */
 
                         String stringaPosti = et_posti.getText().toString();
                         int intPostiRichiesta = Integer.parseInt(stringaPosti);
@@ -294,6 +294,14 @@ public class FragmentRichiesta extends DialogFragment implements DatePickerDialo
                                 "con gli stessi parametri richiesti in questa data !! "
                                 , Toast.LENGTH_LONG).show();   }
                 } else {
+
+
+
+
+
+
+
+
                     //MATCH PER OFF-RICH PERIODICHE
                     final RealmQuery<Offerta_Periodica> queryP = realm.where(Offerta_Periodica.class)
                             .equalTo("luogoPartenza", et_LPartenza.getText().toString())

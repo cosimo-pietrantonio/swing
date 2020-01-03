@@ -10,27 +10,26 @@ import io.realm.annotations.Required;
 
 public class Richiesta_Periodica extends RealmObject {
     @PrimaryKey
-    private int CodRichiesta;
-
+    private int codRichiesta;
     //@Required
     private String mailUtente;
 
     private int numPosti;
     @Required
-    private String LuogoPartenza;
+    private String luogoPartenza;
     @Required
-    private String LuogoArrivo;
+    private String luogoArrivo;
     @Required
     private String dataPartenza;
     @Required
     RealmList<String> giorni = new RealmList<>();
 
     public Richiesta_Periodica(int codRichiesta, String mailUtente, int numPosti, String luogoPartenza, String luogoArrivo, String dataPartenza, RealmList<String> giorni) {
-        CodRichiesta = codRichiesta;
+        this.codRichiesta = codRichiesta;
         this.mailUtente = mailUtente;
         this.numPosti = numPosti;
-        LuogoPartenza = luogoPartenza;
-        LuogoArrivo = luogoArrivo;
+        this.luogoPartenza = luogoPartenza;
+        this.luogoArrivo = luogoArrivo;
         this.dataPartenza = dataPartenza;
         this.giorni = giorni;
     }
@@ -48,11 +47,11 @@ public class Richiesta_Periodica extends RealmObject {
 
 
     public int getCodRichiesta() {
-        return CodRichiesta;
+        return codRichiesta;
     }
 
     public void setCodRichiesta(int codRichiesta) {
-        CodRichiesta = codRichiesta;
+        codRichiesta = codRichiesta;
     }
 
     public String getMailUtente() {
@@ -72,19 +71,19 @@ public class Richiesta_Periodica extends RealmObject {
     }
 
     public String getLuogoPartenza() {
-        return LuogoPartenza;
+        return luogoPartenza;
     }
 
     public void setLuogoPartenza(String luogoPartenza) {
-        LuogoPartenza = luogoPartenza;
+        luogoPartenza = luogoPartenza;
     }
 
     public String getLuogoArrivo() {
-        return LuogoArrivo;
+        return luogoArrivo;
     }
 
     public void setLuogoArrivo(String luogoArrivo) {
-        LuogoArrivo = luogoArrivo;
+        luogoArrivo = luogoArrivo;
     }
 
     public String getDataPartenza() {
