@@ -1,13 +1,16 @@
 package it.poliba.swing;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
+import androidx.annotation.ColorInt;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import androidx.coordinatorlayout.widget.CoordinatorLayout;
 import androidx.fragment.app.Fragment;
 
 import android.view.View;
@@ -22,7 +25,7 @@ import io.realm.SyncConfiguration;
 import io.realm.SyncUser;
 
 
-public class Home_activity extends AppCompatActivity implements View.OnClickListener
+public class Home_activity extends AppCompatActivity
    {
 
     boolean stato=false; //false: menu chiuso, true : menu aperto
@@ -39,6 +42,7 @@ public class Home_activity extends AppCompatActivity implements View.OnClickList
     TextView richiesta;
     FrameLayout layout_offerta;
     FrameLayout layout_richiesta;
+    CoordinatorLayout Home;
     TextView et;
 
     Intent prof = new Intent();
@@ -54,11 +58,6 @@ public class Home_activity extends AppCompatActivity implements View.OnClickList
         final Intent intentProfil = new Intent(this, Profilo_Activity.class);
         final Intent intentNotifich = new Intent(this, MatchList_Activity.class);
 
-
-
-
-        Toolbar toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
 
         String syncServerURL = "https://swing-app.de1a.cloud.realm.io/temp9";
         final SyncConfiguration config = new SyncConfiguration.Builder(SyncUser.current(), syncServerURL).build();
@@ -86,12 +85,16 @@ public class Home_activity extends AppCompatActivity implements View.OnClickList
 
 
 
-        //menu();
+        menu();
 
         offerta = findViewById(R.id.offerta);
         richiesta = findViewById(R.id.ricerca);
         layout_offerta=findViewById(R.id.fragment_offerta);
         layout_richiesta =findViewById(R.id.fragment_ricerca);
+        Home = findViewById(R.id.home_layout);
+        final TextView Alto_destra = findViewById(R.id.textView4);
+        final TextView Alto_sinistra = findViewById(R.id.textView2);
+
         final ViewGroup.LayoutParams params_offerta = layout_offerta.getLayoutParams();
         final ViewGroup.LayoutParams params_ricerca = layout_richiesta.getLayoutParams();
 
@@ -105,7 +108,7 @@ public class Home_activity extends AppCompatActivity implements View.OnClickList
                 richiesta.setAlpha(1f);
                 offerta.setAlpha(0f);
                 params_ricerca.width=300;
-                params_offerta.width=1140;
+                params_offerta.width=1120;
 
                 //invio stringa mail
                 Bundle args = new Bundle();
@@ -114,9 +117,16 @@ public class Home_activity extends AppCompatActivity implements View.OnClickList
 
                 layout_richiesta.setLayoutParams(params_ricerca);
                 layout_offerta.setLayoutParams(params_offerta);
-                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_offerta,fragOfferta).commit();
+                int pink = Color.parseColor("#f3e7e7");
+                int white = Color.parseColor("#FFFFFF");
+                Home.setBackgroundColor(pink);
+                Alto_destra.setBackgroundColor(pink);
+                Alto_sinistra.setBackground(getDrawable(R.drawable.icona_piccola_bianca));
 
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_offerta,fragOfferta).commit();
                 getSupportFragmentManager().beginTransaction().remove(fragRichiesta).commit();
+
+
             }
         });
 
@@ -127,7 +137,7 @@ public class Home_activity extends AppCompatActivity implements View.OnClickList
                 richiesta.setAlpha(0f);
                 offerta.setAlpha(1f);
                 params_offerta.width=300;
-                params_ricerca.width=1140;
+                params_ricerca.width=1125;
 
                 Bundle args = new Bundle();
                 args.putString("object_key",utente.getEmail());
@@ -135,6 +145,11 @@ public class Home_activity extends AppCompatActivity implements View.OnClickList
 
                 layout_richiesta.setLayoutParams(params_ricerca);
                 layout_offerta.setLayoutParams(params_offerta);
+
+                int pink = Color.parseColor("#f3e7e7");
+                int white = Color.parseColor("#FFFFFF");
+                Alto_destra.setBackgroundColor(white);
+                Alto_sinistra.setBackground(getDrawable(R.drawable.icona_piccola_rosa));
 
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_ricerca,fragRichiesta).commit();
                 getSupportFragmentManager().beginTransaction().remove(fragOfferta).commit();
@@ -162,9 +177,31 @@ public class Home_activity extends AppCompatActivity implements View.OnClickList
         profilo = findViewById(R.id.profilo);
         notifiche = findViewById(R.id.notifiche);
 
-        principale.setOnClickListener(this);
-        profilo.setOnClickListener(this);
-        notifiche.setOnClickListener(this);
+        principale.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(stato==false)
+                {
+                    openMenu();
+                }
+                else
+                {
+                    closeMenu();
+                }
+            }
+        });
+        profilo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(prof);
+            }
+        });
+        notifiche.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //startActivity(not);
+            }
+        });
 
         //setAlpha modifica l'opacità dell'oggetto
         profilo.setAlpha(0f);
@@ -185,24 +222,4 @@ public class Home_activity extends AppCompatActivity implements View.OnClickList
         notifiche.animate().translationY(150f).alpha(0f).setInterpolator(interpolator).start();
     }
 
-
-    @Override
-    public void onClick(View v)
-    {
-        switch (v.getId()) {
-            case R.id.principale:
-                if(stato==false)
-                {
-                    openMenu();
-                }
-                else
-                {
-                    closeMenu();
-                }
-            case R.id.profilo:
-                startActivity(prof);
-            case R.id.notifiche:
-                startActivity(not);
-        }
-    }
 }
