@@ -4,6 +4,8 @@ import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
+import android.icu.lang.UScript;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -45,7 +47,7 @@ public class FragmentRichiesta extends DialogFragment implements DatePickerDialo
 
 
 
-    final ArrayList<Offerta> risultatiDelMatch = new ArrayList<>();
+    final ArrayList<Offerta_Periodica> resMatchPeriodico = new ArrayList<>();
     final ArrayList<Offerta> resMatchSemplice = new ArrayList<>();
     RealmList<String> giorniSel = new RealmList<>();
     final Richiesta r = new Richiesta();
@@ -60,6 +62,8 @@ public class FragmentRichiesta extends DialogFragment implements DatePickerDialo
     boolean[] checkedItems;
     ArrayList<Integer> UserItem = new ArrayList<>(); //contiene le posizioni all'interno della dialog degli elementi selezionati
     TextView giorni;
+    int trovati=0;
+
 
 
 
@@ -210,121 +214,137 @@ public class FragmentRichiesta extends DialogFragment implements DatePickerDialo
         });
 
 
-                //inviare dati
-                invia.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-
-                        String numero = et_posti.getText().toString();
-                        int intero = Integer.parseInt(numero);
-                        double numerocodrich = Math.random() * 99999999;
-
-                        if (UserItem.isEmpty()) {
-
-                            Home_Activity activity = new Home_Activity();
-                            String mailUtente = activity.getMail();
-
-                            r.setCodRichiesta((int) numerocodrich);
-                            r.setDataPartenza(et_data.getText().toString());
-                            r.setLuogoPartenza(et_LPartenza.getText().toString());
-                            r.setLuogoArrivo(et_LArrivo.getText().toString());
-                            r.setNumPosti(intero);
-                            r.setOra(et_ora.getText().toString());
-                            r.setMailUtente(mailUtente);
+        //inviare dati
+        invia.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
 
 
-                            realm.executeTransaction(new Realm.Transaction() {
-                                @Override
-                                public void execute(Realm realm) {
+                String numero = et_posti.getText().toString();
+                int intero = Integer.parseInt(numero);
+                double numerocodrich = Math.random() * 99999999;
 
-                                    realm.copyToRealm(r);
-                                }
-                            });
+                if (UserItem.isEmpty()) {
 
 
-                            //controllo se la transazione è andata a buon fine
-                            if (realm.where(Richiesta.class).equalTo("CodRichiesta", (int) numerocodrich).count() != 0) {
-                                Toast.makeText(getContext(), "Richiesta correttamente pubblicata", Toast.LENGTH_LONG).show();
-                            } else {
-                                Toast.makeText(getContext(), "La richiesta non è andata a buon fine ", Toast.LENGTH_LONG).show();
-                            }
-                        } else {
-                            rp.setCodRichiesta((int) numerocodrich);
-                            rp.setDataPartenza(et_data.getText().toString());
-                            rp.setLuogoPartenza(et_LPartenza.getText().toString());
-                            rp.setLuogoArrivo(et_LArrivo.getText().toString());
-                            rp.setNumPosti(intero);
-                            rp.setGiorni(giorniSel);
-                            // rp.setMailUtente(mailUtente);
-                            realm.executeTransaction(new Realm.Transaction() {
-                                @Override
-                                public void execute(Realm realm) {
-                                    realm.copyToRealm(rp);
-                                }
-                            });
+                    r.setCodRichiesta((int) numerocodrich);
+                    r.setDataPartenza(et_data.getText().toString());
+                    r.setLuogoPartenza(et_LPartenza.getText().toString());
+                    r.setLuogoArrivo(et_LArrivo.getText().toString());
+                    r.setNumPosti(intero);
+                    r.setOra(et_ora.getText().toString());
+                    r.setMailUtente(((Home_activity) getActivity()).utente.getEmail());
 
+
+                    realm.executeTransaction(new Realm.Transaction() {
+                        @Override
+                        public void execute(Realm realm) {
+
+                            realm.copyToRealm(r);
                         }
+                    });
+                    //controllo se la transazione è andata a buon fine
+                    if (realm.where(Richiesta.class).equalTo("CodRichiesta", (int) numerocodrich).count() != 0) {
+                        Toast.makeText(getContext(), "Richiesta correttamente pubblicata", Toast.LENGTH_LONG).show();
+                    } else {
+                        Toast.makeText(getContext(), "La richiesta non è andata a buon fine ", Toast.LENGTH_LONG).show();
+                    }
+                } else {
+                    rp.setCodRichiesta((int) numerocodrich);
+                    rp.setDataPartenza(et_data.getText().toString());
+                    rp.setLuogoPartenza(et_LPartenza.getText().toString());
+                    rp.setLuogoArrivo(et_LArrivo.getText().toString());
+                    rp.setNumPosti(intero);
+                    rp.setGiorni(giorniSel);
+                    rp.setMailUtente(((Home_activity) getActivity()).utente.getEmail());
+                    realm.executeTransaction(new Realm.Transaction() {
+                        @Override
+                        public void execute(Realm realm) {
+                            realm.copyToRealm(rp);
+                        }
+                    });
+
+                }
 
 
-                        // settore del matching
-                        if (UserItem.isEmpty()) {
+                // settore del matching
+                if (UserItem.isEmpty()) {
 
-                            final RealmQuery<Offerta> queryMatchSingolo = realm.where(Offerta.class).equalTo("luogoPartenza", et_LPartenza.getText().toString())
-                                    .equalTo("luogoArrivo", et_LArrivo.getText().toString());
-                            //MATCH PER OFF-RICH SINGOLE
-                            //Controllo se c'è già un' offerta pubblicata dall'utente richiedente con gli stessi parametri della richiesta
-                            //if (queryMatchSingolo.equalTo("emailUtente", r.getMailUtente()).equalTo("data", et_data.getText().toString()).count() == 0) {
+                    final RealmQuery<Offerta> queryMatchSingolo = realm.where(Offerta.class).equalTo("luogoPartenza", et_LPartenza.getText().toString())
+                            .equalTo("luogoArrivo", et_LArrivo.getText().toString());
+                    //MATCH PER OFF-RICH SINGOLE
+                    //Controllo se c'è già un' offerta pubblicata dall'utente richiedente con gli stessi parametri della richiesta
+                    if (queryMatchSingolo.equalTo("emailUtente", r.getMailUtente()).equalTo("data", et_data.getText().toString()).count() == 0) {
 
-                            if (queryMatchSingolo.equalTo("data", et_data.getText().toString()).count() != 0) {
+                    if (queryMatchSingolo.equalTo("data", et_data.getText().toString()).count() != 0) {
 
-                                final RealmResults<Offerta> queryRes = queryMatchSingolo.equalTo("data", et_data.getText().toString()).findAll();
-                                /*final Iterator<Offerta> resIter = queryRes.iterator(); */
+                        final RealmResults<Offerta> queryRes = queryMatchSingolo.equalTo("data", et_data.getText().toString()).findAll();
+                        /*final Iterator<Offerta> resIter = queryRes.iterator(); */
 
-                                String stringaPosti = et_posti.getText().toString();
-                                int intPostiRichiesta = Integer.parseInt(stringaPosti);
+                        String stringaPosti = et_posti.getText().toString();
+                        int intPostiRichiesta = Integer.parseInt(stringaPosti);
 
-                                for (int i = 0; i < queryRes.size(); i++) {
-                                    if (queryRes.get(i).getNumPostiDisponibili() >= intPostiRichiesta) {
-                                        System.out.println("Stringa del next: " + queryRes.get(i).getLuogoArrivo());
-                                        resMatchSemplice.add(queryRes.get(i));
-                                    }
-                                }
+                        for (int i = 0; i < queryRes.size(); i++) {
+                            if (queryRes.get(i).getNumPostiDisponibili() >= intPostiRichiesta) {
+                                resMatchSemplice.add(queryRes.get(i));
                             }
-                    /*} else {
+                        }
+                    } }else {
                         Toast.makeText(getContext(), "C'è un offerta da te formulata " +
                                 "con gli stessi parametri richiesti in questa data !! "
-                                , Toast.LENGTH_LONG).show();   } */
-                        } else {
-                            //MATCH PER OFF-RICH PERIODICHE
-                            final RealmQuery<Offerta_Periodica> queryP = realm.where(Offerta_Periodica.class)
-                                    .equalTo("luogoPartenza", et_LPartenza.getText().toString())
-                                    .equalTo("luogoArrivo", et_LArrivo.getText().toString());
+                                , Toast.LENGTH_LONG).show();   }
+                } else {
+                    //MATCH PER OFF-RICH PERIODICHE
+                    final RealmQuery<Offerta_Periodica> queryP = realm.where(Offerta_Periodica.class)
+                            .equalTo("luogoPartenza", et_LPartenza.getText().toString())
+                            .equalTo("luogoArrivo", et_LArrivo.getText().toString());
 
-                            if (queryP.equalTo("emailUtente", rp.getMailUtente()).count() == 0) {
-                                if (queryP.count() != 0) {
-                                    RealmResults<Offerta_Periodica> queryResultsP = queryP.findAll();
-                                    Iterator<Offerta_Periodica> i = queryResultsP.iterator();
-                                    while (i.hasNext()) {
-                                        Iterator<String> itGiorni = i.next().getGiorni().iterator();
-                                        // while (itGiorni.hasNext()) {
+                    System.err.println("LISTA GIORNI SELEZIONATI");
+                    for (int count=0;count<giorniSel.size(); count++){
+                        System.out.println(giorniSel.get(count)); }
 
 
-                                    }
+                    if (queryP.equalTo("emailUtente", rp.getMailUtente()).count() == 0) {
+                    if (queryP.count() != 0) {
+
+                        RealmResults<Offerta_Periodica> queryResultsP = queryP.findAll();
+
+                        for (int i = 0; i < queryResultsP.size(); i++) {
+                            trovati = 0;
+
+                            System.err.println("LISTA GIORNI DELL'' OFFERTA "+i);
+                            for (int count1=0; count1<queryResultsP.get(i).getGiorni().size(); count1++){
+                               System.out.println(queryResultsP.get(i).getGiorni().get(count1));
+                            }
+
+                            for (int k = 0; k < queryResultsP.get(i).getGiorni().size(); k++) {
+                                if (trovati == giorniSel.size()) {
+                                    resMatchPeriodico.add(queryResultsP.get(i));
+                                    break;
                                 }
 
+                                for (int j = 0; j < giorniSel.size(); j++) {
+                                    if (giorniSel.get(j) == queryResultsP.get(i).getGiorni().get(k))
+                                        trovati++;
+
+
+                                }
                             }
                         }
+                    }
+                }
+                }
 
 // Discuto i risultati del match :
-                        if (!resMatchSemplice.isEmpty()) {
-                            Toast.makeText(getContext(), "Match Semplice riuscito ", Toast.LENGTH_LONG).show();
-                        } else {
-                            Toast.makeText(getContext(), "Match semplice non riuscito", Toast.LENGTH_LONG).show();
-                        }
-                    }
+                if (!resMatchPeriodico.isEmpty()) {
+                    Toast.makeText(getContext(), "Match periodico riuscito", Toast.LENGTH_LONG).show();
+                } else if (!resMatchSemplice.isEmpty()) {
+                    Toast.makeText(getContext(), "Match Semplice riuscito ", Toast.LENGTH_LONG).show();
+                }
+            }
 
 
-                });
+        });
 
 
         return view;

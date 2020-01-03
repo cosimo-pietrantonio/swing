@@ -29,12 +29,13 @@ import java.util.Iterator;
 
 import io.realm.Realm;
 import io.realm.RealmList;
-import io.realm.SyncConfiguration;
-import io.realm.SyncUser;
 import io.realm.RealmQuery;
 import io.realm.RealmResults;
+import io.realm.SyncConfiguration;
+import io.realm.SyncUser;
 
-public class FragmentOfferta extends DialogFragment implements DatePickerDialog.OnDateSetListener,TimePickerDialog.OnTimeSetListener {
+public class FragmentOfferta extends DialogFragment implements DatePickerDialog.OnDateSetListener,TimePickerDialog.OnTimeSetListener
+{
     EditText et_luogo_partenza;
     EditText et_luogo_arrivo;
     EditText et_data_offerta;
@@ -53,12 +54,13 @@ public class FragmentOfferta extends DialogFragment implements DatePickerDialog.
     final Offerta o = new Offerta();
     final Offerta_Periodica op = new Offerta_Periodica();
     RealmList<String> giorniSel = new RealmList<>();
-    final ArrayList<Richiesta> resMatchSemplice = new ArrayList<>();
+    ArrayList<Richiesta> resMatchSemplice = new ArrayList<>();
 
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+
 
 
         //configurazione  DB
@@ -77,8 +79,8 @@ public class FragmentOfferta extends DialogFragment implements DatePickerDialog.
         np.setMaxValue(7);
         np.setOnValueChangedListener(onValueChangeListener);
 
-        et_luogo_arrivo = view.findViewById(R.id.etLuogoArrivoF);
-        et_luogo_partenza = view.findViewById(R.id.etLuogoPartenzaF);
+        et_luogo_arrivo= view.findViewById(R.id.etLuogoArrivoF);
+        et_luogo_partenza= view.findViewById(R.id.etLuogoPartenzaF);
 
         et_data_offerta = view.findViewById(R.id.etDataOfferta);
         et_data_offerta.setOnClickListener(new View.OnClickListener() {
@@ -211,6 +213,8 @@ public class FragmentOfferta extends DialogFragment implements DatePickerDialog.
                     final int iposti = Integer.parseInt(posti);
 
 
+
+
                     o.setData(et_data_offerta.getText().toString());
                     o.setCodOfferta(cod);
                     o.setLuogoPartenza(et_luogo_partenza.getText().toString());
@@ -218,7 +222,7 @@ public class FragmentOfferta extends DialogFragment implements DatePickerDialog.
                     o.setPrezzo(dprezzo);
                     o.setOra(et_ora_offerta.getText().toString());
                     o.setNumPostiDisponibili(iposti);
-                    // o.setEmailUtente(mailUtente);
+                    o.setEmailUtente(((Home_activity) getActivity()).utente.getEmail());
 
 
                     realm.executeTransaction(new Realm.Transaction() {
@@ -234,6 +238,8 @@ public class FragmentOfferta extends DialogFragment implements DatePickerDialog.
                     op.setLuogoPartenza(et_luogo_partenza.getText().toString());
                     op.setLuogoArrivo(et_luogo_arrivo.getText().toString());
                     op.setGiorni(giorniSel);
+                    op.setEmailUtente(((Home_activity) getActivity()).utente.getEmail());
+
                     realm.executeTransaction(new Realm.Transaction() {
                         @Override
                         public void execute(Realm realm) {
@@ -242,41 +248,42 @@ public class FragmentOfferta extends DialogFragment implements DatePickerDialog.
                     });
 
                 }
-                // controllo se la transazione è andata a buon fine
+                    // verifico caricam offerta
 
-                if (realm.where(Offerta.class).count() != 0) {
+                if (realm.where(Offerta.class).count()!= 0) {
                     Toast.makeText(getContext(), "Ci sono offerte sul DB", Toast.LENGTH_LONG).show();
                 } else {
                     Toast.makeText(getContext(), "non ci sono offerte sul DB ", Toast.LENGTH_LONG).show();
                 }
 
 
-                // codice matching
-                if (UserItem.isEmpty()) {
+                //MATCH
 
+                //singola
+
+                if (UserItem.isEmpty()) {
                     final RealmQuery<Richiesta> queryMatchSingolo = realm.where(Richiesta.class).equalTo("luogoPartenza", et_luogo_partenza.getText().toString()).equalTo("luogoArrivo", et_luogo_arrivo.getText().toString());
-                    //singola
-                    if (queryMatchSingolo.equalTo("data", et_data_offerta.getText().toString()).count() != 0) {
-                        final RealmResults<Richiesta> queryRes = queryMatchSingolo.equalTo("data", et_data_offerta.getText().toString()).findAll();
-                        String stringaPosti = et_posti_offerta.getText().toString();
-                        int intPostiOfferta = Integer.parseInt(stringaPosti);
-                        for (int i = 0; i < queryRes.size(); i++) {
-                            if (queryRes.get(i).getNumPosti() <= intPostiOfferta) {
-                                System.out.println("Stringa del next: " + queryRes.get(i).getLuogoArrivo());
-                                resMatchSemplice.add(queryRes.get(i));
+                    if (queryMatchSingolo.equalTo("emailUtente", o.getEmailUtente()).equalTo("data", et_data_offerta.getText().toString()).count() == 0) {
+                        if (queryMatchSingolo.equalTo("data", et_data_offerta.getText().toString()).count() != 0) {
+                            final RealmResults<Richiesta> queryRes = queryMatchSingolo.equalTo("data", et_data_offerta.getText().toString()).findAll();
+                            String stringaPosti = et_posti_offerta.getText().toString();
+                            int intPostiOfferta = Integer.parseInt(stringaPosti);
+                            for (int i = 0; i < queryRes.size(); i++) {
+                                if (queryRes.get(i).getNumPosti() <= intPostiOfferta) {
+                                    System.out.println("Stringa del next: " + queryRes.get(i).getLuogoArrivo());
+                                    resMatchSemplice.add(queryRes.get(i));
+                                }
                             }
                         }
-                    }
-                } else {
+                    } else {Toast.makeText(getContext(),"C'è già un'' offerta da te inserita con questi parametri",Toast.LENGTH_LONG).show(); }
+                }else {
                     //periodica
                     final RealmQuery<Richiesta_Periodica> queryP = realm.where(Richiesta_Periodica.class).equalTo("luogoPartenza", et_luogo_partenza.getText().toString()).equalTo("luogoArrivo", et_luogo_arrivo.getText().toString());
-
-                    if (queryP.equalTo("emailUtente", op.getMailUtente()).count() == 0) {
+                    if (queryP.equalTo("emailUtente", op.getEmailUtente()).count() == 0) {
                         if (queryP.count() != 0) {
                             RealmResults<Richiesta_Periodica> queryResultsP = queryP.findAll();
                             Iterator<Richiesta_Periodica> i = queryResultsP.iterator();
                             while (i.hasNext()) {
-                                Iterator<String> itGiorni = i.next().getGiorni().iterator();
                             }
                         }
                     }
@@ -289,56 +296,60 @@ public class FragmentOfferta extends DialogFragment implements DatePickerDialog.
                 }
             }
         });
+
         return view;
     }
 
 
 
-            final int StartYear = 2019;
-            final int StartMonth = 12;
-            final int StartDay = 31;
 
-            private void showDatePickerDialog ()
-            {
-                DatePickerDialog dpd = new DatePickerDialog(
-                        getContext(),
-                        this,
-                        StartYear,
-                        StartMonth,
-                        StartDay);
-                dpd.show();
-            }
 
-            public void onDateSet (DatePicker view,int year, int month, int dayOfMonth)
-            {
-                month = month + 1;
-                String date = "" + dayOfMonth + "/" + month;
-                et_data_offerta.setText(date);
-            }
+    final int StartYear = 2019;
+    final int StartMonth= 12;
+    final int StartDay= 31;
 
-            NumberPicker.OnValueChangeListener onValueChangeListener = new NumberPicker.OnValueChangeListener() {
-                @Override
-                public void onValueChange(NumberPicker picker, int oldVal, int newVal) {
-                    et_posti_offerta.setText(" " + picker.getValue());
-                }
-            };
-
-            private void showTimePickerDialog ()
-            {
-                TimePickerDialog tpd = new TimePickerDialog(
-                        getContext(),
-                        this,
-                        Calendar.HOUR_OF_DAY,
-                        Calendar.MINUTE,
-                        true);
-
-                tpd.show();
-            }
-
-            public void onTimeSet (TimePicker t,int hour, int minute)
-            {
-                String time = "" + hour + ":" + minute + "";
-                et_ora_offerta.setText(time);
-            }
-
+    private void showDatePickerDialog()
+    {
+        DatePickerDialog dpd = new DatePickerDialog(
+                getContext(),
+                this,
+                StartYear,
+                StartMonth,
+                StartDay);
+        dpd.show();
     }
+
+    public void onDateSet(DatePicker view, int year, int month, int dayOfMonth)
+    {
+        month = month+1;
+        String date =""+dayOfMonth+"/"+month;
+        et_data_offerta.setText(date);
+    }
+
+    NumberPicker.OnValueChangeListener onValueChangeListener = new NumberPicker.OnValueChangeListener() {
+        @Override
+        public void onValueChange(NumberPicker picker, int oldVal, int newVal) {
+            et_posti_offerta.setText(" "+picker.getValue());
+        }
+    };
+
+    private void showTimePickerDialog()
+    {
+        TimePickerDialog tpd = new TimePickerDialog(
+                getContext(),
+                this,
+                Calendar.HOUR_OF_DAY,
+                Calendar.MINUTE,
+                true);
+
+        tpd.show();
+    }
+
+    public void onTimeSet(TimePicker t, int hour, int minute)
+    {
+        String time =""+hour+":"+minute+"";
+        et_ora_offerta.setText(time);
+    }
+
+
+}

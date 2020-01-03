@@ -44,8 +44,6 @@ public class Home_Activity extends AppCompatActivity implements View.OnClickList
     Intent prof = new Intent();
     Intent not = new Intent();
 
-    public String mailUtente;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
