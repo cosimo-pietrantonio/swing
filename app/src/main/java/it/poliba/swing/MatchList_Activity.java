@@ -9,6 +9,9 @@ import android.service.autofill.FieldClassification;
 import android.text.TextUtils;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import java.util.ArrayList;
 
 import io.realm.Realm;
 import io.realm.RealmQuery;
@@ -29,6 +32,10 @@ public class MatchList_Activity extends AppCompatActivity {
         Boolean bitOff=false;
         Boolean bitRic=true;
         utente ut1 = new utente();
+        ArrayList<Offerta> offerteSingoleDelMatch = new ArrayList<>();
+
+
+
 
         String syncServerURL = "https://swing-app.de1a.cloud.realm.io/temp9";
         final SyncConfiguration config = new SyncConfiguration.Builder(SyncUser.current(), syncServerURL).build();
@@ -81,9 +88,37 @@ public class MatchList_Activity extends AppCompatActivity {
         RealmResults<Richiesta> richiesteSingAttive = getRichiesteSingole(ut1.getEmail(),realm);
         RealmResults<Richiesta_Periodica> richiestePeriodAttive = getRichiestePeriodiche(ut1.getEmail(),realm);
 
+        // RICEZIONE OFFERTE ATTIVE
+        RealmResults<Offerta> offerteSingAttive = getOfferteSingole(ut1.getEmail(),realm);
+        RealmResults<Offerta_Periodica> offertePeriodAttive = getOffertePeriodiche(ut1.getEmail(),realm);
+
         // MATCH PER RICHIESTE SINGOLE ATTIVE
+        for (int i=0; i < richiesteSingAttive.size(); i++){
+            Richiesta r = richiesteSingAttive.get(i);
+            final RealmQuery<Offerta> queryMatchSingolo = realm.where(Offerta.class)
+                    .equalTo("luogoPartenza", r.getLuogoPartenza())
+                    .equalTo("luogoArrivo", r.getLuogoArrivo());
+                if (queryMatchSingolo.equalTo("data", r.getDataPartenza()).count() != 0) {
+
+                    final RealmResults<Offerta> queryRes = queryMatchSingolo.equalTo("data", r.getDataPartenza()).findAll();
+                    int intPostiRichiesta = r.getNumPosti();
+                    for (int j = 0; j < queryRes.size(); j++) {
+                        if (queryRes.get(j).getNumPostiDisponibili() >= intPostiRichiesta) {
+                            offerteSingoleDelMatch.add(queryRes.get(j));
+                        }
+                    }
+                }
+        }
+
+        //  MATCH PER RICHIESTE PERIODICHE ATTIVE
+
+        for(int k=0; k < richiestePeriodAttive.size(); k++){
+            Richiesta_Periodica rp = richiestePeriodAttive.get(k);
 
 
+
+
+        }
 
 
         }
@@ -100,5 +135,15 @@ public class MatchList_Activity extends AppCompatActivity {
         RealmQuery queryPeriod = realm.where(Richiesta_Periodica.class).equalTo("mailUtente",mailUtente);
         return queryPeriod.findAll();
 
+    }
+
+    public RealmResults<Offerta> getOfferteSingole(String mailUtente, Realm realm){
+        RealmQuery querySing =realm.where(Offerta.class).equalTo("mailUtente",mailUtente);
+        return querySing.findAll();
+    }
+
+    public RealmResults<Offerta_Periodica> getOffertePeriodiche(String mailUtente, Realm realm){
+        RealmQuery queryPeriod = realm.where(Offerta_Periodica.class).equalTo("mailUtente",mailUtente);
+        return queryPeriod.findAll();
     }
 }
