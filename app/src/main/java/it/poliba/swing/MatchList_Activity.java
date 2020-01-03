@@ -2,7 +2,6 @@ package it.poliba.swing;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -31,13 +30,13 @@ public class MatchList_Activity extends AppCompatActivity {
         final LinearLayout richiesteTRO = findViewById(R.id.l2);
         Boolean bitOff=false;
         Boolean bitRic=true;
-        utente ut1 = new utente();
+        Utente ut1 = new Utente();
         ArrayList<Offerta> offerteSingoleDelMatch = new ArrayList<>();
 
 
 
 
-        String syncServerURL = "https://swing-app.de1a.cloud.realm.io/temp10";
+        String syncServerURL = "https://swing-app.de1a.cloud.realm.io/temp9";
         final SyncConfiguration config = new SyncConfiguration.Builder(SyncUser.current(), syncServerURL).build();
         final Realm realm = Realm.getInstance(config);
 
@@ -187,13 +186,10 @@ public class MatchList_Activity extends AppCompatActivity {
         for(int k=0; k < richiestePeriodAttive.size(); k++){
             Richiesta_Periodica rp = richiestePeriodAttive.get(k);
 
-
-
-
         }
 
 
-        }
+    }
 
 
 
@@ -210,12 +206,12 @@ public class MatchList_Activity extends AppCompatActivity {
     }
 
     public RealmResults<Offerta> getOfferteSingole(String mailUtente, Realm realm){
-        RealmQuery querySing =realm.where(Offerta.class).equalTo("mailUtente",mailUtente);
+        RealmQuery querySing =realm.where(Offerta.class).equalTo("emailUtente",mailUtente);
         return querySing.findAll();
     }
 
     public RealmResults<Offerta_Periodica> getOffertePeriodiche(String mailUtente, Realm realm){
-        RealmQuery queryPeriod = realm.where(Offerta_Periodica.class).equalTo("mailUtente",mailUtente);
+        RealmQuery queryPeriod = realm.where(Offerta_Periodica.class).equalTo("emailUtente",mailUtente);
         return queryPeriod.findAll();
     }
 }

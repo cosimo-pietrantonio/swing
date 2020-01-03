@@ -73,7 +73,7 @@ public class FragmentRichiesta extends DialogFragment implements DatePickerDialo
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
 
-        String syncServerURL = "https://swing-app.de1a.cloud.realm.io/temp10";
+        String syncServerURL = "https://swing-app.de1a.cloud.realm.io/temp9";
         final SyncConfiguration config = new SyncConfiguration.Builder(SyncUser.current(), syncServerURL).build();
         final Realm realm = Realm.getInstance(config);
 
@@ -273,7 +273,7 @@ public class FragmentRichiesta extends DialogFragment implements DatePickerDialo
                     final RealmQuery<Offerta> queryMatchSingolo = realm.where(Offerta.class).equalTo("luogoPartenza", et_LPartenza.getText().toString())
                             .equalTo("luogoArrivo", et_LArrivo.getText().toString());
                     //MATCH PER RICH SINGOLE
-                    //Controllo se c'è già un' offerta pubblicata dall'utente richiedente con gli stessi parametri della richiesta
+                    //Controllo se c'è già un' offerta pubblicata dall'Utente richiedente con gli stessi parametri della richiesta
                     if (queryMatchSingolo.equalTo("emailUtente", r.getMailUtente()).equalTo("data", et_data.getText().toString()).count() == 0) {
 
                     if (queryMatchSingolo.equalTo("data", et_data.getText().toString()).count() != 0) {

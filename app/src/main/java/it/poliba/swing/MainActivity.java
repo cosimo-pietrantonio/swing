@@ -27,12 +27,12 @@ public class MainActivity extends AppCompatActivity {
         Realm.init(getApplicationContext());
 
         SyncCredentials credentials = SyncCredentials.usernamePassword("NiCoFrAl", "password", false);
-        //Credentials contiene le credenziali dell'unico utente che puo accedere al Realm Object Server per modificarlo(quindi effettuare operazioni di lettura e scrittura)
+        //Credentials contiene le credenziali dell'unico Utente che puo accedere al Realm Object Server per modificarlo(quindi effettuare operazioni di lettura e scrittura)
         SyncUser.logInAsync(credentials, AUTH_URL, new SyncUser.Callback<SyncUser>() {
             @Override
             public void onSuccess(SyncUser syncUser) {
 
-                String syncServerURL = "https://swing-app.de1a.cloud.realm.io/temp10";
+                String syncServerURL = "https://swing-app.de1a.cloud.realm.io/temp9";
                 final SyncConfiguration config = new SyncConfiguration.Builder(SyncUser.current(), syncServerURL).build();
                 Realm realm = Realm.getInstance(config);
 

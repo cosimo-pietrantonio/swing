@@ -33,7 +33,7 @@ public class ModficaProfilo_Activity extends AppCompatActivity implements DatePi
         final int StartMonth= 12;
         final int StartDay= 31;
         Button salva = findViewById(R.id.salva);
-        utente u = new utente();
+        Utente u = new Utente();
 
 
         //data picker dialog
@@ -68,7 +68,7 @@ public class ModficaProfilo_Activity extends AppCompatActivity implements DatePi
         });
 
         // cofigurazione del DB nell'activity
-        String syncServerURL = "https://swing-app.de1a.cloud.realm.io/temp10";
+        String syncServerURL = "https://swing-app.de1a.cloud.realm.io/temp9";
         final SyncConfiguration config = new SyncConfiguration.Builder(SyncUser.current(), syncServerURL).build();
         final Realm realm = Realm.getInstance(config);
 
@@ -85,8 +85,8 @@ public class ModficaProfilo_Activity extends AppCompatActivity implements DatePi
         data.setHint(u.getDataNascita());
         password.setHint(u.getPassword());
 
-        final utente finalU = new utente();
-        final utente finaluu = new utente();
+        final Utente finalU = new Utente();
+        final Utente finaluu = new Utente();
         finaluu.setPassword(u.getPassword());
         salva.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -130,7 +130,7 @@ public class ModficaProfilo_Activity extends AppCompatActivity implements DatePi
                 realm.executeTransaction(new Realm.Transaction() {
                     @Override
                     public void execute(Realm realm) {
-                        RealmResults <utente> utenti = realm.where(utente.class).equalTo("email",email).findAll();
+                        RealmResults <Utente> utenti = realm.where(Utente.class).equalTo("email",email).findAll();
                         utenti.setValue("nome",Nome );
                         utenti.setValue("cognome", Cognome);
                         utenti.setValue("password", Password);
