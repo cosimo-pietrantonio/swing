@@ -61,15 +61,15 @@ public class Register_Activity extends AppCompatActivity implements DatePickerDi
                         || etEmail.getText().toString().equals("") || etPassword.getText().toString().equals("")) {
                     Toast.makeText(getApplicationContext(), "tutti i campi devono essere compilati", Toast.LENGTH_LONG).show();
                 } else{
-                    utente a = new utente();
+                    Utente a = new Utente();
 
 
                     //una volta loggati possiamo creare la configurazione che mette in contatto il server con i devices:
-                    String syncServerURL = "https://swing-app.de1a.cloud.realm.io/temp10";
+                    String syncServerURL = "https://swing-app.de1a.cloud.realm.io/temp9";
                     final SyncConfiguration config = new SyncConfiguration.Builder(SyncUser.current(), syncServerURL).build();
                     Realm realm = Realm.getInstance(config);
 
-                    final utente uno = new utente();
+                    final Utente uno = new Utente();
 
                     uno.setCognome(etCognome.getText().toString());
                     uno.setNome(etNome.getText().toString());
@@ -77,7 +77,7 @@ public class Register_Activity extends AppCompatActivity implements DatePickerDi
                     uno.setPassword(etPassword.getText().toString());
                     uno.setDataNascita(etData.getText().toString());
 
-                    if (realm.where(utente.class).equalTo("email", etEmail.getText().toString()).count() != 0) {
+                    if (realm.where(Utente.class).equalTo("email", etEmail.getText().toString()).count() != 0) {
                         Toast.makeText(getApplicationContext(), "Email già in uso", Toast.LENGTH_LONG).show();
                     } else {
                         realm.executeTransaction(new Realm.Transaction() {
