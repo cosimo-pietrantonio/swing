@@ -24,7 +24,7 @@ public class Offerta extends RealmObject {
     @Required
     private String ora;
     //@Required
-    private String emailUtente;
+    private String mailUtente;
 
     private double prezzo;
 
@@ -85,11 +85,11 @@ public class Offerta extends RealmObject {
 
 
     public String getEmailUtente() {
-        return emailUtente;
+        return mailUtente;
     }
 
     public void setEmailUtente(String emailUtente) {
-        this.emailUtente = emailUtente;
+        this.mailUtente = emailUtente;
     }
 
     public double getPrezzo() {

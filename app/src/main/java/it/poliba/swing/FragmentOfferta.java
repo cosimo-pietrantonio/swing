@@ -64,7 +64,7 @@ public class FragmentOfferta extends DialogFragment implements DatePickerDialog.
 
 
         //configurazione  DB
-        String syncServerURL = "https://swing-app.de1a.cloud.realm.io/temp9";
+        String syncServerURL = "https://swing-app.de1a.cloud.realm.io/temp10";
         final SyncConfiguration config = new SyncConfiguration.Builder(SyncUser.current(), syncServerURL).build();
         final Realm realm = Realm.getInstance(config);
 

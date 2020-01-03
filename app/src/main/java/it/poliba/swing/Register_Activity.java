@@ -65,7 +65,7 @@ public class Register_Activity extends AppCompatActivity implements DatePickerDi
 
 
                     //una volta loggati possiamo creare la configurazione che mette in contatto il server con i devices:
-                    String syncServerURL = "https://swing-app.de1a.cloud.realm.io/temp9";
+                    String syncServerURL = "https://swing-app.de1a.cloud.realm.io/temp10";
                     final SyncConfiguration config = new SyncConfiguration.Builder(SyncUser.current(), syncServerURL).build();
                     Realm realm = Realm.getInstance(config);
 

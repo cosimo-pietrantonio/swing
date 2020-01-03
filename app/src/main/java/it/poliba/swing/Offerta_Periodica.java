@@ -22,7 +22,7 @@ public class Offerta_Periodica extends RealmObject {
     @Required
     RealmList<String> giorni = new RealmList<>();
 
-    private String emailUtente;
+    private String mailUtente;
 
     public Offerta_Periodica(int codOfferta, String luogoPartenza, String luogoArrivo, String dataInizio, RealmList<String> giorni) {
         this.codOfferta = codOfferta;
@@ -76,11 +76,11 @@ public class Offerta_Periodica extends RealmObject {
     }
 
     public String getEmailUtente() {
-        return emailUtente;
+        return mailUtente;
     }
 
     public void setEmailUtente(String emailUtente) {
-        this.emailUtente = emailUtente;
+        this.mailUtente = emailUtente;
     }
 
 }

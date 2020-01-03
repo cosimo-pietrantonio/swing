@@ -199,7 +199,7 @@ public class Home_activity extends AppCompatActivity
         notifiche.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //startActivity(not);
+                startActivity(not);
             }
         });
 
