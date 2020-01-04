@@ -35,8 +35,13 @@ public class ModficaProfilo_Activity extends AppCompatActivity implements DatePi
         Button salva = findViewById(R.id.salva);
         Utente u = new Utente();
 
+        // cofigurazione del DB nell'activity
+        String syncServerURL = "https://swing-app.de1a.cloud.realm.io/temp12";
+        final SyncConfiguration config = new SyncConfiguration.Builder(SyncUser.current(), syncServerURL).build();
+        final Realm realm = Realm.getInstance(config);
 
-        //data picker dialog
+
+        //Parte dedicata al setting del calendario
         final DatePickerDialog datePickerDialog = new DatePickerDialog(this, ModficaProfilo_Activity.this,StartYear,StartMonth,StartDay );
 
         data.setOnClickListener(new View.OnClickListener() {
@@ -60,6 +65,8 @@ public class ModficaProfilo_Activity extends AppCompatActivity implements DatePi
             }
         });
 
+
+        //controllo del tocco sul calmpo mail
         email.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -67,62 +74,53 @@ public class ModficaProfilo_Activity extends AppCompatActivity implements DatePi
             }
         });
 
-        // cofigurazione del DB nell'activity
-        String syncServerURL = "https://swing-app.de1a.cloud.realm.io/temp12";
-        final SyncConfiguration config = new SyncConfiguration.Builder(SyncUser.current(), syncServerURL).build();
-        final Realm realm = Realm.getInstance(config);
 
-        //ricezione dati utete loggato
+        //ricezione dati utete loggato da Profilo
         Intent b = getIntent();
         Bundle b1 = b.getExtras();
         if (b1 != null) {
             u = b1.getParcelable("object_key");
         }
 
+
+        //setting dei campi
         nome.setHint(u.getNome());
         cognome.setHint(u.getCognome());
         email.setText(u.getEmail());
         data.setHint(u.getDataNascita());
         password.setHint(u.getPassword());
 
-        final Utente finalU = new Utente();
-        final Utente finaluu = new Utente();
-        finaluu.setPassword(u.getPassword());
+
+        //salvataggio
         salva.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                finalU.setCognome(cognome.getText().toString());
-                finalU.setNome(nome.getText().toString());
-                finalU.setDataNascita(data.getText().toString());
-                finalU.setEmail(email.getText().toString());
-                finalU.setPassword(password.getText().toString());
-                final String email = finalU.getEmail();
-
+                final String Email = email.getText().toString();
                 //controllo
                 final String Cognome;
                 if(cognome.getText().toString().length()!=0){
-                    Cognome =finalU.getCognome();
+                    Cognome =cognome.getText().toString();
                 }else{
                     Cognome= cognome.getHint().toString();
                 }
 
                 final String Nome;
                 if(nome.getText().toString().length()!=0){
-                    Nome =finalU.getNome();
+                    Nome =nome.getText().toString();
                 }else{
                     Nome= nome.getHint().toString();
                 }
 
                 final String Data;
                 if(data.getText().toString().length()!=0){
-                    Data =finalU.getDataNascita();
+                    Data =data.getText().toString();
                 }else{
                     Data= data.getHint().toString();
                 }
 
                 final String Password;
                 if(password.getText().toString().length()!=0){
-                    Password =finalU.getPassword();
+                    Password =password.getText().toString();
                 }else{
                     Password= password.getHint().toString();
                 }
@@ -130,7 +128,7 @@ public class ModficaProfilo_Activity extends AppCompatActivity implements DatePi
                 realm.executeTransaction(new Realm.Transaction() {
                     @Override
                     public void execute(Realm realm) {
-                        RealmResults <Utente> utenti = realm.where(Utente.class).equalTo("email",email).findAll();
+                        RealmResults <Utente> utenti = realm.where(Utente.class).equalTo("email",Email).findAll();
                         utenti.setValue("nome",Nome );
                         utenti.setValue("cognome", Cognome);
                         utenti.setValue("password", Password);

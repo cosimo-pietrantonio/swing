@@ -238,7 +238,7 @@ public class FragmentOfferta extends DialogFragment implements DatePickerDialog.
                 if (UserItem.isEmpty()) {
                     final RealmQuery<Richiesta> queryMatchSingolo = realm.where(Richiesta.class).equalTo("luogoPartenza", et_luogo_partenza.getText().toString())
                             .equalTo("luogoArrivo", et_luogo_arrivo.getText().toString());
-                    if (queryMatchSingolo.equalTo("emailUtente", o.getEmailUtente())
+                    if (queryMatchSingolo.equalTo("mailUtente", o.getEmailUtente())
                             .equalTo("dataPartenza", et_data_offerta.getText().toString()).count() == 0) {
                         if (queryMatchSingolo.equalTo("dataPartenza", et_data_offerta.getText().toString()).count() != 0) {
                             final RealmResults<Richiesta> queryRes = queryMatchSingolo.equalTo("dataPartenza", et_data_offerta.getText().toString()).findAll();
