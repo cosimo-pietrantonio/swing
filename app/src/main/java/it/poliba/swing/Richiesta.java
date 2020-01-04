@@ -1,7 +1,5 @@
 package it.poliba.swing;
 
-import java.util.Date;
-
 import io.realm.RealmObject;
 import io.realm.annotations.PrimaryKey;
 import io.realm.annotations.Required;
@@ -11,7 +9,7 @@ public class Richiesta extends RealmObject {
     private int codRichiesta;
 
     //@Required
-    private String emailUtente;
+    private String mailUtente;
 
     private int numPosti;
     @Required
@@ -65,11 +63,11 @@ public class Richiesta extends RealmObject {
     }
 
     public String getMailUtente() {
-        return emailUtente;
+        return mailUtente;
     }
 
     public void setMailUtente(String mailUtente) {
-        this.emailUtente = mailUtente;
+        this.mailUtente = mailUtente;
     }
 
     public void setDataPartenza(String dataPartenza) {
