@@ -37,10 +37,7 @@ public class Profilo_Activity extends AppCompatActivity implements io.realm.Real
         TextView n = findViewById(R.id.no);
         TextView d = findViewById(R.id.da);
         TextView pa = findViewById(R.id.pa);
-        final LinearLayout lin= findViewById(R.id.attivi);
-        Button add = findViewById(R.id.add);
         Button modifica = findViewById(R.id.modifica);
-        findViewById(R.id.addd).setSelected(true);
 
 
         //ricezione dati utete loggato
@@ -49,6 +46,15 @@ public class Profilo_Activity extends AppCompatActivity implements io.realm.Real
         if (b1 != null) {
             utente = b1.getParcelable("object_key");
         }
+
+        //aggiorno i dati dell'utente
+        RealmQuery<Utente> query = realm.where(Utente.class);
+        query.equalTo("email", utente.getEmail());
+        final RealmResults<Utente> result = query.findAll();
+        utente.setCognome(result.get(0).getCognome());
+        utente.setNome(result.get(0).getNome());
+        utente.setDataNascita(result.get(0).getDataNascita());
+        utente.setPassword(result.get(0).getPassword());
 
 
         //lettura richieste e offerte ad esso associato
@@ -84,27 +90,7 @@ public class Profilo_Activity extends AppCompatActivity implements io.realm.Real
             }
         });
 
-        add.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                final TextView add = new TextView(Profilo_Activity.this);
-                //get partenza destinazione data
-                add.setText("Bari-noci   ore: 15:00  ciao ciao");
-                add.setPadding(5,5,0,15);
-                add.setTextColor(Color.BLACK);
-                add.setTextSize(25);
-                add.setBackgroundColor(Color.WHITE);
-                add.setFocusable(true);
-                add.setSingleLine(true);
-                add.setEllipsize(TextUtils.TruncateAt.MARQUEE);
-                add.setMarqueeRepeatLimit(100);
-                add.setFocusable(true);
-                add.setFocusableInTouchMode(true);
-                add.setHorizontallyScrolling(true);
-                add.setSelected(true);
-                lin.addView(add);
-            }
-        });
+
 
     }
 }
