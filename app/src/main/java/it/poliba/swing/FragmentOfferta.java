@@ -92,6 +92,7 @@ public class FragmentOfferta extends DialogFragment implements DatePickerDialog.
         });
 
         et_prezzo = view.findViewById(R.id.etPrezzo);
+        et_posti_offerta = view.findViewById(R.id.etPostiOfferta);
 
         abboamento = view.findViewById(R.id.switch1);
         day = getResources().getStringArray(R.array.numbers);
