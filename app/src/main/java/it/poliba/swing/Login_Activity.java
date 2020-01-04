@@ -30,13 +30,13 @@ public class Login_Activity extends AppCompatActivity {
 
 
         // cofigurazione del DB nell'activity
-        String syncServerURL = "https://swing-app.de1a.cloud.realm.io/temp9";
+        String syncServerURL = "https://swing-app.de1a.cloud.realm.io/temp12";
         final SyncConfiguration config = new SyncConfiguration.Builder(SyncUser.current(), syncServerURL).build();
         final Realm realm = Realm.getInstance(config);
 
 
         final Intent a = new Intent(this, Register_Activity.class);
-        final Intent b = new Intent(this, Home_activity.class);
+        final Intent b = new Intent(this, Home_Activity.class);
         final Intent c = new Intent(this, Richiesta.class);//inutile
         final Intent d = new Intent(this, Offerta.class);//inutile
 

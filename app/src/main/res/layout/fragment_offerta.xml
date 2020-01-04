@@ -77,13 +77,6 @@
             android:layout_marginTop="30dp"
             android:layout_marginLeft="230dp"/>
 
-        <NumberPicker
-            android:id="@+id/numberPicker_offerta"
-            android:layout_width="wrap_content"
-            android:layout_height="128dp"
-            android:layout_marginLeft="220dp"
-            android:layout_marginTop="70dp"
-            android:alpha="0" />
         <TextView
             android:id="@+id/giorni_offerta"
             android:layout_width="wrap_content"
@@ -125,6 +118,7 @@
             android:layout_marginLeft="225dp"
             android:textSize="16sp"
             android:textAlignment="center"
+            android:inputType="number"
             />
 
         <Button

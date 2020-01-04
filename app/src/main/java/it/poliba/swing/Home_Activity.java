@@ -23,7 +23,7 @@ import io.realm.SyncConfiguration;
 import io.realm.SyncUser;
 
 
-public class Home_activity extends AppCompatActivity
+public class Home_Activity extends AppCompatActivity
    {
 
     boolean stato=false; //false: menu chiuso, true : menu aperto
@@ -57,7 +57,7 @@ public class Home_activity extends AppCompatActivity
         final Intent intentNotifich = new Intent(this, MatchList_Activity.class);
 
 
-        String syncServerURL = "https://swing-app.de1a.cloud.realm.io/temp9";
+        String syncServerURL = "https://swing-app.de1a.cloud.realm.io/temp12";
         final SyncConfiguration config = new SyncConfiguration.Builder(SyncUser.current(), syncServerURL).build();
         final Realm realm = Realm.getInstance(config);
 
@@ -160,11 +160,6 @@ public class Home_activity extends AppCompatActivity
 
 
     }
-
-//metodo per il passaggio della mail
-    public String getMail(){
-        return utente.getEmail();
-   }
 
 
 

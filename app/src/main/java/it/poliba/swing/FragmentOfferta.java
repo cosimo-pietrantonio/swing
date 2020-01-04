@@ -64,17 +64,13 @@ public class FragmentOfferta extends DialogFragment implements DatePickerDialog.
 
 
         //configurazione  DB
-        String syncServerURL = "https://swing-app.de1a.cloud.realm.io/temp9";
+        String syncServerURL = "https://swing-app.de1a.cloud.realm.io/temp12";
         final SyncConfiguration config = new SyncConfiguration.Builder(SyncUser.current(), syncServerURL).build();
         final Realm realm = Realm.getInstance(config);
 
 
         final View view = inflater.inflate(R.layout.fragment_offerta, container, false);
         Button invia = view.findViewById(R.id.InviaO);
-        final NumberPicker np = view.findViewById(R.id.numberPicker_offerta);
-        np.setMinValue(1);
-        np.setMaxValue(7);
-        np.setOnValueChangedListener(onValueChangeListener);
 
         et_luogo_arrivo= view.findViewById(R.id.etLuogoArrivoF);
         et_luogo_partenza= view.findViewById(R.id.etLuogoPartenzaF);
@@ -92,24 +88,6 @@ public class FragmentOfferta extends DialogFragment implements DatePickerDialog.
             @Override
             public void onClick(View v) {
                 showTimePickerDialog();
-            }
-        });
-
-        et_posti_offerta = view.findViewById(R.id.etPostiOfferta);
-        et_posti_offerta.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                if (controllo_posti == false) {
-                    np.setEnabled(true);
-                    np.setAlpha(1f);
-                    controllo_posti = true;
-
-                } else {
-                    np.setEnabled(false);
-                    np.setAlpha(0f);
-                    controllo_posti = false;
-                }
             }
         });
 
@@ -219,7 +197,7 @@ public class FragmentOfferta extends DialogFragment implements DatePickerDialog.
                     o.setPrezzo(dprezzo);
                     o.setOra(et_ora_offerta.getText().toString());
                     o.setNumPostiDisponibili(iposti);
-                    o.setEmailUtente(((Home_activity) getActivity()).utente.getEmail());
+                    o.setEmailUtente(((Home_Activity) getActivity()).utente.getEmail());
 
 
                     realm.executeTransaction(new Realm.Transaction() {
@@ -235,7 +213,7 @@ public class FragmentOfferta extends DialogFragment implements DatePickerDialog.
                     op.setLuogoPartenza(et_luogo_partenza.getText().toString());
                     op.setLuogoArrivo(et_luogo_arrivo.getText().toString());
                     op.setGiorni(giorniSel);
-                    op.setEmailUtente(((Home_activity) getActivity()).utente.getEmail());
+                    op.setEmailUtente(((Home_Activity) getActivity()).utente.getEmail());
 
                     realm.executeTransaction(new Realm.Transaction() {
                         @Override
@@ -259,15 +237,16 @@ public class FragmentOfferta extends DialogFragment implements DatePickerDialog.
                 //singola
 
                 if (UserItem.isEmpty()) {
-                    final RealmQuery<Richiesta> queryMatchSingolo = realm.where(Richiesta.class).equalTo("luogoPartenza", et_luogo_partenza.getText().toString()).equalTo("luogoArrivo", et_luogo_arrivo.getText().toString());
-                    if (queryMatchSingolo.equalTo("emailUtente", o.getEmailUtente()).equalTo("data", et_data_offerta.getText().toString()).count() == 0) {
-                        if (queryMatchSingolo.equalTo("data", et_data_offerta.getText().toString()).count() != 0) {
-                            final RealmResults<Richiesta> queryRes = queryMatchSingolo.equalTo("data", et_data_offerta.getText().toString()).findAll();
+                    final RealmQuery<Richiesta> queryMatchSingolo = realm.where(Richiesta.class).equalTo("luogoPartenza", et_luogo_partenza.getText().toString())
+                            .equalTo("luogoArrivo", et_luogo_arrivo.getText().toString());
+                    if (queryMatchSingolo.equalTo("emailUtente", o.getEmailUtente())
+                            .equalTo("dataPartenza", et_data_offerta.getText().toString()).count() == 0) {
+                        if (queryMatchSingolo.equalTo("dataPartenza", et_data_offerta.getText().toString()).count() != 0) {
+                            final RealmResults<Richiesta> queryRes = queryMatchSingolo.equalTo("dataPartenza", et_data_offerta.getText().toString()).findAll();
                             String stringaPosti = et_posti_offerta.getText().toString();
                             int intPostiOfferta = Integer.parseInt(stringaPosti);
                             for (int i = 0; i < queryRes.size(); i++) {
                                 if (queryRes.get(i).getNumPosti() <= intPostiOfferta) {
-                                    System.out.println("Stringa del next: " + queryRes.get(i).getLuogoArrivo());
                                     resMatchSemplice.add(queryRes.get(i));
                                 }
                             }
@@ -279,9 +258,8 @@ public class FragmentOfferta extends DialogFragment implements DatePickerDialog.
                     if (queryP.equalTo("emailUtente", op.getEmailUtente()).count() == 0) {
                         if (queryP.count() != 0) {
                             RealmResults<Richiesta_Periodica> queryResultsP = queryP.findAll();
-                            Iterator<Richiesta_Periodica> i = queryResultsP.iterator();
-                            while (i.hasNext()) {
-                            }
+
+
                         }
                     }
                 }

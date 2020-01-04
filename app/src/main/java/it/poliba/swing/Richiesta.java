@@ -8,16 +8,16 @@ import io.realm.annotations.Required;
 
 public class Richiesta extends RealmObject {
     @PrimaryKey
-    private int CodRichiesta;
+    private int codRichiesta;
 
     //@Required
-    private String mailUtente;
+    private String emailUtente;
 
     private int numPosti;
     @Required
-    private String LuogoPartenza;
+    private String luogoPartenza;
     @Required
-    private String LuogoArrivo;
+    private String luogoArrivo;
     @Required
     private String dataPartenza;
     @Required
@@ -29,11 +29,11 @@ public class Richiesta extends RealmObject {
     }
 
     public int getCodRichiesta() {
-        return CodRichiesta;
+        return codRichiesta;
     }
 
     public void setCodRichiesta(int codRichiesta) {
-        CodRichiesta = codRichiesta;
+        this.codRichiesta = codRichiesta;
     }
 
     public int getNumPosti() {
@@ -45,19 +45,19 @@ public class Richiesta extends RealmObject {
     }
 
     public String getLuogoPartenza() {
-        return LuogoPartenza;
+        return luogoPartenza;
     }
 
     public void setLuogoPartenza(String luogoPartenza) {
-        LuogoPartenza = luogoPartenza;
+        this.luogoPartenza = luogoPartenza;
     }
 
     public String getLuogoArrivo() {
-        return LuogoArrivo;
+        return luogoArrivo;
     }
 
     public void setLuogoArrivo(String luogoArrivo) {
-        LuogoArrivo = luogoArrivo;
+        this.luogoArrivo = luogoArrivo;
     }
 
     public String getDataPartenza() {
@@ -65,11 +65,11 @@ public class Richiesta extends RealmObject {
     }
 
     public String getMailUtente() {
-        return mailUtente;
+        return emailUtente;
     }
 
     public void setMailUtente(String mailUtente) {
-        this.mailUtente = mailUtente;
+        this.emailUtente = mailUtente;
     }
 
     public void setDataPartenza(String dataPartenza) {
