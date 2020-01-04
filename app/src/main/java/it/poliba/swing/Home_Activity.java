@@ -32,7 +32,7 @@ public class Home_Activity extends AppCompatActivity
     FloatingActionButton notifiche;
     OvershootInterpolator interpolator = new OvershootInterpolator();
 
-    it.poliba.swing.utente utente = new utente();
+    Utente utente = new Utente();
     Fragment fragRichiesta = new FragmentRichiesta();  //fragment richiesta
     Fragment fragOfferta = new FragmentOfferta();       //fragment offerta
 

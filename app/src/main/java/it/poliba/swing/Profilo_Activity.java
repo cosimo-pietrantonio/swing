@@ -30,8 +30,8 @@ public class Profilo_Activity extends AppCompatActivity implements io.realm.Real
         final Realm realm = Realm.getInstance(config);
 
         final Intent a = new Intent(this, ModficaProfilo_Activity.class);
-        utente utente = new utente();
-        final it.poliba.swing.utente U =new utente();
+        Utente utente = new Utente();
+        final Utente U =new Utente();
         TextView e = findViewById(R.id.em);
         TextView c = findViewById(R.id.co);
         TextView n = findViewById(R.id.no);
@@ -54,8 +54,8 @@ public class Profilo_Activity extends AppCompatActivity implements io.realm.Real
         //lettura richieste e offerte ad esso associato
         RealmQuery<Richiesta> query1 = realm.where(Richiesta.class);
         RealmQuery<Offerta> query2 = realm.where(Offerta.class);
-        //query1.equalTo("email", utente.getEmail());
-        //query2.equalTo("email", utente.getEmail());
+        //query1.equalTo("email", Utente.getEmail());
+        //query2.equalTo("email", Utente.getEmail());
         final RealmResults<Richiesta> result1 = query1.findAll();
         final RealmResults<Offerta> result2 = query2.findAll();
 
