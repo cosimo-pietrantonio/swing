@@ -4,8 +4,6 @@ import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.content.DialogInterface;
-import android.content.Intent;
-import android.icu.lang.UScript;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -26,7 +24,6 @@ import androidx.fragment.app.DialogFragment;
 
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Iterator;
 
 import io.realm.Realm;
 import io.realm.RealmList;
@@ -203,7 +200,7 @@ public class FragmentRichiesta extends DialogFragment implements DatePickerDialo
                     r.setLuogoArrivo(et_LArrivo.getText().toString());
                     r.setNumPosti(intero);
                     r.setOra(et_ora.getText().toString());
-                    r.setMailUtente(((Home_Activity) getActivity()).utente.getEmail());
+                    r.setMailUtente(((Home_activity) getActivity()).utente.getEmail());
 
 
                     realm.executeTransaction(new Realm.Transaction() {
@@ -226,7 +223,7 @@ public class FragmentRichiesta extends DialogFragment implements DatePickerDialo
                     rp.setLuogoArrivo(et_LArrivo.getText().toString());
                     rp.setNumPosti(intero);
                     rp.setGiorni(giorniSel);
-                    rp.setMailUtente(((Home_Activity) getActivity()).utente.getEmail());
+                    rp.setMailUtente(((Home_activity) getActivity()).utente.getEmail());
                     realm.executeTransaction(new Realm.Transaction() {
                         @Override
                         public void execute(Realm realm) {

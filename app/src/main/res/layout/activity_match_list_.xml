@@ -81,26 +81,7 @@
                         android:textSize="25sp"
                         android:textStyle="bold" />
 
-                    <TextView
-                        android:id="@+id/offert"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="5dp"
-                        android:layout_marginTop="5dp"
-                        android:layout_marginBottom="15dp"
-                        android:background="#00FFFFFF"
-                        android:ems="10"
-                        android:fontFamily="@font/roboto_thin"
-                        android:text="Single-line text view that scrolls automatically if the text is too long to fit in the widget"
-                        android:singleLine="true"
-                        android:ellipsize="marquee"
-                        android:marqueeRepeatLimit ="marquee_forever"
-                        android:focusable="true"
-                        android:focusableInTouchMode="true"
-                        android:scrollHorizontally="true"
-                        android:textColor="#000000"
-                        android:textSize="20sp"
-                        android:textStyle="bold" />
+
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
 
@@ -134,26 +115,6 @@
                         android:textSize="25sp"
                         android:textStyle="bold" />
 
-                    <TextView
-                        android:id="@+id/offerta11"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="5dp"
-                        android:layout_marginTop="5dp"
-                        android:layout_marginBottom="15dp"
-                        android:background="#00FFFFFF"
-                        android:ems="10"
-                        android:fontFamily="@font/roboto_thin"
-                        android:text="Single-line text view that scrolls automatically if the text is too long to fit in the widget"
-                        android:singleLine="true"
-                        android:ellipsize="marquee"
-                        android:marqueeRepeatLimit ="marquee_forever"
-                        android:focusable="true"
-                        android:focusableInTouchMode="true"
-                        android:scrollHorizontally="true"
-                        android:textColor="#000000"
-                        android:textSize="20sp"
-                        android:textStyle="bold" />
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
 
@@ -186,26 +147,7 @@
                         android:textSize="25sp"
                         android:textStyle="bold" />
 
-                    <TextView
-                        android:id="@+id/offerta3"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="5dp"
-                        android:layout_marginTop="5dp"
-                        android:layout_marginBottom="15dp"
-                        android:background="#00FFFFFF"
-                        android:ems="10"
-                        android:fontFamily="@font/roboto_thin"
-                        android:text="Single-line text view that scrolls automatically if the text is too long to fit in the widget"
-                        android:singleLine="true"
-                        android:ellipsize="marquee"
-                        android:marqueeRepeatLimit ="marquee_forever"
-                        android:focusable="true"
-                        android:focusableInTouchMode="true"
-                        android:scrollHorizontally="true"
-                        android:textColor="#000000"
-                        android:textSize="20sp"
-                        android:textStyle="bold" />
+
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
 
@@ -239,26 +181,6 @@
                         android:textSize="25sp"
                         android:textStyle="bold" />
 
-                    <TextView
-                        android:id="@+id/offerta"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="5dp"
-                        android:layout_marginTop="5dp"
-                        android:layout_marginBottom="15dp"
-                        android:background="#00FFFFFF"
-                        android:ems="10"
-                        android:fontFamily="@font/roboto_thin"
-                        android:text="Single-line text view that scrolls automatically if the text is too long to fit in the widget"
-                        android:singleLine="true"
-                        android:ellipsize="marquee"
-                        android:marqueeRepeatLimit ="marquee_forever"
-                        android:focusable="true"
-                        android:focusableInTouchMode="true"
-                        android:scrollHorizontally="true"
-                        android:textColor="#000000"
-                        android:textSize="20sp"
-                        android:textStyle="bold" />
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
 
