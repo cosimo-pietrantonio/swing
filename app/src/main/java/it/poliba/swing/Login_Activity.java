@@ -22,11 +22,11 @@ public class Login_Activity extends AppCompatActivity {
         setContentView(R.layout.activity_login_);
 
 
-        Button bLogIn = (Button) findViewById(R.id.buttonLogIn);
-        Button bRegister = (Button) findViewById(R.id.buttonReg);
-        final EditText etEmail = (EditText) findViewById(R.id.etMail);
-        final EditText etPassword = (EditText) findViewById(R.id.etPass);
-        final Utente u1 = new Utente();
+        Button bLogIn = findViewById(R.id.buttonLogIn);
+        Button bRegister = findViewById(R.id.buttonReg);
+        final EditText etEmail = findViewById(R.id.etMail);
+        final EditText etPassword = findViewById(R.id.etPass);
+
 
 
         // cofigurazione del DB nell'activity
@@ -39,6 +39,7 @@ public class Login_Activity extends AppCompatActivity {
         final Intent b = new Intent(this, Home_Activity.class);
         final Intent c = new Intent(this, Richiesta.class);//inutile
         final Intent d = new Intent(this, Offerta.class);//inutile
+
 
 
         bRegister.setOnClickListener(new View.OnClickListener() {
@@ -55,20 +56,11 @@ public class Login_Activity extends AppCompatActivity {
                 RealmQuery<Utente> query = realm.where(Utente.class).equalTo("email", etEmail.getText().toString()).equalTo("password", etPassword.getText().toString());
                 RealmResults<Utente> result = query.findAll();
                 long temp = query.count();
-
                 if (temp != 0) {
-                    u1.setCognome(result.get(0).getCognome());
-                    u1.setNome(result.get(0).getNome());
-                    u1.setDataNascita(result.get(0).getDataNascita());
-                    u1.setEmail(result.get(0).getEmail());
-                    u1.setPassword(result.get(0).getPassword());
-
-                    //invio dati Utente alla home
                     Bundle b1 = new Bundle();
-                    b1.putParcelable("object_key", u1);
+                    b1.putParcelable("object_key", result.get(0));
                     b.putExtras(b1);
                     startActivity(b);
-
                 } else if (realm.where(Utente.class).equalTo("email", etEmail.getText().toString()).count() != 0 && realm.where(Utente.class).equalTo("email", etEmail.getText().toString()).equalTo("password", etPassword.getText().toString()).count() == 0) {
                     Toast.makeText(getApplicationContext(), "La Password che hai inserito è errata" , Toast.LENGTH_LONG).show();
                 } else if (realm.where(Utente.class).equalTo("email", etEmail.getText().toString()).count() == 0) {

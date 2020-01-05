@@ -28,8 +28,16 @@ public class Register_Activity extends AppCompatActivity implements DatePickerDi
         final int StartMonth= 12;
         final int StartDay= 31;
         final Intent login = new Intent(this, Login_Activity.class);
-        Button bReg = (Button) findViewById(R.id.registrati);
+        Button bReg = findViewById(R.id.registrati);
 
+
+        //Collegamento con il DB
+        String syncServerURL = "https://swing-app.de1a.cloud.realm.io/temp12";
+        final SyncConfiguration config = new SyncConfiguration.Builder(SyncUser.current(), syncServerURL).build();
+        final Realm realm = Realm.getInstance(config);
+
+
+        //Parte dedicata al setting del calendario
         final DatePickerDialog datePickerDialog = new DatePickerDialog(Register_Activity.this,Register_Activity.this,StartYear,StartMonth,StartDay );
 
         etData.setOnClickListener(new View.OnClickListener() {
@@ -42,16 +50,16 @@ public class Register_Activity extends AppCompatActivity implements DatePickerDi
         datePickerDialog.setOnDateSetListener(new DatePickerDialog.OnDateSetListener() {
             @Override
             public void onDateSet(DatePicker datePicker, int i, int i1, int i2) {
-                //DatePicker date = datePickerDialog.getDatePicker();
-
                 String day,month,year;
-                day= Integer.toString(i2);
-                month=Integer.toString(i1+1);
                 year=Integer.toString(i);
+                month=Integer.toString(i1+1);
+                day= Integer.toString(i2);
                 String data=day+"/"+month+"/"+year;
                 etData.setText(data);
             }
         });
+
+
 
         bReg.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -59,49 +67,47 @@ public class Register_Activity extends AppCompatActivity implements DatePickerDi
 
                 if (etNome.getText().toString().equals("") || etCognome.getText().toString().equals("")
                         || etEmail.getText().toString().equals("") || etPassword.getText().toString().equals("")) {
+
                     Toast.makeText(getApplicationContext(), "tutti i campi devono essere compilati", Toast.LENGTH_LONG).show();
+
                 } else{
-                    Utente a = new Utente();
-
-
-                    //una volta loggati possiamo creare la configurazione che mette in contatto il server con i devices:
-                    String syncServerURL = "https://swing-app.de1a.cloud.realm.io/temp12";
-                    final SyncConfiguration config = new SyncConfiguration.Builder(SyncUser.current(), syncServerURL).build();
-                    Realm realm = Realm.getInstance(config);
 
                     final Utente uno = new Utente();
-
                     uno.setCognome(etCognome.getText().toString());
                     uno.setNome(etNome.getText().toString());
                     uno.setEmail(etEmail.getText().toString());
                     uno.setPassword(etPassword.getText().toString());
                     uno.setDataNascita(etData.getText().toString());
-
                     if (realm.where(Utente.class).equalTo("email", etEmail.getText().toString()).count() != 0) {
+
                         Toast.makeText(getApplicationContext(), "Email già in uso", Toast.LENGTH_LONG).show();
+
                     } else {
+
                         realm.executeTransaction(new Realm.Transaction() {
                             @Override
                             public void execute(Realm realm) {
                                 realm.copyToRealm(uno);
-                                Toast.makeText(getApplicationContext(), "Registrazione effettuata con successo", Toast.LENGTH_LONG).show();
-                                startActivity(login);
-                                finish();
                             }
-
                         });
+
+                        Toast.makeText(getApplicationContext(), "Registrazione effettuata con successo", Toast.LENGTH_LONG).show();
+                        startActivity(login);
+                        finish();
                     }
-
                 }
-
             }
         });
+
     }
+
 
     @Override
     public void onDateSet(DatePicker datePicker, int i, int i1, int i2) {
 
     }
+
+
 }
 
 
