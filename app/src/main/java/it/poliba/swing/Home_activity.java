@@ -23,7 +23,7 @@ import io.realm.SyncConfiguration;
 import io.realm.SyncUser;
 
 
-public class Home_activity extends AppCompatActivity
+public class Home_Activity extends AppCompatActivity
    {
 
     boolean stato=false; //false: menu chiuso, true : menu aperto
@@ -108,10 +108,6 @@ public class Home_activity extends AppCompatActivity
                 params_ricerca.width=300;
                 params_offerta.width=1120;
 
-                //invio stringa mail
-                Bundle args = new Bundle();
-                args.putString("object_key",utente.getEmail());
-                fragOfferta.setArguments(args);
 
                 layout_richiesta.setLayoutParams(params_ricerca);
                 layout_offerta.setLayoutParams(params_offerta);
@@ -137,9 +133,6 @@ public class Home_activity extends AppCompatActivity
                 params_offerta.width=300;
                 params_ricerca.width=1125;
 
-                Bundle args = new Bundle();
-                args.putString("object_key",utente.getEmail());
-                fragRichiesta.setArguments(args);
 
                 layout_richiesta.setLayoutParams(params_ricerca);
                 layout_offerta.setLayoutParams(params_offerta);

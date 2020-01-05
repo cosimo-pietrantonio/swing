@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -44,11 +45,13 @@ public class FragmentRichiesta extends DialogFragment implements DatePickerDialo
 
 
 
-    final ArrayList<Offerta_Periodica> resMatchPeriodico = new ArrayList<>();
-    final ArrayList<Offerta> resMatchSemplice = new ArrayList<>();
+    RealmList<Offerta_Periodica> resMatchPeriodico = new RealmList<>();
+    RealmList<Offerta> resMatchSemplice = new RealmList<>();
     RealmList<String> giorniSel = new RealmList<>();
     final Richiesta r = new Richiesta();
     final Richiesta_Periodica rp= new Richiesta_Periodica();
+    Boolean caricamento = new Boolean(false);
+
 
 
 
@@ -74,10 +77,13 @@ public class FragmentRichiesta extends DialogFragment implements DatePickerDialo
         final SyncConfiguration config = new SyncConfiguration.Builder(SyncUser.current(), syncServerURL).build();
         final Realm realm = Realm.getInstance(config);
 
-
+        final String mailUtente = ((Home_Activity) getActivity()).utente.getEmail();
 
         final View view = inflater.inflate(R.layout.fragment_richiesta, container, false);
         Button invia = view.findViewById(R.id.InviaR);
+
+        final Intent intentMatchList = new Intent(getContext(), MatchList_Activity.class);
+
 
         et_LPartenza = view.findViewById(R.id.etLuogoPartenzaF);
         et_LArrivo = view.findViewById(R.id.etLuogoArrivoF);
@@ -181,7 +187,8 @@ public class FragmentRichiesta extends DialogFragment implements DatePickerDialo
         });
 
 
-        //inviare dati
+        //caricamento dati sul DataBase
+
         invia.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -191,7 +198,8 @@ public class FragmentRichiesta extends DialogFragment implements DatePickerDialo
                 int intero = Integer.parseInt(numero);
                 double numerocodrich = Math.random() * 99999999;
 
-                if (UserItem.isEmpty()) {
+
+                if (giorniSel.isEmpty()) {
 
 
                     r.setCodRichiesta((int) numerocodrich);
@@ -200,7 +208,7 @@ public class FragmentRichiesta extends DialogFragment implements DatePickerDialo
                     r.setLuogoArrivo(et_LArrivo.getText().toString());
                     r.setNumPosti(intero);
                     r.setOra(et_ora.getText().toString());
-                    r.setMailUtente(((Home_activity) getActivity()).utente.getEmail());
+                    r.setMailUtente(mailUtente);
 
 
                     realm.executeTransaction(new Realm.Transaction() {
@@ -210,20 +218,25 @@ public class FragmentRichiesta extends DialogFragment implements DatePickerDialo
                             realm.copyToRealm(r);
                         }
                     });
+
                     //controllo se la transazione è andata a buon fine
                     if (realm.where(Richiesta.class).equalTo("codRichiesta", (int) numerocodrich).count() != 0) {
                         Toast.makeText(getContext(), "Richiesta correttamente pubblicata", Toast.LENGTH_LONG).show();
+                        caricamento = true;
                     } else {
                         Toast.makeText(getContext(), "La richiesta non è andata a buon fine ", Toast.LENGTH_LONG).show();
                     }
+
                 } else {
+
                     rp.setCodRichiesta((int) numerocodrich);
                     rp.setDataPartenza(et_data.getText().toString());
                     rp.setLuogoPartenza(et_LPartenza.getText().toString());
                     rp.setLuogoArrivo(et_LArrivo.getText().toString());
                     rp.setNumPosti(intero);
                     rp.setGiorni(giorniSel);
-                    rp.setMailUtente(((Home_activity) getActivity()).utente.getEmail());
+                    rp.setMailUtente(mailUtente);
+
                     realm.executeTransaction(new Realm.Transaction() {
                         @Override
                         public void execute(Realm realm) {
@@ -231,39 +244,47 @@ public class FragmentRichiesta extends DialogFragment implements DatePickerDialo
                         }
                     });
 
+                    //controllo se la transazione è andata a buon fine
+                    if (realm.where(Richiesta_Periodica.class).equalTo("codRichiesta", (int) numerocodrich).count() != 0) {
+                        Toast.makeText(getContext(), "Richiesta periodica correttamente pubblicata", Toast.LENGTH_LONG).show();
+                    } else {
+                        Toast.makeText(getContext(), "La richiesta non è andata a buon fine ", Toast.LENGTH_LONG).show();
+                    }
+
                 }
 
 
                 // settore del matching
-                if (UserItem.isEmpty()) {
+                if (giorniSel.isEmpty() && caricamento == true) {
 
                     //MATCH PER RICHIESTE SINGOLE
 
-                    final RealmQuery<Offerta> queryMatchSingolo = realm.where(Offerta.class)
-                            .equalTo("luogoPartenza", et_LPartenza.getText().toString())
-                            .equalTo("luogoArrivo", et_LArrivo.getText().toString());
+                   /* final RealmQuery<Offerta> queryMatchSingolo = realm.where(Offerta.class)
+                            .equalTo("luogoPartenza", r.getLuogoPartenza())
+                            .equalTo("luogoArrivo", r.getLuogoArrivo());  */
 
 
                     //Controllo se c'è già un' offerta pubblicata dall'Utente richiedente con gli stessi parametri della richiesta
 
-                    if (queryMatchSingolo.equalTo("emailUtente", r.getMailUtente())
-                            .equalTo("data", et_data.getText().toString()).count() == 0) {
-                    //MATCH PER RICH SINGOLE
+                    if (realm.where(Offerta.class)
+                            .equalTo("luogoPartenza", r.getLuogoPartenza())
+                            .equalTo("luogoArrivo", r.getLuogoArrivo()).equalTo("emailUtente", r.getMailUtente())
+                            .equalTo("data", r.getDataPartenza()).count() == 0) {
 
+                        RealmResults<Offerta> queryRes = realm.where(Offerta.class)
+                                .equalTo("luogoPartenza", r.getLuogoPartenza())
+                                .equalTo("luogoArrivo", r.getLuogoArrivo()).equalTo("data", r.getDataPartenza()).findAll();
 
-                    if (queryMatchSingolo.equalTo("data", et_data.getText().toString()).count() != 0) {
-
-                        final RealmResults<Offerta> queryRes = queryMatchSingolo.equalTo("data", et_data.getText().toString()).findAll();
-
-                        String stringaPosti = et_posti.getText().toString();
-                        int intPostiRichiesta = Integer.parseInt(stringaPosti);
+                    if (!queryRes.isEmpty()) {
 
                         for (int i = 0; i < queryRes.size(); i++) {
-                            if (queryRes.get(i).getNumPostiDisponibili() >= intPostiRichiesta) {
+                            if (queryRes.get(i).getNumPostiDisponibili() >= r.getNumPosti()) {
                                 resMatchSemplice.add(queryRes.get(i));
                             }
                         }
-                    } }else {
+                    } else{ Toast.makeText(getContext(),"Non c'è nessuna offerta nella data selezionata",Toast.LENGTH_LONG).show(); }
+
+                    } else {
                         Toast.makeText(getContext(), "C'è un offerta da te formulata " +
                                 "con gli stessi parametri richiesti in questa data !! "
                                 , Toast.LENGTH_LONG).show();   }
@@ -273,23 +294,24 @@ public class FragmentRichiesta extends DialogFragment implements DatePickerDialo
 
 
 
-
-
-
                     //MATCH PER OFF-RICH PERIODICHE
-                    final RealmQuery<Offerta_Periodica> queryP = realm.where(Offerta_Periodica.class)
-                            .equalTo("luogoPartenza", et_LPartenza.getText().toString())
-                            .equalTo("luogoArrivo", et_LArrivo.getText().toString());
+
 
                     System.err.println("LISTA GIORNI SELEZIONATI");
-                    for (int count=0;count<giorniSel.size(); count++){
-                        System.out.println(giorniSel.get(count)); }
+                    for (int count=0;count < giorniSel.size(); count++){
+                        System.out.println( giorniSel.get(count) ); }
 
 
-                    if (queryP.equalTo("emailUtente", rp.getMailUtente()).count() == 0) {
-                    if (queryP.count() != 0) {
+                    if (realm.where(Offerta_Periodica.class)
+                            .equalTo("luogoPartenza", et_LPartenza.getText().toString())
+                            .equalTo("luogoArrivo", et_LArrivo.getText().toString()).equalTo("emailUtente", rp.getMailUtente()).count() == 0) {
+                    if (realm.where(Offerta_Periodica.class)
+                            .equalTo("luogoPartenza", et_LPartenza.getText().toString())
+                            .equalTo("luogoArrivo", et_LArrivo.getText().toString()).count() != 0) {
 
-                        RealmResults<Offerta_Periodica> queryResultsP = queryP.findAll();
+                        RealmResults<Offerta_Periodica> queryResultsP = realm.where(Offerta_Periodica.class)
+                                .equalTo("luogoPartenza", et_LPartenza.getText().toString())
+                                .equalTo("luogoArrivo", et_LArrivo.getText().toString()).findAll();
 
                         for (int i = 0; i < queryResultsP.size(); i++) {
                             trovati = 0;
@@ -317,12 +339,18 @@ public class FragmentRichiesta extends DialogFragment implements DatePickerDialo
                 }
                 }
 
-// Discuto i risultati del match :
+
                 if (!resMatchPeriodico.isEmpty()) {
                     Toast.makeText(getContext(), "Match periodico riuscito", Toast.LENGTH_LONG).show();
                 } else if (!resMatchSemplice.isEmpty()) {
                     Toast.makeText(getContext(), "Match Semplice riuscito ", Toast.LENGTH_LONG).show();
+                    startActivity(intentMatchList);
                 }
+
+
+
+
+
             }
 
 

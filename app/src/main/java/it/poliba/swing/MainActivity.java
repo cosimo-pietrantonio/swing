@@ -27,7 +27,8 @@ public class MainActivity extends AppCompatActivity {
         Realm.init(getApplicationContext());
 
         SyncCredentials credentials = SyncCredentials.usernamePassword("NiCoFrAl", "password", false);
-        //Credentials contiene le credenziali dell'unico Utente che puo accedere al Realm Object Server per modificarlo(quindi effettuare operazioni di lettura e scrittura)
+        //Credentials contiene le credenziali dell'unico Utente che puo accedere al Realm Object Server
+        //per modificare il Database (quindi effettuare operazioni di lettura e scrittura, ecc)
         SyncUser.logInAsync(credentials, AUTH_URL, new SyncUser.Callback<SyncUser>() {
             @Override
             public void onSuccess(SyncUser syncUser) {
@@ -37,7 +38,7 @@ public class MainActivity extends AppCompatActivity {
                 Realm realm = Realm.getInstance(config);
 
                 System.out.println("sono qui");
-                Log.i("Login", "Admin identificato");
+                Log.i("Login" , "Admin identificato");
 
                new Handler().postDelayed(new Runnable() {
                     @Override

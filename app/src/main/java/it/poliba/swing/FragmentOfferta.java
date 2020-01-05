@@ -196,7 +196,7 @@ public class FragmentOfferta extends DialogFragment implements DatePickerDialog.
                     o.setPrezzo(dprezzo);
                     o.setOra(et_ora_offerta.getText().toString());
                     o.setNumPostiDisponibili(iposti);
-                    o.setEmailUtente(((Home_activity) getActivity()).utente.getEmail());
+                    o.setEmailUtente(((Home_Activity) getActivity()).utente.getEmail());
 
 
                     realm.executeTransaction(new Realm.Transaction() {
@@ -212,7 +212,7 @@ public class FragmentOfferta extends DialogFragment implements DatePickerDialog.
                     op.setLuogoPartenza(et_luogo_partenza.getText().toString());
                     op.setLuogoArrivo(et_luogo_arrivo.getText().toString());
                     op.setGiorni(giorniSel);
-                    op.setEmailUtente(((Home_activity) getActivity()).utente.getEmail());
+                    op.setEmailUtente(((Home_Activity) getActivity()).utente.getEmail());
 
                     realm.executeTransaction(new Realm.Transaction() {
                         @Override
@@ -254,7 +254,7 @@ public class FragmentOfferta extends DialogFragment implements DatePickerDialog.
                 }else {
                     //periodica
                     final RealmQuery<Richiesta_Periodica> queryP = realm.where(Richiesta_Periodica.class).equalTo("luogoPartenza", et_luogo_partenza.getText().toString()).equalTo("luogoArrivo", et_luogo_arrivo.getText().toString());
-                    if (queryP.equalTo("emailUtente", op.getEmailUtente()).count() == 0) {
+                    if (queryP.equalTo("mailUtente", op.getEmailUtente()).count() == 0) {
                         if (queryP.count() != 0) {
                             RealmResults<Richiesta_Periodica> queryResultsP = queryP.findAll();
 
