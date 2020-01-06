@@ -57,7 +57,7 @@ public class Home_Activity extends AppCompatActivity
         final Intent intentNotifich = new Intent(this, MatchList_Activity.class);
 
 
-        String syncServerURL = "https://swing-app.de1a.cloud.realm.io/temp12";
+        String syncServerURL = "https://swingdb.de1a.cloud.realm.io/temp12";
         final SyncConfiguration config = new SyncConfiguration.Builder(SyncUser.current(), syncServerURL).build();
         final Realm realm = Realm.getInstance(config);
 

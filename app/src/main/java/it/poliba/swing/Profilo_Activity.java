@@ -35,7 +35,7 @@ public class Profilo_Activity extends AppCompatActivity implements io.realm.Real
 
 
         // cofigurazione del DB nell'activity
-        String syncServerURL = "https://swing-app.de1a.cloud.realm.io/temp12";
+        String syncServerURL = "https://swingdb.de1a.cloud.realm.io/temp12";
         final SyncConfiguration config = new SyncConfiguration.Builder(SyncUser.current(), syncServerURL).build();
         final Realm realm = Realm.getInstance(config);
 

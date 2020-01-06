@@ -62,7 +62,7 @@ public class FragmentOfferta extends DialogFragment implements DatePickerDialog.
 
 
         //configurazione  DB
-        String syncServerURL = "https://swing-app.de1a.cloud.realm.io/temp12";
+        String syncServerURL = "https://swingdb.de1a.cloud.realm.io/temp12";
         final SyncConfiguration config = new SyncConfiguration.Builder(SyncUser.current(), syncServerURL).build();
         final Realm realm = Realm.getInstance(config);
 
@@ -198,13 +198,20 @@ public class FragmentOfferta extends DialogFragment implements DatePickerDialog.
                     o.setNumPostiDisponibili(iposti);
                     o.setEmailUtente(((Home_Activity) getActivity()).utente.getEmail());
 
+                    if (et_data_offerta.getText().toString() == "" || et_luogo_partenza.getText().toString() == "" || et_luogo_arrivo.getText().toString() == ""
+                            || et_posti_offerta.getText().toString() == "" || et_ora_offerta.getText().toString() == "") {
+                        Toast.makeText(getContext(),"Compila tutti i campi necessri prima",Toast.LENGTH_LONG).show(); }
+                    else {
 
-                    realm.executeTransaction(new Realm.Transaction() {
-                        @Override
-                        public void execute(Realm realm) {
-                            realm.copyToRealm(o);
-                        }
-                    });
+                        realm.executeTransaction(new Realm.Transaction() {
+                            @Override
+                            public void execute(Realm realm) {
+                                realm.copyToRealm(o);
+                            }
+                        });
+                    }
+
+
                 } else {
 
                     op.setDataInizio(et_data_offerta.getText().toString());
@@ -214,12 +221,19 @@ public class FragmentOfferta extends DialogFragment implements DatePickerDialog.
                     op.setGiorni(giorniSel);
                     op.setEmailUtente(((Home_Activity) getActivity()).utente.getEmail());
 
-                    realm.executeTransaction(new Realm.Transaction() {
-                        @Override
-                        public void execute(Realm realm) {
-                            realm.copyToRealm(op);
-                        }
-                    });
+                    if (et_data_offerta.getText().toString() == "" || et_luogo_partenza.getText().toString() == "" || et_luogo_arrivo.getText().toString() == ""
+                            || et_posti_offerta.getText().toString() == "" || giorniSel.isEmpty()) {
+                        Toast.makeText(getContext(),"Compila tutti i campi necessri prima",Toast.LENGTH_LONG).show(); }
+                    else {
+
+
+                        realm.executeTransaction(new Realm.Transaction() {
+                            @Override
+                            public void execute(Realm realm) {
+                                realm.copyToRealm(op);
+                            }
+                        });
+                    }
 
                 }
                     // verifico caricam offerta

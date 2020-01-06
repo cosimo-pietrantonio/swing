@@ -73,7 +73,7 @@ public class FragmentRichiesta extends DialogFragment implements DatePickerDialo
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
 
-        String syncServerURL = "https://swing-app.de1a.cloud.realm.io/temp12";
+        String syncServerURL = "https://swingdb.de1a.cloud.realm.io/temp12";
         final SyncConfiguration config = new SyncConfiguration.Builder(SyncUser.current(), syncServerURL).build();
         final Realm realm = Realm.getInstance(config);
 
@@ -210,14 +210,21 @@ public class FragmentRichiesta extends DialogFragment implements DatePickerDialo
                     r.setOra(et_ora.getText().toString());
                     r.setMailUtente(mailUtente);
 
+                    if (et_data.getText().toString() == "" || et_LPartenza.getText().toString() == "" || et_LArrivo.getText().toString() == ""
+                            || et_posti.getText().toString() == "" || et_ora.getText().toString() == "") {
+                        Toast.makeText(getContext(),"Compila tutti i campi necessri prima",Toast.LENGTH_LONG).show(); }
 
-                    realm.executeTransaction(new Realm.Transaction() {
-                        @Override
-                        public void execute(Realm realm) {
+                    else {
 
-                            realm.copyToRealm(r);
-                        }
-                    });
+
+                        realm.executeTransaction(new Realm.Transaction() {
+                            @Override
+                            public void execute(Realm realm) {
+
+                                realm.copyToRealm(r);
+                            }
+                        });
+                    }
 
                     //controllo se la transazione è andata a buon fine
                     if (realm.where(Richiesta.class).equalTo("codRichiesta", (int) numerocodrich).count() != 0) {
@@ -237,12 +244,18 @@ public class FragmentRichiesta extends DialogFragment implements DatePickerDialo
                     rp.setGiorni(giorniSel);
                     rp.setMailUtente(mailUtente);
 
-                    realm.executeTransaction(new Realm.Transaction() {
-                        @Override
-                        public void execute(Realm realm) {
-                            realm.copyToRealm(rp);
-                        }
-                    });
+                    if (et_data.getText().toString() == "" || et_LPartenza.getText().toString() == "" || et_LArrivo.getText().toString() == ""
+                            || et_posti.getText().toString() == "" || giorniSel.isEmpty()) {
+                        Toast.makeText(getContext(),"Compila tutti i campi necessri prima",Toast.LENGTH_LONG).show(); }
+                    else {
+
+                        realm.executeTransaction(new Realm.Transaction() {
+                            @Override
+                            public void execute(Realm realm) {
+                                realm.copyToRealm(rp);
+                            }
+                        });
+                    }
 
                     //controllo se la transazione è andata a buon fine
                     if (realm.where(Richiesta_Periodica.class).equalTo("codRichiesta", (int) numerocodrich).count() != 0) {
