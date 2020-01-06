@@ -161,12 +161,13 @@ public class MatchList_Activity extends AppCompatActivity {
         // MATCH PER RICHIESTE SINGOLE ATTIVE
         for (int i=1; i < richiesteSingAttive.size(); i++){
             Richiesta r = richiesteSingAttive.get(i);
-            final RealmQuery<Offerta> queryMatchSingolo = realm.where(Offerta.class)
+                if (realm.where(Offerta.class)
                     .equalTo("luogoPartenza", r.getLuogoPartenza())
-                    .equalTo("luogoArrivo", r.getLuogoArrivo());
-                if (queryMatchSingolo.equalTo("data", r.getDataPartenza()).count() != 0) {
+                    .equalTo("luogoArrivo", r.getLuogoArrivo()).equalTo("data", r.getDataPartenza()).count() != 0) {
 
-                    final RealmResults<Offerta> queryRes = queryMatchSingolo.equalTo("data", r.getDataPartenza()).findAll();
+                    RealmResults<Offerta> queryRes = realm.where(Offerta.class)
+                            .equalTo("luogoPartenza", r.getLuogoPartenza())
+                            .equalTo("luogoArrivo", r.getLuogoArrivo()).equalTo("data", r.getDataPartenza()).findAll();
                     int intPostiRichiesta = r.getNumPosti();
                     for (int j = 0; j < queryRes.size(); j++) {
                         if (queryRes.get(j).getNumPostiDisponibili() >= intPostiRichiesta) {
