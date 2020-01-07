@@ -156,7 +156,7 @@ public class MatchList_Activity extends AppCompatActivity {
         }
 
 
-        // MATCH PER RICHIESTE SINGOLE ATTIVE
+        // CODICE DEL MATCH DELLE RICHIESTE PUBBLICATE CON LE OFFERTI PRESENTI SUL SERVER
         for (int i=1; i < richiesteSingAttive.size(); i++){
             Richiesta r = richiesteSingAttive.get(i);
                 if (realm.where(Offerta.class)
