@@ -28,7 +28,6 @@ import java.util.Calendar;
 
 import io.realm.Realm;
 import io.realm.RealmList;
-import io.realm.RealmQuery;
 import io.realm.RealmResults;
 import io.realm.SyncConfiguration;
 import io.realm.SyncUser;
@@ -77,7 +76,8 @@ public class FragmentRichiesta extends DialogFragment implements DatePickerDialo
         final SyncConfiguration config = new SyncConfiguration.Builder(SyncUser.current(), syncServerURL).build();
         final Realm realm = Realm.getInstance(config);
 
-        final String mailUtente = ((Home_Activity) getActivity()).utente.getEmail();
+        final String mailUtente = ((Home_activity) getActivity()).utente.getEmail();
+        final Utente utente = ((Home_activity) getActivity()).utente;
 
         final View view = inflater.inflate(R.layout.fragment_richiesta, container, false);
         Button invia = view.findViewById(R.id.InviaR);
@@ -351,6 +351,9 @@ public class FragmentRichiesta extends DialogFragment implements DatePickerDialo
                     Toast.makeText(getContext(), "Match periodico riuscito", Toast.LENGTH_LONG).show();
                 } else if (!resMatchSemplice.isEmpty()) {
                     Toast.makeText(getContext(), "Match Semplice riuscito ", Toast.LENGTH_LONG).show();
+                    Bundle b1 = new Bundle();
+                    b1.putParcelable("object_key", utente);
+                    intentMatchList.putExtras(b1);
                     startActivity(intentMatchList);
                 }
 

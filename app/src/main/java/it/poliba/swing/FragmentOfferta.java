@@ -198,7 +198,7 @@ public class FragmentOfferta extends DialogFragment implements DatePickerDialog.
                     o.setPrezzo(dprezzo);
                     o.setOra(et_ora_offerta.getText().toString());
                     o.setNumPostiDisponibili(iposti);
-                    o.setEmailUtente(((Home_Activity) getActivity()).utente.getEmail());
+                    o.setEmailUtente(((Home_activity) getActivity()).utente.getEmail());
 
                     if (et_data_offerta.getText().toString() == "" || et_luogo_partenza.getText().toString() == "" || et_luogo_arrivo.getText().toString() == ""
                             || et_posti_offerta.getText().toString() == "" || et_ora_offerta.getText().toString() == "") {
@@ -221,7 +221,7 @@ public class FragmentOfferta extends DialogFragment implements DatePickerDialog.
                     op.setLuogoPartenza(et_luogo_partenza.getText().toString());
                     op.setLuogoArrivo(et_luogo_arrivo.getText().toString());
                     op.setGiorni(giorniSel);
-                    op.setEmailUtente(((Home_Activity) getActivity()).utente.getEmail());
+                    op.setEmailUtente(((Home_activity) getActivity()).utente.getEmail());
 
                     if (et_data_offerta.getText().toString() == "" || et_luogo_partenza.getText().toString() == "" || et_luogo_arrivo.getText().toString() == ""
                             || et_posti_offerta.getText().toString() == "" || giorniSel.isEmpty()) {

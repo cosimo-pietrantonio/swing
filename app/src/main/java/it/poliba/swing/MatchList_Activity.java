@@ -156,18 +156,16 @@ public class MatchList_Activity extends AppCompatActivity {
         }
 
 
-
-
         // MATCH PER RICHIESTE SINGOLE ATTIVE
         for (int i=1; i < richiesteSingAttive.size(); i++){
             Richiesta r = richiesteSingAttive.get(i);
                 if (realm.where(Offerta.class)
                     .equalTo("luogoPartenza", r.getLuogoPartenza())
-                    .equalTo("luogoArrivo", r.getLuogoArrivo()).equalTo("data", r.getDataPartenza()).count() != 0) {
+                    .equalTo("luogoArrivo", r.getLuogoArrivo()).equalTo("data", r.getDataPartenza()).notEqualTo("emailUtente", r.getMailUtente()).count() != 0) {
 
                     RealmResults<Offerta> queryRes = realm.where(Offerta.class)
                             .equalTo("luogoPartenza", r.getLuogoPartenza())
-                            .equalTo("luogoArrivo", r.getLuogoArrivo()).equalTo("data", r.getDataPartenza()).findAll();
+                            .equalTo("luogoArrivo", r.getLuogoArrivo()).equalTo("data", r.getDataPartenza()).notEqualTo("emailUtente", r.getMailUtente()).findAll();
                     int intPostiRichiesta = r.getNumPosti();
                     for (int j = 0; j < queryRes.size(); j++) {
                         if (queryRes.get(j).getNumPostiDisponibili() >= intPostiRichiesta) {
@@ -176,6 +174,30 @@ public class MatchList_Activity extends AppCompatActivity {
                     }
                 }
         }
+
+
+        //AGGIUNTA DI OFFERTE SINGOLE TROVATE ATTRAVERSO IL MATCH AL LAYOUT
+        if(offerteSingoleDelMatch.size()!=0){
+            for(int i=1; i<offerteSingoleDelMatch.size(); i++){
+                final TextView add = new TextView(MatchList_Activity.this);
+                add.setText(offerteSingoleDelMatch.get(i).getLuogoPartenza()+ "-" + offerteSingoleDelMatch.get(i).getLuogoArrivo() + " " + offerteSingoleDelMatch.get(i).getData() + " "+ offerteSingoleDelMatch.get(i).getEmailUtente());
+                add.setPadding(5,5,0,15);
+                add.setTextColor(Color.BLACK);
+                add.setTextSize(25);
+                add.setBackgroundColor(Color.WHITE);
+                add.setFocusable(true);
+                add.setSingleLine(true);
+                add.setEllipsize(TextUtils.TruncateAt.MARQUEE);
+                add.setMarqueeRepeatLimit(100);
+                add.setFocusable(true);
+                add.setFocusableInTouchMode(true);
+                add.setHorizontallyScrolling(true);
+                add.setSelected(true);
+                offerteTRO.addView(add);
+            }
+        }
+
+
 
         //  MATCH PER RICHIESTE PERIODICHE ATTIVE
         for(int k=0; k < richiestePeriodAttive.size(); k++){
