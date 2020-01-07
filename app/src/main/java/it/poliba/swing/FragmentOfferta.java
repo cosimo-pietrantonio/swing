@@ -49,10 +49,11 @@ public class FragmentOfferta extends DialogFragment implements DatePickerDialog.
     ArrayList<Integer> UserItem = new ArrayList<>(); //contiene le posizioni all'interno della dialog degli elementi selezionati
     TextView giorni_offerta;
 
-    final Offerta o = new Offerta();
+    Offerta o;
     final Offerta_Periodica op = new Offerta_Periodica();
     RealmList<String> giorniSel = new RealmList<>();
     ArrayList<Richiesta> resMatchSemplice = new ArrayList<>();
+    boolean caricamento = false;
 
 
     @Nullable
@@ -62,7 +63,7 @@ public class FragmentOfferta extends DialogFragment implements DatePickerDialog.
 
 
         //configurazione  DB
-        String syncServerURL = "https://swingdb.de1a.cloud.realm.io/temp12";
+        String syncServerURL = "https://swingdatabase.de1a.cloud.realm.io/temp12";
         final SyncConfiguration config = new SyncConfiguration.Builder(SyncUser.current(), syncServerURL).build();
         final Realm realm = Realm.getInstance(config);
 
@@ -174,6 +175,7 @@ public class FragmentOfferta extends DialogFragment implements DatePickerDialog.
             @Override
             public void onClick(View view) {
 
+                o= new Offerta();
                 double numerocodoff = Math.random() * 99999999;
                 final int cod = (int) numerocodoff;
 
@@ -248,24 +250,38 @@ public class FragmentOfferta extends DialogFragment implements DatePickerDialog.
                 //MATCH
 
                 //singola
+                if (giorniSel.isEmpty() && caricamento == true) {
 
-                if (UserItem.isEmpty()) {
-                    final RealmQuery<Richiesta> queryMatchSingolo = realm.where(Richiesta.class).equalTo("luogoPartenza", et_luogo_partenza.getText().toString())
-                            .equalTo("luogoArrivo", et_luogo_arrivo.getText().toString());
-                    if (queryMatchSingolo.equalTo("mailUtente", o.getEmailUtente())
-                            .equalTo("dataPartenza", et_data_offerta.getText().toString()).count() == 0) {
-                        if (queryMatchSingolo.equalTo("dataPartenza", et_data_offerta.getText().toString()).count() != 0) {
-                            final RealmResults<Richiesta> queryRes = queryMatchSingolo.equalTo("dataPartenza", et_data_offerta.getText().toString()).findAll();
-                            String stringaPosti = et_posti_offerta.getText().toString();
-                            int intPostiOfferta = Integer.parseInt(stringaPosti);
+                    if (realm.where(Richiesta.class).equalTo("luogoPartenza", o.getLuogoPartenza())
+                            .equalTo("luogoArrivo", o.getLuogoArrivo())
+                            .equalTo("emailUtente", o.getEmailUtente())
+                            .equalTo("data", o.getData()).count() == 0) {
+
+                        RealmResults<Richiesta> queryRes = realm.where(Richiesta.class)
+                                .equalTo("luogoPartenza", o.getLuogoPartenza())
+                                .equalTo("luogoArrivo", o.getLuogoArrivo()).equalTo("data", o.getData()).findAll();
+
+                        if (!queryRes.isEmpty()) {
+
+                            System.out.println("sono qui");
+
+
                             for (int i = 0; i < queryRes.size(); i++) {
-                                if (queryRes.get(i).getNumPosti() <= intPostiOfferta) {
+                                if (queryRes.get(i).getNumPosti() <= o.getNumPostiDisponibili()) {
                                     resMatchSemplice.add(queryRes.get(i));
                                 }
                             }
+                        } else {
+                            Toast.makeText(getContext(), "Non c'è nessuna richiesta nella data selezionata", Toast.LENGTH_LONG).show();
                         }
-                    } else {Toast.makeText(getContext(),"C'è già un'' offerta da te inserita con questi parametri",Toast.LENGTH_LONG).show(); }
-                }else {
+                    } else {
+                        Toast.makeText(getContext(), "C'è una richiesta da te formulata " +
+                                        "con gli stessi parametri"
+                                , Toast.LENGTH_LONG).show();
+                    }
+                } else{
+
+
                     //periodica
                     final RealmQuery<Richiesta_Periodica> queryP = realm.where(Richiesta_Periodica.class).equalTo("luogoPartenza", et_luogo_partenza.getText().toString()).equalTo("luogoArrivo", et_luogo_arrivo.getText().toString());
                     if (queryP.equalTo("mailUtente", op.getEmailUtente()).count() == 0) {
@@ -276,6 +292,8 @@ public class FragmentOfferta extends DialogFragment implements DatePickerDialog.
                         }
                     }
                 }
+
+
                 //risultati match
                 if (!resMatchSemplice.isEmpty()) {
                     Toast.makeText(getContext(), "Match Semplice riuscito ", Toast.LENGTH_LONG).show();

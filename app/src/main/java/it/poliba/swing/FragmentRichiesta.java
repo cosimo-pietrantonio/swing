@@ -73,7 +73,7 @@ public class FragmentRichiesta extends DialogFragment implements DatePickerDialo
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
 
-        String syncServerURL = "https://swingdb.de1a.cloud.realm.io/temp12";
+        String syncServerURL = "https://swingdatabase.de1a.cloud.realm.io/temp12";
         final SyncConfiguration config = new SyncConfiguration.Builder(SyncUser.current(), syncServerURL).build();
         final Realm realm = Realm.getInstance(config);
 
@@ -270,13 +270,6 @@ public class FragmentRichiesta extends DialogFragment implements DatePickerDialo
                 // settore del matching
                 if (giorniSel.isEmpty() && caricamento == true) {
 
-                    //MATCH PER RICHIESTE SINGOLE
-
-                   /* final RealmQuery<Offerta> queryMatchSingolo = realm.where(Offerta.class)
-                            .equalTo("luogoPartenza", r.getLuogoPartenza())
-                            .equalTo("luogoArrivo", r.getLuogoArrivo());  */
-
-
                     //Controllo se c'è già un' offerta pubblicata dall'Utente richiedente con gli stessi parametri della richiesta
 
                     if (realm.where(Offerta.class)
@@ -293,6 +286,7 @@ public class FragmentRichiesta extends DialogFragment implements DatePickerDialo
                         for (int i = 0; i < queryRes.size(); i++) {
                             if (queryRes.get(i).getNumPostiDisponibili() >= r.getNumPosti()) {
                                 resMatchSemplice.add(queryRes.get(i));
+                                Toast.makeText(getContext(), "Match Semplice riuscito ", Toast.LENGTH_LONG).show();
                             }
                         }
                     } else{ Toast.makeText(getContext(),"Non c'è nessuna offerta nella data selezionata",Toast.LENGTH_LONG).show(); }

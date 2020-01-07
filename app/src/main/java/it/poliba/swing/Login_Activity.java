@@ -30,7 +30,7 @@ public class Login_Activity extends AppCompatActivity {
 
 
         // cofigurazione del DB nell'activity
-        String syncServerURL = "https://swingdb.de1a.cloud.realm.io/temp12";
+        String syncServerURL = "https://swingdatabase.de1a.cloud.realm.io/temp12";
         final SyncConfiguration config = new SyncConfiguration.Builder(SyncUser.current(), syncServerURL).build();
         final Realm realm = Realm.getInstance(config);
 
