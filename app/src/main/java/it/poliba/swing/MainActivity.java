@@ -33,7 +33,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onSuccess(SyncUser syncUser) {
 
-                String syncServerURL = "https://swingdatabase.de1a.cloud.realm.io/temp12";
+                String syncServerURL = "https://swingdatabase.de1a.cloud.realm.io/SWING_DB";
                 final SyncConfiguration config = new SyncConfiguration.Builder(SyncUser.current(), syncServerURL).build();
                 Realm realm = Realm.getInstance(config);
 

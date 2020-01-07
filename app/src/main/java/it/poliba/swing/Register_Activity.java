@@ -32,7 +32,7 @@ public class Register_Activity extends AppCompatActivity implements DatePickerDi
 
 
         //Collegamento con il DB
-        String syncServerURL = "https://swingdatabase.de1a.cloud.realm.io/temp12";
+        String syncServerURL = "https://swingdatabase.de1a.cloud.realm.io/SWING_DB";
         final SyncConfiguration config = new SyncConfiguration.Builder(SyncUser.current(), syncServerURL).build();
         final Realm realm = Realm.getInstance(config);
 
