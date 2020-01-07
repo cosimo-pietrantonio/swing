@@ -23,7 +23,7 @@ import io.realm.SyncConfiguration;
 import io.realm.SyncUser;
 
 
-public class Home_Activity extends AppCompatActivity
+public class Home_activity extends AppCompatActivity
    {
 
     boolean stato=false; //false: menu chiuso, true : menu aperto

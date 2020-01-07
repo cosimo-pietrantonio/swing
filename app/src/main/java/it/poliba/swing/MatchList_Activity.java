@@ -109,7 +109,7 @@ public class MatchList_Activity extends AppCompatActivity {
 
         //AGGIUNTA DI OFFERTE SINGOLE ATTIVE AL LAYOUT
         if(offerteSingAttive.size()!=0){
-            for(int i=1; i<offerteSingAttive.size(); i++){
+            for(int i=0; i<offerteSingAttive.size(); i++){
                 final TextView add = new TextView(MatchList_Activity.this);
                 add.setText(offerteSingAttive.get(i).getLuogoPartenza()+ "-" + offerteSingAttive.get(i).getLuogoArrivo() + " " + offerteSingAttive.get(i).getOra() + " " + offerteSingAttive.get(i).getData());
                 add.setPadding(5,5,0,15);
@@ -131,7 +131,7 @@ public class MatchList_Activity extends AppCompatActivity {
 
         //AGGIUNTA DI OFFERTE PERIODICHE ATTIVE AL LAYOUT
         if(offertePeriodAttive.size()!=0){
-            for(int i=1; i<offertePeriodAttive.size(); i++){
+            for(int i=0; i<offertePeriodAttive.size(); i++){
                 final TextView add = new TextView(MatchList_Activity.this);
                 String gio= "";
                 for(int j=0; j<offertePeriodAttive.get(i).getGiorni().size();j++){
@@ -157,7 +157,7 @@ public class MatchList_Activity extends AppCompatActivity {
 
 
         // CODICE DEL MATCH DELLE RICHIESTE PUBBLICATE CON LE OFFERTI PRESENTI SUL SERVER
-        for (int i=1; i < richiesteSingAttive.size(); i++){
+        for (int i=0; i < richiesteSingAttive.size(); i++){
             Richiesta r = richiesteSingAttive.get(i);
                 if (realm.where(Offerta.class)
                     .equalTo("luogoPartenza", r.getLuogoPartenza())
@@ -176,9 +176,9 @@ public class MatchList_Activity extends AppCompatActivity {
         }
 
 
-        //AGGIUNTA DI OFFERTE SINGOLE TROVATE ATTRAVERSO IL MATCH AL LAYOUT
+        //AGGIUNTA DI OFFERTE SINGOLE TROVATE ATTRAVERSO IL MATCH
         if(offerteSingoleDelMatch.size()!=0){
-            for(int i=1; i<offerteSingoleDelMatch.size(); i++){
+            for(int i=0; i<offerteSingoleDelMatch.size(); i++){
                 final TextView add = new TextView(MatchList_Activity.this);
                 add.setText(offerteSingoleDelMatch.get(i).getLuogoPartenza()+ "-" + offerteSingoleDelMatch.get(i).getLuogoArrivo() + " " + offerteSingoleDelMatch.get(i).getData() + " "+ offerteSingoleDelMatch.get(i).getEmailUtente());
                 add.setPadding(5,5,0,15);

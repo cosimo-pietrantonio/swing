@@ -76,8 +76,8 @@ public class FragmentRichiesta extends DialogFragment implements DatePickerDialo
         final SyncConfiguration config = new SyncConfiguration.Builder(SyncUser.current(), syncServerURL).build();
         final Realm realm = Realm.getInstance(config);
 
-        final String mailUtente = ((Home_Activity) getActivity()).utente.getEmail();
-        final Utente utente = ((Home_Activity) getActivity()).utente;
+        final String mailUtente = ((Home_activity) getActivity()).utente.getEmail();
+        final Utente utente = ((Home_activity) getActivity()).utente;
 
         final View view = inflater.inflate(R.layout.fragment_richiesta, container, false);
         Button invia = view.findViewById(R.id.InviaR);
